@@ -22,11 +22,11 @@ const OurServices = () => {
                         <Image className="img" src="images/services/heavy.svg" fluid />
                         <p className="sub-desc">No need to worry of labour costing more. Just rent all types of machine here!!</p>
                     </Col>
-                    <Col md={3}>
+                    {/* <Col md={3}>
                         <h5 className="sub-title">Gardening Kits</h5>
                         <Image className="img" src="images/services/gardening.svg" fluid />
                         <p className="sub-desc">We provides all of the gardening related products i.e seeds, pestisides and heavy machine.</p>
-                    </Col>
+                    </Col> */}
                     <Col md={3}>
                         <h5 className="sub-title">Supplier</h5>
                         <Image className="img" src="images/services/supplier.svg" fluid />

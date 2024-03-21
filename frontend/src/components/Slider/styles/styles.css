@@ -159,12 +159,12 @@ button:hover {
           transition-delay: 0s;
 }
 
-.slider-content .inner h1 {
-  font-weight: 900;
+.slider-content .inner h4 {
+  font-weight: 600;
   margin: 0 auto;
   max-width: 840px;
   color: #FFFFFF;
-  font-size: 64px;
+  font-size: 40px;
   line-height: 1;
 }
 
