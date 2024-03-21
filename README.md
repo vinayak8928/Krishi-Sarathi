@@ -112,11 +112,7 @@ module.exports = {
 
 Code snippet : at 351 line 
 
-fallback: {
-        "fs": false,
-        "os": false,
-        "path": false
-        },
+
 
 
 ### Seed Database
