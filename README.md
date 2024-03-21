@@ -1,7 +1,6 @@
 # carsclub
 buy a car &amp; rent a car mern stack application
 
-<<<<<<< HEAD
 MERN Stack Application --
 Login / Logout functionality --
 JWT authentication --
@@ -10,7 +9,6 @@ Add to cart functionality --
 Contact Us functionality --
 Basic Admin Dashboard --
 Payment Method (Stripe) --
-=======
 ## 🌱Agricultural Web Application for University Project Built with Reactjs + Expressjs + Nodejs + MongoDB (MERN)💻
 
 ## Features
@@ -132,4 +130,3 @@ npm run data:import
 # Destroy data
 npm run data:destroy
 ```
->>>>>>> 75a42812e2ab92e12613454dbebb524dfdbfa3c5
