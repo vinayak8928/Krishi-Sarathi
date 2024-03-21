@@ -17,4 +17,4 @@ const GenralMap = () => {
     )
 }
 
-// export default GenralMap
+export default GenralMap
