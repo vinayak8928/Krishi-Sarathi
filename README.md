@@ -86,7 +86,7 @@ npm run server
 cd frontend
 npm run build
 ```
-## If you find error related to fs.os,path error :
+## If you find error related to fs,os,path error :
 ### Paste the following code in the file after your npm install in frontend folder : Farm-Equipment-Rental-System\frontend\node_modules\react-scripts\config\webpack.config.js
 
 Code snippet : at 97 line 
