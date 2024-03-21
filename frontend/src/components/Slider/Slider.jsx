@@ -24,8 +24,8 @@ const SliderComponent = () => {
                         style={{ background: `url('${item.image}') no-repeat center center`, marginTop: "40px" }}
                     >
                         <div className="inner">
-                            <h1>{item.title}</h1>
-                            <p>{item.description} <br />- {item.tag.toLowerCase()}</p>
+                            <h4>{item.title}</h4>
+                            <p>{item.description} <br />- {item.tag}</p>
                         </div>
                     </div>
                 ))}
