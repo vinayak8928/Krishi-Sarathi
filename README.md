@@ -115,6 +115,16 @@ fallback: {
 ### Error Invalid options object.
 [Link](https://stackoverflow.com/questions/70374005/invalid-options-object-dev-server-has-been-initialized-using-an-options-object)
 
+### Module not found: Error: Can't resolve 'crypto'
+npm install crypto-browserify
+```
+Paste the following code in the file after your npm install in the frontend folder: Farm-Equipment-Rental-System\frontend\node_modules\react-scripts\config\webpack.config.js
+```
+  "browser": {
+        "crypto": false,
+        "stream": false
+    }
+```
 ### Seed Database
 
 You can use the following commands to seed the database with some sample users and products as well as destroy all data
