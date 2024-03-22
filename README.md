@@ -125,6 +125,10 @@ Paste the following code in the file after your npm install in the frontend fold
         "stream": false
     }
 ```
+
+### Install Redux Extension
+[link](https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+
 ### Seed Database
 
 You can use the following commands to seed the database with some sample users and products as well as destroy all data
