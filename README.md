@@ -1,14 +1,6 @@
-# carsclub
-buy a car &amp; rent a car mern stack application
 
-MERN Stack Application --
-Login / Logout functionality --
-JWT authentication --
-Buy a Car & Rent a Car system --
-Add to cart functionality --
-Contact Us functionality --
-Basic Admin Dashboard --
-Payment Method (Stripe) --
+
+
 ## 🌱Agricultural Web Application for University Project Built with Reactjs + Expressjs + Nodejs + MongoDB (MERN)💻
 
 ## Features
@@ -119,6 +111,10 @@ fallback: {
         },
 
 ```
+
+### Error Invalid options object.
+[Link](https://stackoverflow.com/questions/70374005/invalid-options-object-dev-server-has-been-initialized-using-an-options-object)
+
 ### Seed Database
 
 You can use the following commands to seed the database with some sample users and products as well as destroy all data
