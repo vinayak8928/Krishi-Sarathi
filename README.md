@@ -117,7 +117,7 @@ fallback: {
 
 ### Module not found: Error: Can't resolve 'crypto'
 npm install crypto-browserify
-```
+
 Paste the following code in the file after your npm install in the frontend folder: Farm-Equipment-Rental-System\frontend\node_modules\react-scripts\config\webpack.config.js
 ```
   "browser": {
