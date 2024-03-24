@@ -1,6 +1,5 @@
 {
   "name": "frontend",
-  "proxy": "http://127.0.0.1:5000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,6 +18,8 @@
     "chart.js": "^4.4.2",
     "classname": "^0.0.0",
     "classnames": "^2.5.1",
+    "crypto-browserify": "^3.12.0",
+    "crypto-es": "^2.1.0",
     "mdbreact": "^5.2.0",
     "node-polyfill-webpack-plugin": "^3.0.0",
     "normalize.css": "^8.0.1",
@@ -45,7 +46,8 @@
     "web-vitals": "^3.5.2"
   },
   "browser": {
-    "crypto": false
+    "crypto": false,
+    "stream": false
   },
   "scripts": {
     "start": "react-scripts start",
