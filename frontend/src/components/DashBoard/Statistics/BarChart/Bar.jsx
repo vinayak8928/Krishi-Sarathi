@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Container } from 'react-bootstrap';
+import { Chart as ChartJS } from 'chart.js/auto'
+import { Chart }            from 'react-chartjs-2'
 import { Bar } from 'react-chartjs-2';
 import Message from '../../../Message/Message'
 import Loader from '../../../Loader/Loader'

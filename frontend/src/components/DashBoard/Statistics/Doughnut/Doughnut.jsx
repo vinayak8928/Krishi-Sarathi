@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import { Chart as ChartJS } from 'chart.js/auto'
+import { Chart }            from 'react-chartjs-2'
 import { Doughnut } from 'react-chartjs-2';
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
