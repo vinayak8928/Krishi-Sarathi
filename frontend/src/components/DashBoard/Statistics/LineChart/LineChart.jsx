@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import { Chart as ChartJS } from 'chart.js/auto'
+import { Chart }            from 'react-chartjs-2'
 import { Line } from 'react-chartjs-2';
 import { useDispatch, useSelector } from 'react-redux'
 import Message from './../../../../components/Message/Message'
