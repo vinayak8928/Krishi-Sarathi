@@ -8,7 +8,7 @@ const ProductListScreen = () => {
     return (
         <div style={{ marginTop: "110px" }}>
             <Meta
-                title="Agroic | Admin Products"
+                title="Krishi Sarathi | Admin Products"
             />
             <Container fluid>
                 <Row>
