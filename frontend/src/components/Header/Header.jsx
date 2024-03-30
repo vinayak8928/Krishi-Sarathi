@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Navbar, NavDropdown, Image } from "react-bootstrap";
+
 import "./Header.css";
 
 import { logout } from "./../../actions/userActions";
@@ -26,15 +27,11 @@ const Header = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto ">
-            
-        <LinkContainer to="/">
+          <LinkContainer to="/">
             <Nav.Link className="nav-name">KRISHI SARATHI</Nav.Link>
           </LinkContainer>
 
-         
-          
-
-          <LinkContainer to="/cart">
+          {/* <LinkContainer to="/cart">
             <Nav.Link
               className={`${
                 userInfo ? "remove-space" : "add-space cart nav-cal"
@@ -42,14 +39,41 @@ const Header = () => {
               <i className="fas fa-shopping-cart"></i>
               CART
             </Nav.Link>
+          </LinkContainer> */}
+
+          {/* Search by category dropdown */}
+          <LinkContainer to="/">
+          <Nav.Link 
+           className={`${
+            userInfo ? "remove-space" : "add-space cart nav-cal"
+          } `}>
+          <NavDropdown
+            title={<>Search by Category</>}
+            id="search-by-category"
+            className="nav-dropdown">
+            <LinkContainer to="/search?category=thresher">
+              <NavDropdown.Item>Thresher</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/search?category=weeders">
+              <NavDropdown.Item>Weeders</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/search?category=chippers">
+              <NavDropdown.Item>Chippers</NavDropdown.Item>
+            </LinkContainer>
+          </NavDropdown>
+
+          </Nav.Link>
           </LinkContainer>
+          
+
           <LinkContainer to="/">
             <Nav.Link className="nav-cal">HOME</Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/farmer">
+          
+           {/*<LinkContainer to="/farmer">
             <Nav.Link className="nav-cal">FARMER</Nav.Link>
           </LinkContainer>
-          {/* <LinkContainer to="/consumer">
+          <LinkContainer to="/consumer">
             <Nav.Link className="nav-cal">CONSUMER</Nav.Link>
           </LinkContainer> */}
           <LinkContainer to="login?redirect=supplier">
@@ -90,9 +114,6 @@ const Header = () => {
               </LinkContainer>
             </NavDropdown>
           )}
-          
-          
-
         </Nav>
       </Navbar.Collapse>
     </Navbar>
