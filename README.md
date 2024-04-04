@@ -1,31 +1,19 @@
-# carsclub
-buy a car &amp; rent a car mern stack application
 
-MERN Stack Application --
-Login / Logout functionality --
-JWT authentication --
-Buy a Car & Rent a Car system --
-Add to cart functionality --
-Contact Us functionality --
-Basic Admin Dashboard --
-Payment Method (Stripe) --
-## 🌱Agricultural Web Application for University Project Built with Reactjs + Expressjs + Nodejs + MongoDB (MERN)💻
+
+
+## 🌱Agricultural Web Application Built with Reactjs + Expressjs + Nodejs + MongoDB (MERN)💻
 
 ## Features
 
 - ChatBot
-- Seller Profile
 - Add/Delete Products
 - Edit Profile
 - Add/Edit Personal & Company Address
-- Farmer Profile
 - Add/Delete Grains
 - Edit Profile
 - Add/Edit Address
 - Buy Seeds/Pesticides or Rent Machines
-- Buy Loan & Credit Card
 - Consumer
-- Edit Profile
 - Add/Edit Address
 - Buy Materials From Farmer
 - Payapal Gateway
@@ -42,8 +30,6 @@ Used ECMAScript Modules in the backend in this project. Be sure to have at least
 
 Also, when importing a file (not a package), be sure to add .js at the end or you will get a "module not found" error
 
-You can also install and setup Babel if you would like
-
 ### Env Variables
 
 Create a .env file in then root and add the following
@@ -54,11 +40,6 @@ PORT = 5000
 MONGO_URI = your mongodb uri
 JWT_SECRET = 'abc123'
 PAYPAL_CLIENT_ID = your paypal client id
-```
-Create a .env file inside frontend and add the following
-
-```
-REACT_APP_GOOGLE_KEY = "add google map api key"
 ```
 
 ### Install Dependencies (frontend & backend)
@@ -119,6 +100,24 @@ fallback: {
         },
 
 ```
+
+### Error Invalid options object.
+[Link](https://stackoverflow.com/questions/70374005/invalid-options-object-dev-server-has-been-initialized-using-an-options-object)
+
+### Module not found: Error: Can't resolve 'crypto'
+npm install crypto-browserify
+
+Paste the following code in the file after your npm install in the frontend folder: Farm-Equipment-Rental-System\frontend\node_modules\react-scripts\config\webpack.config.js
+```
+  "browser": {
+        "crypto": false,
+        "stream": false
+    }
+```
+
+### Install Redux Extension
+[link](https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
+
 ### Seed Database
 
 You can use the following commands to seed the database with some sample users and products as well as destroy all data

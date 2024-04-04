@@ -84,7 +84,7 @@ const OrderScreen = ({ match }) => {
     return (
         <div>
             <Meta
-                title="Agroic | Order"
+                title="Krishi Sarathi | Order"
             />
             {
                 loading

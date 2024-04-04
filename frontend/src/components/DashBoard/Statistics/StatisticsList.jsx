@@ -18,14 +18,14 @@ const StatisticsList = () => {
                 <Row className="list-container">
                     <StatCards />
                 </Row>
-                <Row>
+                {/* <Row>
                     <Bar />
-                </Row>
-                <Row style={{ marginBottom: "50px"}}>
-                    <Col md={6}>
+                </Row> */}
+                <Row style={{ marginBottom: "20px"}}>
+                    {/* <Col md={6}>
                         <LineChart />
-                    </Col>
-                    <Col md={6}>
+                    </Col> */}
+                    <Col md={4}>
                         <DoughnutComponent />
                     </Col>
                 </Row>
