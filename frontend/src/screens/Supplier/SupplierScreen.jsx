@@ -10,7 +10,9 @@ const SupplierScreen = () => {
     return (
         <Container className='supplierContainer'>
             <Meta
+
                 title="KRISHI SARATHI | Supplier"
+
             />
             <h1 className='title'>SUPPLIER</h1>
             <h4 className="supplier-title">

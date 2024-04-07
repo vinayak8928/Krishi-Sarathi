@@ -1,23 +1,18 @@
 
+## 🌱Agricultural Web Application Built with Reactjs + Expressjs + Nodejs + MongoDB (MERN)💻
 
-
-## 🌱Agricultural Web Application for University Project Built with Reactjs + Expressjs + Nodejs + MongoDB (MERN)💻
 
 ## Features
 
 - ChatBot
-- Seller Profile
 - Add/Delete Products
 - Edit Profile
 - Add/Edit Personal & Company Address
-- Farmer Profile
 - Add/Delete Grains
 - Edit Profile
 - Add/Edit Address
 - Buy Seeds/Pesticides or Rent Machines
-- Buy Loan & Credit Card
 - Consumer
-- Edit Profile
 - Add/Edit Address
 - Buy Materials From Farmer
 - Payapal Gateway
@@ -34,8 +29,6 @@ Used ECMAScript Modules in the backend in this project. Be sure to have at least
 
 Also, when importing a file (not a package), be sure to add .js at the end or you will get a "module not found" error
 
-You can also install and setup Babel if you would like
-
 ### Env Variables
 
 Create a .env file in then root and add the following
@@ -46,11 +39,6 @@ PORT = 5000
 MONGO_URI = your mongodb uri
 JWT_SECRET = 'abc123'
 PAYPAL_CLIENT_ID = your paypal client id
-```
-Create a .env file inside frontend and add the following
-
-```
-REACT_APP_GOOGLE_KEY = "add google map api key"
 ```
 
 ### Install Dependencies (frontend & backend)

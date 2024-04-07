@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Navbar, NavDropdown, Image } from "react-bootstrap";
 
+import { useHistory } from 'react-router-dom';
+
 import "./Header.css";
 
 import { logout } from "./../../actions/userActions";
@@ -12,6 +14,26 @@ const Header = () => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+  const history = useHistory();
+
+  const handleCartClick = () => {
+    if (userInfo) {
+      history.push('/cart');
+    } else {
+      alert('You must be logged in to view your cart');
+      history.push('/login');
+    }
+  };
+
+  const handleSupplierClick = () => {
+    if (userInfo) {
+      history.push('/supplier');
+    } else {
+      alert('You must be logged in to add product');
+      history.push('/login');
+    }
+  };
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -31,15 +53,20 @@ const Header = () => {
             <Nav.Link className="nav-name">KRISHI SARATHI</Nav.Link>
           </LinkContainer>
 
-          {/* <LinkContainer to="/cart">
+           <LinkContainer to="/cart">
+
+          <LinkContainer to="login?redirect=cart">
+
             <Nav.Link
               className={`${
                 userInfo ? "remove-space" : "add-space cart nav-cal"
-              } `}>
+              } `}
+              onClick={handleCartClick}
+            >
               <i className="fas fa-shopping-cart"></i>
               CART
             </Nav.Link>
-          </LinkContainer> */}
+          </LinkContainer> 
 
           {/* Search by category dropdown */}
           <LinkContainer to="/">
@@ -73,7 +100,7 @@ const Header = () => {
           </LinkContainer>
 
           <LinkContainer to="login?redirect=supplier">
-            <Nav.Link className="nav-cal">SUPPLIER</Nav.Link>
+            <Nav.Link className="nav-cal" onClick={handleSupplierClick}>SUPPLIER</Nav.Link>
           </LinkContainer>
 
           {userInfo ? (

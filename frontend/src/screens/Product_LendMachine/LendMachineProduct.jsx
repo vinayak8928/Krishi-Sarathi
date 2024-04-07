@@ -165,6 +165,7 @@ import Message from "../../components/Message/Message";
 import Meta from "../../components/Helmet/Meta";
 
 const LendMachineProduct = ({ history, match }) => {
+
   const [qty, setQty] = useState(1);
   const [duration, setDuration] = useState("hours");
   const [durationValue, setDurationValue] = useState(""); // State to hold the input value for duration
@@ -333,3 +334,6 @@ const LendMachineProduct = ({ history, match }) => {
 };
 
 export default LendMachineProduct;
+
+
+                                

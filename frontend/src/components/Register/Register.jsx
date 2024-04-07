@@ -142,6 +142,7 @@ const Register = ({ location, history }) => {
         </Col>
       </Row>
 
+
       <Row className="py-3">
         <span style={{ color: "red", fontFamily: "sans-serif" }}>
           Password must contain at least 8 characters,one capital letter,one
@@ -151,5 +152,6 @@ const Register = ({ location, history }) => {
     </FormContainer>
   );
 };
+
 
 export default Register;
