@@ -24,3 +24,7 @@
     height: 100%;
     object-fit: cover;
 }
+
+.borderless .listGroup.Item{
+    color:"black"
+}

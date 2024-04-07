@@ -43,39 +43,35 @@ const Header = () => {
 
           {/* Search by category dropdown */}
           <LinkContainer to="/">
-          <Nav.Link 
-           className={`${
-            userInfo ? "remove-space" : "add-space cart nav-cal"
-          } `}>
-          <NavDropdown
-            title={<>Search by Category</>}
-            id="search-by-category"
-            className="nav-dropdown">
-            <LinkContainer to="/search?category=thresher">
-              <NavDropdown.Item>Thresher</NavDropdown.Item>
-            </LinkContainer>
-            <LinkContainer to="/search?category=weeders">
-              <NavDropdown.Item>Weeders</NavDropdown.Item>
-            </LinkContainer>
-            <LinkContainer to="/search?category=chippers">
-              <NavDropdown.Item>Chippers</NavDropdown.Item>
-            </LinkContainer>
-          </NavDropdown>
+              <NavDropdown
+                title={<>Search by Category</>}
+                id="search-by-category"
+                className="nav-dropdown">
+                <LinkContainer to="/thresher">
+                  <NavDropdown.Item>Thresher</NavDropdown.Item>
+                </LinkContainer>
 
-          </Nav.Link>
+                <LinkContainer to="/sprayers">
+                  <NavDropdown.Item>Sprayers</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/search?category=chippers">
+                  <NavDropdown.Item>Chippers</NavDropdown.Item>
+                </LinkContainer>
+              </NavDropdown>
+            
           </LinkContainer>
-          
 
           <LinkContainer to="/">
             <Nav.Link className="nav-cal">HOME</Nav.Link>
           </LinkContainer>
-          
-           {/*<LinkContainer to="/farmer">
+
+          {/*<LinkContainer to="/farmer">
             <Nav.Link className="nav-cal">FARMER</Nav.Link>
-          </LinkContainer>
+          </LinkContainer>*/}
           <LinkContainer to="/consumer">
             <Nav.Link className="nav-cal">CONSUMER</Nav.Link>
-          </LinkContainer> */}
+          </LinkContainer>
+
           <LinkContainer to="login?redirect=supplier">
             <Nav.Link className="nav-cal">SUPPLIER</Nav.Link>
           </LinkContainer>
@@ -98,7 +94,12 @@ const Header = () => {
             </NavDropdown>
           ) : (
             <LinkContainer to="/login">
+              <Nav.Link
+              className={`${
+                userInfo ? "remove-space" : "add-space cart nav-cal"
+              } `}>
               <Nav.Link className="login nav-cal">SIGN IN</Nav.Link>
+              </Nav.Link>
             </LinkContainer>
           )}
           {userInfo && userInfo.isAdmin && (
