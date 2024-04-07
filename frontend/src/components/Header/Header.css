@@ -8,6 +8,18 @@
   color: white !important;
   font-size: 14px;
 }
+
+.nav-dropdown:hover .dropdown-menu {
+  background-color: white;
+}
+.nav-dropdown .dropdown-menu .dropdown-item:hover {
+  background-color: rgb(13, 120, 13);
+}
+.nav-dropdown .dropdown-toggle {
+  width: auto;
+  color: white !important;
+  font-size: 14px;
+}
 .nav-name {
   width: auto;
   color: white !important;
@@ -64,3 +76,4 @@
     font-size: 15px !important;
   }
 }
+

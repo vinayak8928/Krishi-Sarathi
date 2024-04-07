@@ -9,7 +9,10 @@ import PlaceOrder from './components/PlaceOrder/PlaceOrder.jsx'
 
 import HomeScreen from './screens/Home/HomeScreen';
 import Consumer from './screens/Consumer/ConsumerScreen';
+import Thresher from './screens/Thresher/Thresher';
+import Sprayers from './screens/Sprayers/Sprayers';
 import Farmer from './screens/Farmer/FarmerScreen';
+import FaqScreen from './screens/Faq/FaqScreen';
 import Supplier from './screens/Supplier/SupplierScreen';
 import ProfileScreen from './screens/Profile/ProfileScreen';
 import DashboardScreen from './screens/Dashboard/DashboardScreen';
@@ -44,6 +47,9 @@ const Layout = () => {
                     <Route exact path="/" component={HomeScreen} />
                     <Route exact path="/farmer" component={Farmer} />
                     <Route exact path="/consumer" component={Consumer} />
+                    <Route exact path="/faq" component={FaqScreen} />
+                    <Route exact path="/thresher" component={Thresher} />
+                    <Route exact path="/sprayers" component={Sprayers} />
                     <Route exact path="/supplier" component={Supplier} />
                     <Route exact path="/farmers/sellMeterial" component={LoginComponent} />
                     <Route exact path="/login" component={LoginComponent} />
