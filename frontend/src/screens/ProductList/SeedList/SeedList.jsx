@@ -38,7 +38,7 @@ const SeedList = () => {
 
     useEffect(() => {
         dispatch({ type: SEED_CREATE_RESET })
-        if (!userInfo.isAdmin && !userInfo) {
+        if (!userInfo.isAdmin || !userInfo) {
             history.push('/login')
         } else {
             if (successSeedCreate) {

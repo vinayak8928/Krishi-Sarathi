@@ -43,6 +43,7 @@ const SeedList = () => {
         } else {
             if (successSeedCreate) {
                 history.push(`/admin/productlist/seed/${productCreate._id}/edit`)
+                // history.push('/farmer')
             } else {
                 dispatch(listSeedProducts())
             }
@@ -55,7 +56,7 @@ const SeedList = () => {
         }
     }
 
-    const createSeedProductHandler = () => {
+    const createSeedProductHandler = async(e) => {
         dispatch(createSeedProducts())
     }
 

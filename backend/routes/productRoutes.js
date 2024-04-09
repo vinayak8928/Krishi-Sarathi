@@ -28,17 +28,20 @@ import { protect, admin } from './../middleware/authMiddleware.js'
 router
     .route('/seeds')
     .get(getSeedProducts)
-    .post(protect, admin, createSeedProduct)
+    .post(protect,createSeedProduct)
 
 router
     .route('/seeds/:id/reviews')
     .post(protect, createSeedProductReview)
 
 router
+    .route('/seeds/:id/')
+    .put(protect,updateSeedProduct)
+
+router
     .route('/seeds/:id')
     .get(getSeedProductById)
     .delete(protect, admin, deleteSeedProduct)
-    .put(protect, admin, updateSeedProduct)
 
 router
     .route('/lendMachines')
