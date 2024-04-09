@@ -237,7 +237,9 @@ const SeedListEdit = ({match}) => {
     return (
         <Container style={{ marginBottom: '50px' }}>
             <Meta
-                title="Krishi Sarathi | Supplier"
+
+                title="KRISHI SARATHI | Supplier"
+
             />
             <FormContainer>
                 <h2 style={{ marginTop: '120px', textAlign: 'center' }}>Seed Profile</h2>

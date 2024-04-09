@@ -14,6 +14,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    // verified: { 
+    //     type: Boolean, 
+    //     default: false 
+    // },
     cropSelection: {
         type: String,
         required: false
@@ -23,7 +27,8 @@ const userSchema = mongoose.Schema({
         required: true,
         default: false
     },
-}, {
+}, 
+{
     timestamps: true
 })
 
