@@ -16,12 +16,13 @@ const Header = () => {
   const history = useHistory();
 
   const handleCartClick = () => {
-    if (userInfo) {
+    // if (userInfo) {
       history.push('/cart');
-    } else {
-      alert('You must be logged in to view your cart');
-      history.push('/login');
-    }
+    //   history.push('/cart');
+    // } else {
+    //   alert('You must be logged in to view your cart');
+    //   history.push('/login');
+    // }
   };
 
   const handleSupplierClick = () => {
@@ -52,7 +53,8 @@ const Header = () => {
             <Nav.Link className="nav-name">KRISHI SARATHI</Nav.Link>
           </LinkContainer>
 
-          <LinkContainer to="login?redirect=cart">
+          {/* <LinkContainer to="login?redirect=cart"> */}
+          <LinkContainer to="/cart">
             <Nav.Link
               className={`${
                 userInfo ? "remove-space" : "add-space cart nav-cal"
@@ -64,9 +66,9 @@ const Header = () => {
             </Nav.Link>
           </LinkContainer>
 
-          <LinkContainer to="/">
+          {/* <LinkContainer to="/">
             <Nav.Link className="nav-cal">HOME</Nav.Link>
-          </LinkContainer>
+          </LinkContainer> */}
           <LinkContainer to="/farmer">
             <Nav.Link className="nav-cal">FARMER</Nav.Link>
           </LinkContainer>
