@@ -155,6 +155,9 @@ const Cart = ({ match, location, history }) => {
   const { cartItems } = cartSeed;
   const [durationOptions, setDurationOptions] = useState({});
   const [durationInput, setDurationInput] = useState({});
+  const [radioError, setRadioError] = useState(false);
+  const [inputError, setInputError] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (productId) {
@@ -167,7 +170,61 @@ const Cart = ({ match, location, history }) => {
   };
 
   const checkoutHandler = () => {
+    const selectedItems = Object.keys(durationOptions);
+    const isValid = selectedItems.length === cartItems.length;
+
+    if (!isValid) {
+      setError("Please select one of the duration options for all items.");
+      return;
+    }
+
+    const durations = Object.values(durationInput);
+    const isValidDuration = durations.every((duration) => duration);
+
+    if (!isValidDuration) {
+      setError("Please enter the number of days/hours/weeks for all items.");
+      return;
+    }
+
+    // Proceed to checkout logic...
     history.push("/login?redirect=shipping");
+  };
+
+  const handleDurationChange = (itemSeed, duration) => {
+    setDurationOptions({ ...durationOptions, [itemSeed]: duration });
+  };
+
+  const handleDurationInputChange = (itemSeed, value) => {
+    setDurationInput({ ...durationInput, [itemSeed]: value });
+  };
+
+  const handleProceedToCheckout = () => {
+    let radioSelected = false;
+    let inputFilled = true;
+
+    for (const itemSeed in durationOptions) {
+      if (durationOptions[itemSeed]) {
+        radioSelected = true;
+      } else {
+        radioSelected = false;
+        break;
+      }
+    }
+
+    for (const itemSeed in durationInput) {
+      if (!durationInput[itemSeed]) {
+        inputFilled = false;
+        break;
+      }
+    }
+
+    if (!radioSelected) {
+      setRadioError(true);
+    } else if (!inputFilled) {
+      setInputError(true);
+    } else {
+      history.push("/login?redirect=shipping");
+    }
   };
 
   // Function to calculate the subtotal based on selected duration
@@ -190,17 +247,9 @@ const Cart = ({ match, location, history }) => {
     return subtotal.toFixed(2);
   };
 
-  const handleDurationChange = (itemSeed, duration) => {
-    setDurationOptions({ ...durationOptions, [itemSeed]: duration });
-  };
-
-  const handleDurationInputChange = (itemSeed, value) => {
-    setDurationInput({ ...durationInput, [itemSeed]: value });
-  };
-
   return (
     <Container style={{ marginTop: "100px", marginBottom: "50px" }}>
-      <Meta title="KRISHI SARATHI | Cart" />
+      <Meta title="Krishi Sarathi | Cart" />
       <Row>
         <Col md={8}>
           <h1>Shopping Cart</h1>
@@ -240,7 +289,10 @@ const Cart = ({ match, location, history }) => {
 
                     <Col md={3}>
                       <Form.Group>
-                        <Form.Label>Duration Options:</Form.Label>
+                        <Form.Label>
+                          <span style={{ color: "red" }}>*</span>Duration
+                          Options:
+                        </Form.Label>
                         <Form.Check
                           inline
                           label="Hours"
@@ -274,11 +326,12 @@ const Cart = ({ match, location, history }) => {
                       </Form.Group>
                       <Form.Group>
                         <Form.Label>
-                          Enter the number of {durationOptions[item.seed]}
+                          <span style={{ color: "red" }}>*</span>Enter the
+                          number of {durationOptions[item.seed]}
                         </Form.Label>
                         <Form.Control
                           type="number"
-                          value={durationInput[item.seed] || ""}
+                          value={durationInput[item.seed] || "1"}
                           onChange={(e) =>
                             handleDurationInputChange(item.seed, e.target.value)
                           }
@@ -331,6 +384,7 @@ const Cart = ({ match, location, history }) => {
                   )
                   .toFixed(2)}
               </ListGroup.Item>
+
               <ListGroup.Item>
                 <Button
                   type="button"
@@ -339,6 +393,8 @@ const Cart = ({ match, location, history }) => {
                   onClick={checkoutHandler}>
                   Proceed To Checkout
                 </Button>
+
+                {error && <Message variant="danger">{error}</Message>}
               </ListGroup.Item>
             </ListGroup>
           </Card>
