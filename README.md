@@ -4,7 +4,7 @@
 
 ## Features
 
-- ChatBot
+
 - Add/Delete Products
 - Edit Profile
 - Add/Edit Personal & Company Address
