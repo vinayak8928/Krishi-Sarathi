@@ -17,12 +17,13 @@ const Header = () => {
   const history = useHistory();
 
   const handleCartClick = () => {
-    if (userInfo) {
-      history.push("/cart");
-    } else {
-      alert("You must be logged in to view your cart");
-      history.push("/login");
-    }
+    // if (userInfo) {
+      history.push('/cart');
+    //   history.push('/cart');
+    // } else {
+    //   alert('You must be logged in to view your cart');
+    //   history.push('/login');
+    // }
   };
 
   const handleSupplierClick = () => {
@@ -91,11 +92,11 @@ const Header = () => {
         <Nav className="ml-auto">
           <LinkContainer to="login?redirect=cart">
             <Nav.Link className="cart nav-cal" onClick={handleCartClick}>
+
               <i className="fas fa-shopping-cart"></i>
               CART
             </Nav.Link>
           </LinkContainer>
-
           {userInfo ? (
             // Display user-related options when logged in
             <>

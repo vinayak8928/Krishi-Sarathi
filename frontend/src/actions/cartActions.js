@@ -2,6 +2,7 @@ import axios from 'axios'
 import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
+    CART_RESET,
     CART_SAVE_SHIPPING_ADDRESSS,
     CART_SAVE_PAYMENT_METHOD
 } from './../constants/cartConstants'
@@ -61,6 +62,14 @@ export const removeFromCart = (id) => (dispatch, getState) => {
     dispatch({
         type: CART_REMOVE_ITEM,
         payload: id
+    })
+
+    localStorage.setItem('cartItems', JSON.stringify(getState().cartSeed.cartItems))
+}
+
+export const removeAllFromCart = () => (dispatch, getState) => {
+    dispatch({
+        type: CART_RESET,
     })
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cartSeed.cartItems))

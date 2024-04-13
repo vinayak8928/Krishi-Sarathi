@@ -138,6 +138,7 @@ import {
   Container,
   Card,
 } from "react-bootstrap";
+import './Cart.css';
 import Meta from "../../components/Helmet/Meta";
 
 const Cart = ({ match, location, history }) => {
@@ -252,7 +253,13 @@ const Cart = ({ match, location, history }) => {
       <Meta title="Krishi Sarathi | Cart" />
       <Row>
         <Col md={8}>
-          <h1>Shopping Cart</h1>
+           md={8}>
+                    <h1>Shopping Cart</h1>
+                    {/* <h5>Hey Guest User, Kindly login to Proceed further after adding items to cart.</h5> */}
+                    <div className="note-text">
+                        <h6>NOTE:</h6>
+                        <p>Hey, Guest User! Please log in to proceed after adding items to your cart.</p>
+                    </div>
           {cartItems.length === 0 ? (
             <Message variant="danger">
               Your cart is empty <Link to="/">GO BACK</Link>
