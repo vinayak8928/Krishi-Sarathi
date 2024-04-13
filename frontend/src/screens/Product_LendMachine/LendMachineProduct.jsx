@@ -269,7 +269,7 @@ const LendMachineProduct = ({ history, match }) => {
                     </ListGroup.Item>
                   )}
 
-                  <ListGroup.Item>
+                  {/* <ListGroup.Item>
                     <Row>
                       <Col>Duration:</Col>
                       <Col>
@@ -313,7 +313,7 @@ const LendMachineProduct = ({ history, match }) => {
                       />
                       </Col>
                     </Row>
-                  </ListGroup.Item>
+                  </ListGroup.Item> */}
 
                   <ListGroup.Item>
                     <Button

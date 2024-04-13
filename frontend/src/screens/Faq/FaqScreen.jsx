@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Card, Accordion, Button } from "react-bootstrap";
-import './FaqStyles.css'
+// import './FaqStyles.css'
 const FaqScreen = () => {
   return (
     <div className="container mt-5">

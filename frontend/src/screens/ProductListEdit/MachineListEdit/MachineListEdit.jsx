@@ -16,7 +16,7 @@ import { listLendMachineProductsDetails, updateLendMachine } from './../../../ac
 import { MACHINE_UPDATE_RESET } from '../../../constants/productConstants'
 import Meta from '../../../components/Helmet/Meta'
 
-const SeedListEdit = ({ match }) => {
+const MachineListEdit = ({ match }) => {
 
     const [name, setName] = useState('')
     const [image, setImage] = useState('')
@@ -196,4 +196,4 @@ const SeedListEdit = ({ match }) => {
     )
 }
 
-export default SeedListEdit 
+export default MachineListEdit 
