@@ -1,13 +1,13 @@
 import axios from 'axios'
-import { 
-    CART_ADD_ITEM, 
+import {
+    CART_ADD_ITEM,
     CART_REMOVE_ITEM,
     CART_RESET,
     CART_SAVE_SHIPPING_ADDRESSS,
     CART_SAVE_PAYMENT_METHOD
 } from './../constants/cartConstants'
 
-export const addToCart = (id, qty) => async (dispatch, getState) => {
+export const addToCart = (id, qty, duration) => async (dispatch, getState) => {
     try {
         const { data } = await axios.get(`/api/seeds/${id}`)
         dispatch({
@@ -19,6 +19,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
                 price: data.price,
                 countInStock: data.countInStock,
                 qty,
+                duration // Include duration in payload
             }
         })
     } catch (error) {
@@ -33,9 +34,10 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
                     price: data.price,
                     countInStock: data.quantity,
                     qty,
+                    duration // Include duration in payload
                 }
             })
-        } catch (error) { 
+        } catch (error) {
             const { data } = await axios.get(`/api/consumer/${id}`)
             dispatch({
                 type: CART_ADD_ITEM,
@@ -46,12 +48,14 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
                     price: data.price,
                     countInStock: data.quantity,
                     qty,
+                    duration // Include duration in payload
                 }
             })
         }
     }
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cartSeed.cartItems))
+    localStorage.setItem('durationValues', JSON.stringify(getState().cartSeed.durationValues)); // Store duration values in local storage
 }
 
 export const removeFromCart = (id) => (dispatch, getState) => {
