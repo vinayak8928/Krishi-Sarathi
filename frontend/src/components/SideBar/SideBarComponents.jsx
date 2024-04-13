@@ -33,11 +33,11 @@ const SideBarComponents = () => {
                         <i className="fas icon-fas fa-sort-amount-up-alt"></i>Order List
                     </ListGroup.Item>
                 </LinkContainer>
-                <LinkContainer className='link-contain' to='/admin/supplierproducts'>
+                {/* <LinkContainer className='link-contain' to='/admin/supplierproducts'>
                     <ListGroup.Item className="border-0 item">
                     <i className="fas icon-fas fa-seedling"></i>Harvest
                     </ListGroup.Item>
-                </LinkContainer>
+                </LinkContainer> */}
                 {/* <LinkContainer className='link-contain' to='/admin/map'>
                     <ListGroup.Item className="border-0 item">
                         <i className="fas icon-fas fa-map-marker-alt"></i>Map

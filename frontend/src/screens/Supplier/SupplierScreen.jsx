@@ -224,8 +224,14 @@ const SeedListEdit = ({match}) => {
             }
 
             const { data } = await axios.post('/api/upload', formData, config)
+            console.log('Uploaded data:', data);
 
-            setImage(data)
+            // setImage(data)
+            setNewProduct({
+                ...newProduct,
+                image: data
+            });
+            // newProduct.image({ ...newProduct, data: e.target.value})
             setUploading(false)
 
         } catch (error) {

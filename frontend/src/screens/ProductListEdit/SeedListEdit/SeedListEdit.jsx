@@ -153,7 +153,7 @@ const SeedListEdit = ({ match }) => {
                                 <Form.Label>Category</Form.Label>
                                 <Form.Control
                                     type="category"
-                                    placeholder="Enter price"
+                                    placeholder="Enter category"
                                     value={category}
                                     onChange={(e) => setCategory(e.target.value)}
                                 ></Form.Control>
