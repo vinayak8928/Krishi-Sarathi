@@ -4,7 +4,6 @@ import {
     CART_RESET,
     CART_SAVE_SHIPPING_ADDRESSS,
     CART_SAVE_PAYMENT_METHOD, 
-    CART_REST
 } from './../constants/cartConstants'
 
 export const cartSeedReducer = (state = { cartItems: [], shippingAddress: [] }, action) => {

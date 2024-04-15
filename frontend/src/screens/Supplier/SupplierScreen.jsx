@@ -1,32 +1,8 @@
-// import React from 'react'
-// import {
-//     Container,
-// } from 'react-bootstrap';
-// import Meta from '../../components/Helmet/Meta';
-// import AddSupplierProduct from '../../components/SupplierProduct/AddSupplierProduct';
-// import './supplierStyles.css'
-
-// const SupplierScreen = () => {
-//     return (
-//         <Container className='supplierContainer'>
-//             <Meta
-//                 title="Krishi Sarathi | Supplier"
-//             />
-//             <h1 className='title'>SUPPLIER</h1>
-//             <h4 className="supplier-title">
-//                 Sell your wide variety of products related to farming, through our platform. We have millions of farmers connected from all parts of country.</h4>
-//             <br />
-//             <AddSupplierProduct />
-//         </Container>
-//     )
-// }
-
-// export default SupplierScreen
-import mongoose from 'mongoose'
-
 import React, { useState, useEffect } from 'react'
+import { LinkContainer } from 'react-router-bootstrap'
 import axios from 'axios'
 import {
+    Table,
     Form,
     Button,
     Container,
@@ -35,23 +11,27 @@ import {
 } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-// import Message from './../../../components/Message/Message'
 import Message from '../../components/Message/Message'
 import Loader from '../../components/Loader/Loader'
+// import { listSeedProducts, listSeedProductsDetails, updateSeedProducts, createSeedProducts } from '../../actions/productSeedActions'
+// import { SEED_UPDATE_RESET } from '../../constants/productConstants'
+// import { SEED_CREATE_RESET } from '../../constants/productConstants'
+import { listConsumerProducts, deleteConsumerProduct, createConsumer } from '../../actions/consumerProductAction'
+import { CONSUMER_CREATE_RESET } from '../../constants/productConstants'
 import FormContainer from '../../components/FormContainer/FormContainer'
-import { listSeedProducts, listSeedProductsDetails, updateSeedProducts, createSeedProducts } from '../../actions/productSeedActions'
-import { SEED_UPDATE_RESET } from '../../constants/productConstants'
-import { SEED_CREATE_RESET } from '../../constants/productConstants'
+import { listConsumerProductsDetails, updateConsumer } from '../../actions/consumerProductAction'
+import { CONSUMER_UPDATE_RESET } from '../../constants/productConstants'
 import Meta from '../../components/Helmet/Meta'
 
-const SeedListEdit = ({match}) => {
+const ConsumerList = ({ match }) => {
 
-    const [name, setName] = useState('')
+    const [prodName, setProdName] = useState('')
     const [image, setImage] = useState('')
-    const [description, setDescription] = useState('')
+    const [sellerName, setSellerName] = useState('')
     const [price, setPrice] = useState('')
-    const [category, setCategory] = useState('')
-    const [countInStock, setCountInStock] = useState(0)
+    const [description, setDescription] = useState('')
+    const [quantity, setQuantity] = useState('')
+    const [avalaibleLoc, setAvalaibleLoc] = useState('')
     const [uploading, setUploading] = useState(false)
 
     const productId = match.params.id
@@ -59,156 +39,80 @@ const SeedListEdit = ({match}) => {
     const dispatch = useDispatch()
     let history = useHistory()
 
-    const prodcutSeedDetails = useSelector(state => state.prodcutSeedDetails)
-    const { loading, productSeed, error } = prodcutSeedDetails
+    const consumerProductList = useSelector(state => state.consumerProductList)
+    const { loading: loadingConsumer, error: errorConsumer, consumerProducts } = consumerProductList
 
-    const seedUpdate = useSelector(state => state.seedUpdate)
-    const { loading: loadingUpdate, success: successUpdate, error: errorUpdate } = seedUpdate
+    const consumerProductDetails = useSelector(state => state.consumerProductDetails)
+    const { loading, error } = consumerProductDetails
 
-    const prodcutSeedList = useSelector(state => state.prodcutSeedList)
-    const { loading: loadingSeed, error: errorSeed, productSeeds } = prodcutSeedList
+    const consumerUpdate = useSelector(state => state.consumerUpdate)
+    const { loading: loadingUpdate, success: successUpdate, error: errorUpdate } = consumerUpdate
 
-    const prodcutSeedDelete = useSelector(state => state.prodcutSeedDelete)
-    const { success: successSeedDelete, loading: loadingDelete, error: errorDelete } = prodcutSeedDelete
+    const consumerProductDelete = useSelector(state => state.consumerProductDelete)
+    const { loading: deleteLoadingConsumer, error: errorDeleteConsumer, success: successDelete } = consumerProductDelete
 
-    const [newProduct, setNewProduct] = useState({
-        name: '',
-        image: '',
-        description: '',
-        category: '',
-        price: 0,
-        countInStock: 0
-    });
-
-    const seedCreate = useSelector(state => state.seedCreate)
+    const consumerCreate = useSelector(state => state.consumerCreate)
     const {
-        success: successSeedCreate,
-        loading: loadingCreate,
-        error: errorCreate,
-        product: productCreate
-    } = seedCreate
+        loading: createLoadingConsumer,
+        error: errorcreateConsumer,
+        success: successCreate,
+        product: consumerProduct
+    } = consumerCreate
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
     useEffect(() => {
-            if (successUpdate) {
-                // dispatch({ type: SEED_UPDATE_RESET })
-                history.push('/farmers')
-            }
-    }, [history, productSeed, dispatch, productId, successUpdate])
-    // useEffect(() => {
-    //     if (successUpdate) {
-    //         dispatch({ type: SEED_UPDATE_RESET })
-    //         history.push('/admin/productlist')
-    //     } else {
-    //         if (!productSeed.name || productSeed._id !== productId) {
-    //             dispatch(listSeedProductsDetails(productId))
-    //         } else {
-    //             setName(productSeed.name)
-    //             setDescription(productSeed.description)
-    //             setPrice(productSeed.price)
-    //             setCategory(productSeed.category)
-    //             setImage(productSeed.image)
-    //             setCountInStock(productSeed.countInStock)
-    //         }
-    //     }
-    // }, [history, productSeed, dispatch, productId, successUpdate])
-    // useEffect(() => {
-    //     dispatch({ type: SEED_UPDATE_RESET }); // Reset update state
-    
-    //     if (!productSeed || productSeed._id !== productId) {
-    //       // Fetch product details if not loaded or not the current product
-    //       dispatch(listSeedProductsDetails(productId));
-    //     } else {
-    //       // Pre-fill form with existing product data
-    //       setName(productSeed.name);
-    //       setImage(productSeed.image);
-    //       setDescription(productSeed.description);
-    //       setPrice(productSeed.price);
-    //       setCategory(productSeed.category);
-    //       setCountInStock(productSeed.countInStock);
-    //     }
-    //   }, [dispatch, history, productId, productSeed, successUpdate]);
-    useEffect(() => {
-        dispatch({ type: SEED_CREATE_RESET })
+        dispatch({ type: CONSUMER_CREATE_RESET })
         if (!userInfo) {
             history.push('/login')
         } else {
-            if (successSeedCreate) {
-    //         history.push('/admin/productlist')
-                history.push(`/admin/productlist/seed/${productCreate._id}/edit`)
-                
-                // dispatch(updateSeedProducts({
-                //     _id: productCreate._id,
-                //     name:productCreate.name,
-                //     image:productCreate.image,
-                //     description:productCreate.description,
-                //     category:productCreate.category,
-                //     price:productCreate.price,
-                //     countInStock:productCreate.countInStock
-                // }))
-                // history.push(`/farmers/purchaseSeeds/${productCreate._id}`)
-                
+            if (successCreate) {
+                history.push(`/admin/productlist/consumer/${consumerProduct._id}/edit`)
             } else {
                 if(successUpdate){
-                dispatch({ type: SEED_UPDATE_RESET })
-                history.push('/farmers')
+                dispatch(listConsumerProducts())
+                history.push('/consumer')
                 }
             }
         }
-    }, [dispatch, history, userInfo, successSeedDelete, successSeedCreate, productCreate])
-    
-    // Function to handle form submission
-    // const createProductHandler = async (e) => {
-    //     // e.preventDefault();
-    //     // const newProduct = {
-    //     //     name,
-    //     //     image,
-    //     //     description,
-    //     //     category,
-    //     //     price,
-    //     //     countInStock,
-    //     // };
-    //     dispatch(createSeedProducts())
+    }, [dispatch, history, successUpdate, productId, userInfo, successDelete, successCreate, consumerProduct])
 
-    // };
-    const createProductHandler = async (e) => {
-        e.preventDefault();
-      
-        const { name, image, description, category, price, countInStock } = newProduct; // Access state values
-      
-        try {
-            // dispatch(createSeedProducts())
-          dispatch(updateSeedProducts({ _id: match.params.id, name, image, description, category, price, countInStock }));
-          history.push(`/admin/productlist/seed/${match.params.id}`); // Redirect on success
-        } catch (error) {
-          console.error(error);
-          // Handle errors appropriately, e.g., display an error message to the user
+    const deleteHandler = (id) => {
+        if (window.confirm('Are you sure')) {
+            dispatch(deleteConsumerProduct(id))
         }
-      };
-      
-    const submitHandler = async(e) => {
-        e.preventDefault()
-        dispatch(updateSeedProducts({
-            _id: productId,
-            name,
-            image,
-            description,
-            category,
-            price,
-            countInStock
-        }))
     }
 
-    const createSeedProductHandler = async(e) => {
-        // e.preventDefault();
-        dispatch(createSeedProducts())
+    const createConsumerProductHandler = () => {
+        dispatch(createConsumer())
     }
-    // const createSeedProductHandler = () => {
-    //         dispatch(updateSeedProducts())
-    //     }
-    
+
+    useEffect(() => {
+            if (successUpdate) {
+                // dispatch({ type: SEED_UPDATE_RESET })
+                history.push('/consumer')
+            }
+    }, [dispatch, history, userInfo, successDelete, successCreate, consumerProduct])
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+        try {
+            dispatch(updateConsumer({
+                _id: match.params.id,
+                prod_name: prodName,
+                image: image,
+                price: price,
+                seller_name: sellerName,
+                description: description,
+                quantity: quantity,
+                avalaible_location: avalaibleLoc
+            }))
+            history.push(`/admin/productlist/consumer/${consumerProduct._id}/edit`) // Redirect on success
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0]
@@ -224,14 +128,8 @@ const SeedListEdit = ({match}) => {
             }
 
             const { data } = await axios.post('/api/upload', formData, config)
-            console.log('Uploaded data:', data);
 
-            // setImage(data)
-            setNewProduct({
-                ...newProduct,
-                image: data
-            });
-            // newProduct.image({ ...newProduct, data: e.target.value})
+            setImage(data)
             setUploading(false)
 
         } catch (error) {
@@ -239,37 +137,37 @@ const SeedListEdit = ({match}) => {
             setUploading(false)
         }
     }
-
+     
     return (
         <Container style={{ marginBottom: '50px' }}>
             <Meta
-
-                title="KRISHI SARATHI | Supplier"
-
+                title="Krishi Sarathi | Consumer"
             />
             <FormContainer>
-                <h2 style={{ marginTop: '120px', textAlign: 'center' }}>Seed Profile</h2>
-                <Link to='/farmer' className='btn btn-light my-3'>
+                <h2 style={{ marginTop: '120px', textAlign: 'center' }}>Consumer Profile</h2>
+                <Link to='/' className='btn btn-light my-3'>
                     GO BACK
                 </Link>
-                <Button className='my-3' onClick={createSeedProductHandler}>
-                        <i className='fas fa-plus'></i> 
-                </Button>
-                {loading && <Loader />}
-                {error && <Message variant='danger'>{error}</Message>}
+                <Col className="text-right">
+                    <Button className='my-3' onClick={createConsumerProductHandler}>
+                        <i className='fas fa-plus'></i>
+                    </Button>
+                </Col>
                 {loadingUpdate && <Loader />}
                 {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+                {loading && <Loader />}
+                {error && <Message variant='danger'>{error}</Message>}
                 {successUpdate && <Message variant='success'>Profile Updated!</Message>}
-                <Form onSubmit={createProductHandler}>
+                <Form onSubmit={submitHandler}>
                     <Row>
                         <Col md={6}>
-                            <Form.Group controlId='name'>
+                            <Form.Group controlId='prodname'>
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control
-                                    type="text"
-                                    placeholder="Enter name"
-                                    value={newProduct.name}
-                                    onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+                                    type="prodName"
+                                    placeholder="Enter Product Name"
+                                    value={prodName}
+                                    onChange={(e) => setProdName(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
                             <Form.Group controlId='image'>
@@ -277,8 +175,8 @@ const SeedListEdit = ({match}) => {
                                 <Form.Control
                                     type="text"
                                     placeholder="Enter image url"
-                                    value={newProduct.image}
-                                    onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
+                                    value={image}
+                                    onChange={(e) => setImage(e.target.value)}
                                 ></Form.Control>
                                 <Form.File
                                     id='image-file'
@@ -288,26 +186,13 @@ const SeedListEdit = ({match}) => {
                                 ></Form.File>
                                 {uploading && <Loader />}
                             </Form.Group>
-                            <Form.Group controlId='description'>
-                                <Form.Label>Description</Form.Label>
+                            <Form.Group controlId='sellerName'>
+                                <Form.Label>Seller Name</Form.Label>
                                 <Form.Control
-                                    as="textarea"
-                                    rows={3}
-                                    type="description"
-                                    placeholder="Enter description"
-                                    value={newProduct.description}
-                                    onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-                                ></Form.Control>
-                            </Form.Group>
-                        </Col>
-                        <Col md={6}>
-                            <Form.Group controlId='category'>
-                                <Form.Label>Category</Form.Label>
-                                <Form.Control
-                                    type="category"
-                                    placeholder="Enter category"
-                                    value={newProduct.category}
-                                    onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+                                    type="sellerName"
+                                    placeholder="Enter seller name"
+                                    value={sellerName}
+                                    onChange={(e) => setSellerName(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
                             <Form.Group controlId='price'>
@@ -315,17 +200,39 @@ const SeedListEdit = ({match}) => {
                                 <Form.Control
                                     type="price"
                                     placeholder="Enter price"
-                                    value={newProduct.price}
-                                    onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+                                    value={price}
+                                    onChange={(e) => setPrice(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
-                            <Form.Group controlId='countInStock'>
-                                <Form.Label>Count in stock</Form.Label>
+                        </Col>
+                        <Col md={6}>
+                            <Form.Group controlId='description'>
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={3}
+                                    type="description"
+                                    placeholder="Enter Description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                ></Form.Control>
+                            </Form.Group>
+                            <Form.Group controlId='quantity'>
+                                <Form.Label>Quantity</Form.Label>
                                 <Form.Control
                                     type="countInStock"
-                                    placeholder="Enter count in stock"
-                                    value={newProduct.countInStock}
-                                    onChange={(e) => setNewProduct({ ...newProduct, countInStock: e.target.value })}
+                                    placeholder="Enter quantity"
+                                    value={quantity}
+                                    onChange={(e) => setQuantity(e.target.value)}
+                                ></Form.Control>
+                            </Form.Group>
+                            <Form.Group controlId='avalaibleLoc'>
+                                <Form.Label>Machine Power</Form.Label>
+                                <Form.Control
+                                    type="avalaibleLoc"
+                                    placeholder="Enter Machine Power"
+                                    value={avalaibleLoc}
+                                    onChange={(e) => setAvalaibleLoc(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
                             <Button type="submit" variant="primary">Update</Button>
@@ -337,4 +244,4 @@ const SeedListEdit = ({match}) => {
     )
 }
 
-export default SeedListEdit 
+export default ConsumerList
