@@ -1,4 +1,5 @@
 import axios from 'axios'
+import mongoose from 'mongoose'
 import {
     PRODUCT_SEED_LIST_REQUEST,
     PRODUCT_SEED_LIST_SUCCESS,
@@ -91,25 +92,58 @@ export const deleteSeedProducts = (id) => async (dispatch, getState) => {
         })
     }
 }
+// old one
+// export const createSeedProducts = (id) => async (dispatch, getState) => {
+//     try {
+//         dispatch({ type: SEED_CREATE_REQUEST })
+
+//         const { userLogin: { userInfo } } = getState()
+
+//         const config = {
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 Authorization: `Bearer ${userInfo.token}`
+//             },
+//         }
+
+//         const { data } = await axios.post('/api/seeds', {}, config)
+
+//         dispatch({
+//             type: SEED_CREATE_SUCCESS,
+//             payload: data
+//         })
+//     } catch (error) {
+//         dispatch({
+//             type: SEED_CREATE_FAIL,
+//             payload:
+//                 error.response && error.response.data.message
+//                     ? error.response.data.message
+//                     : error.message
+//         })
+//     }
+// }
 
 export const createSeedProducts = (id) => async (dispatch, getState) => {
     try {
-        dispatch({ type: SEED_CREATE_REQUEST })
+        dispatch({ type: SEED_CREATE_REQUEST });
 
-        const { userLogin: { userInfo } } = getState()
+        const { userLogin: { userInfo } } = getState();
 
         const config = {
             headers: {
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${userInfo.token}`
-            },
-        }
+            }
+        };
 
-        const { data } = await axios.post(`/api/seeds`, {}, config)
+        // const newProduct = { _id: new mongoose.Types.ObjectId(), ...id }
+        const { data } = await axios.post('/api/seeds', {}, config);
 
         dispatch({
             type: SEED_CREATE_SUCCESS,
             payload: data
-        })
+        });
+        
     } catch (error) {
         dispatch({
             type: SEED_CREATE_FAIL,
@@ -117,9 +151,9 @@ export const createSeedProducts = (id) => async (dispatch, getState) => {
                 error.response && error.response.data.message
                     ? error.response.data.message
                     : error.message
-        })
+        });
     }
-}
+};
 
 export const updateSeedProducts = (seed) => async (dispatch, getState) => {
     try {
@@ -133,8 +167,9 @@ export const updateSeedProducts = (seed) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             },
         }
-
+        // const newProduct = { _id: new mongoose.Types.ObjectId() }
         const { data } = await axios.put(`/api/seeds/${seed._id}`, seed, config)
+
 
         dispatch({
             type: SEED_UPDATE_SUCCESS,

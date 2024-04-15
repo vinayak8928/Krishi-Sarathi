@@ -95,7 +95,9 @@ export const listMyProducts = () => async (dispatch, getState) => {
             },
         }
 
-        const { data } = await axios.get(`/api/supplier/myproducts`, config)
+        // const { data } = await axios.get(`/api/supplier/myproducts`, config)
+        const { data } = await axios.post(`/api/seeds`, {}, config)
+
 
         dispatch({
             type: SUPPLIER_PRODUCT_LIST_MY_SUCCESS,

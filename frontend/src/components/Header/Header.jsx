@@ -90,7 +90,7 @@ const Header = () => {
         </Nav>
 
         <Nav className="ml-auto">
-          <LinkContainer to="login?redirect=cart">
+          <LinkContainer to="cart">
             <Nav.Link className="cart nav-cal" onClick={handleCartClick}>
 
               <i className="fas fa-shopping-cart"></i>
