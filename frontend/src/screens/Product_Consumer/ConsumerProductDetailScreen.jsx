@@ -67,6 +67,9 @@ const ConsumerProductDetailScreen = ({ history, match }) => {
                                                 <h4>Price: {consumerProduct.price}</h4>
                                             </ListGroup.Item>
                                             <ListGroup.Item>
+                                                <h6>Description: {consumerProduct.description}</h6>
+                                            </ListGroup.Item>
+                                            <ListGroup.Item>
                                                 <p>Avalaible Location: {consumerProduct.avalaible_location}</p>
                                             </ListGroup.Item>
                                         </ListGroup>
