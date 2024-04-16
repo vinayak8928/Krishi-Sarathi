@@ -5,7 +5,7 @@ const router = express.Router()
 
 const storage = multer.diskStorage({
     destination(req, file, cb) {
-        cb(null, 'uploads/')
+        cb(null, 'frontend/public/uploads/')
     },
     filename(req, file, cb) {
         cb(
@@ -34,8 +34,18 @@ const upload = multer({
     },
 })
 
+// router.post('/', upload.single('image'), (req, res) => {
+    // res.send(`/${req.file.path}`)
+//     const imagePath = req.file.path.replace(/.*\/public/, ''); // Remove 'frontend/public' from the path
+//     console.log(imagePath)
+//     res.send(imagePath);
+// })
+
 router.post('/', upload.single('image'), (req, res) => {
-    res.send(`/${req.file.path}`)
-})
+    const imagePath = req.file.path;
+    const imagePathRelativeToPublic = path.relative('frontend/public', imagePath);
+    const finalImagePath = imagePathRelativeToPublic.replace(/\\/g, '/'); // Replace backslashes with forward slashes
+    res.send(`/${finalImagePath}`);
+});
 
 export default router
