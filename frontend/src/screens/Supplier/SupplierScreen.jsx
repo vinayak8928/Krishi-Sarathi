@@ -129,7 +129,10 @@ const ConsumerList = ({ match }) => {
 
             const { data } = await axios.post('/api/upload', formData, config)
 
-            setImage(data)
+            // setImage(data)
+            const imagePath = data.replace(/\\/g, '/');
+            console.log(imagePath)
+            setImage(imagePath);
             setUploading(false)
 
         } catch (error) {

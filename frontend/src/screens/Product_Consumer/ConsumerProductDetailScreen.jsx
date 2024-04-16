@@ -51,6 +51,7 @@ const ConsumerProductDetailScreen = ({ history, match }) => {
                                     <Col md={6}>
                                         <Image className="mx-auto image-seed"
                                             src={consumerProduct.image}
+                                            // src={`http://localhost:5000${consumerProduct.image}`}
                                             alt={consumerProduct.prod_name}
                                             width={300}
                                         />

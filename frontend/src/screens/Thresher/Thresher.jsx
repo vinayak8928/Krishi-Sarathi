@@ -65,7 +65,7 @@ const Thresher_LendScreen = () => {
                                     }
                                     {
                                         numberOfItems >= filteredThreshers.length
-                                            ? <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">Finished</Alert>
+                                            ? <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
                                             : ''
                                     }
                                     <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>show more</Button>

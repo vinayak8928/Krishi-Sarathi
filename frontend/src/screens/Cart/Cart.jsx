@@ -40,7 +40,7 @@
 
 //   return (
 //     <Container style={{ marginTop: "100px", marginBottom: "50px" }}>
-//       <Meta title="KRISHI SARATHI | Cart" />
+//       <Meta title="Krishi Sarathi | Cart" />
 //       <Row>
 //         <Col md={8}>
 //           <h1>Shopping Cart</h1>
