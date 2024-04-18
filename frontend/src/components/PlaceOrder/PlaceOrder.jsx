@@ -16,12 +16,12 @@ import Meta from "../Helmet/Meta";
 
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
+let val;
 const PlaceOrder = ({}) => {
   const history = useHistory();
   const location = useLocation();
   const data = location.state;
-  const val = data.amt; //item amt
+  val = data.amt; //item amt
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cartSeed);
@@ -89,7 +89,7 @@ const PlaceOrder = ({}) => {
   return (
     <div style={{ marginTop: "100px" }}>
       <Container>
-        <Meta title="Krishi Sarathi | Orderr" />
+        <Meta title="Krishi Sarathi | Order" />
         <Row className="justify-content-md-center">
           <Col xs={12} md={6}>
             <CheckoutSteps step1 step2 step3 step4 />

@@ -7,12 +7,12 @@ import { savePaymentMethod } from "./../../actions/cartActions.js";
 import Meta from "../../components/Helmet/Meta";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
+let val;
 const PaymentScreen = ({}) => {
   const history = useHistory();
   const location = useLocation();
   const data = location.state;
-  const val = data.amt;
+   val = data.amt;
 console.log("pay is",val);
   const cart = useSelector((state) => state.cartSeed);
   const { shippingAddress } = cart;
