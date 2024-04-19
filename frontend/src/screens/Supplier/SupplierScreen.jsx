@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
 import axios from 'axios'
 import {
-    Table,
     Form,
     Button,
     Container,
@@ -11,27 +9,25 @@ import {
 } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+// import Message from './../../../components/Message/Message'
 import Message from '../../components/Message/Message'
 import Loader from '../../components/Loader/Loader'
-// import { listSeedProducts, listSeedProductsDetails, updateSeedProducts, createSeedProducts } from '../../actions/productSeedActions'
-// import { SEED_UPDATE_RESET } from '../../constants/productConstants'
-// import { SEED_CREATE_RESET } from '../../constants/productConstants'
-import { listConsumerProducts, deleteConsumerProduct, createConsumer } from '../../actions/consumerProductAction'
-import { CONSUMER_CREATE_RESET } from '../../constants/productConstants'
 import FormContainer from '../../components/FormContainer/FormContainer'
-import { listConsumerProductsDetails, updateConsumer } from '../../actions/consumerProductAction'
-import { CONSUMER_UPDATE_RESET } from '../../constants/productConstants'
+import { listLendMachineProducts, deleteLendMachineProduct, createLendMachine } from '../../actions/productLendMachinesActions'
+import { MACHINE_CREATE_RESET, MACHINE_UPDATE_RESET } from '../../constants/productConstants'
+import { listLendMachineProductsDetails, updateLendMachine } from '../../actions/productLendMachinesActions'
 import Meta from '../../components/Helmet/Meta'
 
-const ConsumerList = ({ match }) => {
+const SeedListEdit = ({match}) => {
 
-    const [prodName, setProdName] = useState('')
+    const [name, setName] = useState('')
     const [image, setImage] = useState('')
-    const [sellerName, setSellerName] = useState('')
-    const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
+    const [price, setPrice] = useState('')
+    const [seller, setSeller] = useState('')
+    const [category, setCategory] = useState('')
     const [quantity, setQuantity] = useState('')
-    const [avalaibleLoc, setAvalaibleLoc] = useState('')
+    const [machine_power, setMachine_power] = useState('')
     const [uploading, setUploading] = useState(false)
 
     const productId = match.params.id
@@ -39,80 +35,87 @@ const ConsumerList = ({ match }) => {
     const dispatch = useDispatch()
     let history = useHistory()
 
-    const consumerProductList = useSelector(state => state.consumerProductList)
-    const { loading: loadingConsumer, error: errorConsumer, consumerProducts } = consumerProductList
+    const productLendMachinesList = useSelector(state => state.productLendMachinesList)
+    const { loading: loadingMachine, error: errorMachine, productLendMachines } = productLendMachinesList
 
-    const consumerProductDetails = useSelector(state => state.consumerProductDetails)
-    const { loading, error } = consumerProductDetails
+    const productLendMachinesDelete = useSelector(state => state.productLendMachinesDelete)
+    const { loading: loadingDelete, error: errorDelete, success: successDelete } = productLendMachinesDelete
 
-    const consumerUpdate = useSelector(state => state.consumerUpdate)
-    const { loading: loadingUpdate, success: successUpdate, error: errorUpdate } = consumerUpdate
+    const LendMachinesCreate = useSelector(state => state.LendMachinesCreate)
+    const { loading: loadingCreate, error: errorCreate, success: successCreate, product: productCreate } = LendMachinesCreate
 
-    const consumerProductDelete = useSelector(state => state.consumerProductDelete)
-    const { loading: deleteLoadingConsumer, error: errorDeleteConsumer, success: successDelete } = consumerProductDelete
+    const productLendMachinesDetails = useSelector(state => state.productLendMachinesDetails)
+    const { loading, error } = productLendMachinesDetails
 
-    const consumerCreate = useSelector(state => state.consumerCreate)
-    const {
-        loading: createLoadingConsumer,
-        error: errorcreateConsumer,
-        success: successCreate,
-        product: consumerProduct
-    } = consumerCreate
+    const LendMachinesUpdate = useSelector(state => state.LendMachinesUpdate)
+    const { loading: loadingUpdate, success: successUpdate, error: errorUpdate } = LendMachinesUpdate
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+    const [newProduct, setNewProduct] = useState({
+        name: '',
+        image: '',
+        description: '',
+        category: '',
+        price: 0,
+        countInStock: 0
+    });
+
+    // useEffect(() => {
+    //         if (successUpdate) {
+    //             // dispatch({ type: SEED_UPDATE_RESET })
+    //             history.push('/farmers')
+    //         }
+    // }, [history, productSeed, dispatch, productId, successUpdate])
+
     useEffect(() => {
-        dispatch({ type: CONSUMER_CREATE_RESET })
+        dispatch({ type: MACHINE_CREATE_RESET })
         if (!userInfo) {
             history.push('/login')
         } else {
             if (successCreate) {
-                history.push(`/admin/productlist/consumer/${consumerProduct._id}/edit`)
+                history.push(`/admin/productlist/machine/${productCreate._id}/edit`)
+                
             } else {
                 if(successUpdate){
-                dispatch(listConsumerProducts())
-                history.push('/consumer')
+                dispatch({ type: MACHINE_UPDATE_RESET })
+                history.push('/farmers')
                 }
             }
         }
-    }, [dispatch, history, successUpdate, productId, userInfo, successDelete, successCreate, consumerProduct])
-
-    const deleteHandler = (id) => {
-        if (window.confirm('Are you sure')) {
-            dispatch(deleteConsumerProduct(id))
-        }
-    }
-
-    const createConsumerProductHandler = () => {
-        dispatch(createConsumer())
-    }
-
-    useEffect(() => {
-            if (successUpdate) {
-                // dispatch({ type: SEED_UPDATE_RESET })
-                history.push('/consumer')
-            }
-    }, [dispatch, history, userInfo, successDelete, successCreate, consumerProduct])
-
-    const submitHandler = (e) => {
-        e.preventDefault()
+    }, [dispatch, history, userInfo, successDelete, successCreate, productCreate])
+    
+    const createProductHandler = async (e) => {
+        e.preventDefault();
+      
+        const { name, image, description, category, price, countInStock } = newProduct; // Access state values
+      
         try {
-            dispatch(updateConsumer({
-                _id: match.params.id,
-                prod_name: prodName,
-                image: image,
-                price: price,
-                seller_name: sellerName,
-                description: description,
-                quantity: quantity,
-                avalaible_location: avalaibleLoc
-            }))
-            history.push(`/admin/productlist/consumer/${consumerProduct._id}/edit`) // Redirect on success
+            // dispatch(createSeedProducts())
+          dispatch(updateLendMachine({ _id: match.params.id, name, image, description, category, price, countInStock }));
+          history.push(`/admin/productlist/machine/${match.params.id}`); // Redirect on success
         } catch (error) {
-            console.error(error);
+          console.error(error);
+          // Handle errors appropriately, e.g., display an error message to the user
         }
+      };
+      
+    const submitHandler = async(e) => {
+        e.preventDefault()
+        dispatch(updateLendMachine({
+            _id: productId,
+            name,
+            image,
+            price,
+            seller,
+            description,
+            category,
+            quantity,
+            machine_power
+        }))
     }
+    
 
     const uploadFileHandler = async (e) => {
         const file = e.target.files[0]
@@ -128,11 +131,14 @@ const ConsumerList = ({ match }) => {
             }
 
             const { data } = await axios.post('/api/upload', formData, config)
+            console.log('Uploaded data:', data);
 
             // setImage(data)
-            const imagePath = data.replace(/\\/g, '/');
-            console.log(imagePath)
-            setImage(imagePath);
+            setNewProduct({
+                ...newProduct,
+                image: data
+            });
+            // newProduct.image({ ...newProduct, data: e.target.value})
             setUploading(false)
 
         } catch (error) {
@@ -140,37 +146,41 @@ const ConsumerList = ({ match }) => {
             setUploading(false)
         }
     }
-     
+
+    const createMachineProductHandler = () => {
+        dispatch(createLendMachine())
+    }
+
     return (
         <Container style={{ marginBottom: '50px' }}>
             <Meta
-                title="Krishi Sarathi | Consumer"
+
+                title="Krishi Sarathi | Supplier"
+
             />
             <FormContainer>
-                <h2 style={{ marginTop: '120px', textAlign: 'center' }}>Consumer Profile</h2>
-                <Link to='/' className='btn btn-light my-3'>
+                <h2 style={{ marginTop: '120px', textAlign: 'center' }}>Lend Machines</h2>
+                <Link to='/farmer' className='btn btn-light my-3'>
                     GO BACK
                 </Link>
-                <Col className="text-right">
-                    <Button className='my-3' onClick={createConsumerProductHandler}>
-                        <i className='fas fa-plus'></i>
-                    </Button>
-                </Col>
-                {loadingUpdate && <Loader />}
-                {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+                <Button className='my-3' onClick={createMachineProductHandler}>
+                        <i className='fas fa-plus'></i> 
+                </Button>
                 {loading && <Loader />}
                 {error && <Message variant='danger'>{error}</Message>}
+                {loadingUpdate && <Loader />}
+                {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
                 {successUpdate && <Message variant='success'>Profile Updated!</Message>}
-                <Form onSubmit={submitHandler}>
-                    <Row>
+                <Form onSubmit={createProductHandler}>
+                <Row>
                         <Col md={6}>
-                            <Form.Group controlId='prodname'>
+                            <Form.Group controlId='name'>
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control
-                                    type="prodName"
-                                    placeholder="Enter Product Name"
-                                    value={prodName}
-                                    onChange={(e) => setProdName(e.target.value)}
+                                    type="name"
+                                    placeholder="Enter name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
                             <Form.Group controlId='image'>
@@ -189,15 +199,6 @@ const ConsumerList = ({ match }) => {
                                 ></Form.File>
                                 {uploading && <Loader />}
                             </Form.Group>
-                            <Form.Group controlId='sellerName'>
-                                <Form.Label>Seller Name</Form.Label>
-                                <Form.Control
-                                    type="sellerName"
-                                    placeholder="Enter seller name"
-                                    value={sellerName}
-                                    onChange={(e) => setSellerName(e.target.value)}
-                                ></Form.Control>
-                            </Form.Group>
                             <Form.Group controlId='price'>
                                 <Form.Label>Price</Form.Label>
                                 <Form.Control
@@ -207,35 +208,53 @@ const ConsumerList = ({ match }) => {
                                     onChange={(e) => setPrice(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
+                            <Form.Group controlId='seller'>
+                                <Form.Label>Seller Name</Form.Label>
+                                <Form.Control
+                                    type="name"
+                                    placeholder="Enter seller name"
+                                    value={seller}
+                                    onChange={(e) => setSeller(e.target.value)}
+                                ></Form.Control>
+                            </Form.Group>
                         </Col>
                         <Col md={6}>
-                            <Form.Group controlId='description'>
+                        <Form.Group controlId='description'>
                                 <Form.Label>Description</Form.Label>
                                 <Form.Control
                                     as="textarea"
                                     rows={3}
                                     type="description"
-                                    placeholder="Enter Description"
+                                    placeholder="Enter description"
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
+                                ></Form.Control>
+                            </Form.Group>
+                            <Form.Group controlId='category'>
+                                <Form.Label>Category</Form.Label>
+                                <Form.Control
+                                    type="category"
+                                    placeholder="Enter Category"
+                                    value={category}
+                                    onChange={(e) => setCategory(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
                             <Form.Group controlId='quantity'>
                                 <Form.Label>Quantity</Form.Label>
                                 <Form.Control
-                                    type="countInStock"
+                                    type="quantity"
                                     placeholder="Enter quantity"
                                     value={quantity}
                                     onChange={(e) => setQuantity(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
-                            <Form.Group controlId='avalaibleLoc'>
+                            <Form.Group controlId='machinepower'>
                                 <Form.Label>Machine Power</Form.Label>
                                 <Form.Control
-                                    type="avalaibleLoc"
-                                    placeholder="Enter Machine Power"
-                                    value={avalaibleLoc}
-                                    onChange={(e) => setAvalaibleLoc(e.target.value)}
+                                    type="machinepower"
+                                    placeholder="Enter machine power"
+                                    value={machine_power}
+                                    onChange={(e) => setMachine_power(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
                             <Button type="submit" variant="primary">Update</Button>
@@ -247,4 +266,4 @@ const ConsumerList = ({ match }) => {
     )
 }
 
-export default ConsumerList
+export default SeedListEdit 

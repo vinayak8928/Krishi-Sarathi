@@ -57,12 +57,12 @@ router
 router
     .route('/consumer')
     .get(getConsumerProducts)
-    .post(protect, admin, createConsumer)
+    .post(protect, createConsumer)
 
 router
     .route('/consumer/:id')
     .get(getConsumerProductById)
-    .delete(protect, admin, deleteConsumerProduct)
-    .put(protect, admin, updateConsumer)
+    .delete(protect, deleteConsumerProduct)
+    .put(protect, updateConsumer)
 
 export default router

@@ -43,21 +43,47 @@ const deleteConsumerProduct = asyncHandler(async (req, res) => {
 // @desc    Create Consumer
 // @rout    POST /consumer/
 // @access  private/ Admin
+// const createConsumer = asyncHandler(async (req, res) => {
+//     const consumerProduct = new ConsumerProducts({
+//         prod_name: "",
+//         user: req.user._id,
+//         seller_name: "",
+//         image: '/images/consumer/mogra_rice.jpg',
+//         price: 0,
+//         description: "",
+//         quantity: 0,
+//         avalaible_location: ""
+//     })
+
+//     const createdconsumerProduct = await consumerProduct.save()
+//     res.status(201).json(createdconsumerProduct)
+// })
 const createConsumer = asyncHandler(async (req, res) => {
+    const {
+        prod_name,
+        seller_name,
+        image,
+        price,
+        description,
+        quantity,
+        avalaible_location
+    } = req.body;
+
     const consumerProduct = new ConsumerProducts({
-        prod_name: "",
+        prod_name,
         user: req.user._id,
-        seller_name: "",
-        image: '/images/consumer/mogra_rice.jpg',
-        price: 0,
-        description: "",
-        quantity: 0,
-        avalaible_location: ""
+        seller_name,
+        image,
+        price,
+        description,
+        quantity,
+        avalaible_location
     })
 
     const createdconsumerProduct = await consumerProduct.save()
     res.status(201).json(createdconsumerProduct)
 })
+
 
 // @desc    Update Consumer
 // @rout    PUT /consumer/:id
