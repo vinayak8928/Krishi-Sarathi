@@ -23,7 +23,7 @@ const CardMenu = () => {
                     </Card.Body>
                 </Card> */}
                 <Card border='primary'>
-                    <Card.Body>
+                    <Card.Body className="text-center">
                         <Card.Title className='title'>Supplier</Card.Title>
                         <Card.Text className='card-text'>
                             Rent your wide variety of products related to farming, through our platform. We have millions of farmers connected from all parts of country.
@@ -34,7 +34,7 @@ const CardMenu = () => {
                     </Card.Body>
                 </Card>
                 <Card border='primary'>
-                    <Card.Body>
+                    <Card.Body className="text-center">
                         <Card.Title className='title'>Consumer</Card.Title>
                         <Card.Text className='card-text'>
                             No need to visit field to get grains!!! Just order here and and get all kinds of grains deliverd at your doorstep. Why to wait? Go and order.

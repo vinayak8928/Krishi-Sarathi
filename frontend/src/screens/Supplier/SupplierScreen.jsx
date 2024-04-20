@@ -159,7 +159,7 @@ const SeedListEdit = ({match}) => {
                 title="Krishi Sarathi | Supplier"
 
             />
-            <FormContainer>
+            <FormContainer className="text-right">
                 <h2 style={{ marginTop: '120px', textAlign: 'center' }}>Lend Machines</h2>
                 <Link to='/farmer' className='btn btn-light my-3'>
                     GO BACK

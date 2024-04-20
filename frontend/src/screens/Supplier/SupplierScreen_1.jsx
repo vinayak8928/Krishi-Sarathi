@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import './supplierStyles.css'
 import { LinkContainer } from 'react-router-bootstrap'
 import axios from 'axios'
 import {

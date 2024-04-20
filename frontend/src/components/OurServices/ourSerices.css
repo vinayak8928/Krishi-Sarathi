@@ -11,10 +11,17 @@
 
 .description {
   padding: 0 10%; /* Increase padding for better readability */
+  font-weight: 300;
+  font-style: normal;
+  font-family: Poppins, sans-serif;
+  
 }
 
 .sub-title {
   margin-bottom: 30px;
+  font-weight: 400;
+  font-style: normal;
+  font-family: Poppins, sans-serif;
 }
 
 .services {
@@ -31,6 +38,10 @@
   display: block;
 }
 
+
 .sub-desc {
   margin-top: 40px;
+  font-weight: 300;
+  font-style: normal;
+  font-family: Poppins, sans-serif;
 }

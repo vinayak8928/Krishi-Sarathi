@@ -7,32 +7,38 @@
 .farmer-title {
     text-align: center;
     font-size: 22px;
-    font-family: "Montserrat", sans-serif;
+    font-family: Poppins, sans-serif;
     font-optical-sizing: auto;
-    font-weight: 40px;
+    font-weight: 400;
+  font-style: normal;
 }
 
-.card-titile {
+.card-title {
     text-align: center;
     margin-bottom: 20px;
-    font-family: "Montserrat", sans-serif;
+    font-family: Poppins, sans-serif;
     font-optical-sizing: auto;
-    font-weight: 40px;
+    font-weight: 400;
+  font-style: normal;
 }
 
 .title {
-    text-align: center; 
-    font-weight: bold; 
-    font-size: 35px;
-    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    /* Use Poppins font family */
+    font-family: Poppins, sans-serif;
     font-optical-sizing: auto;
-    font-weight: 40px;
-}
+    /* Adjust font weight as needed */
+    font-weight: 1000;
+    font-style: bold;
+  }
 
 .btn-explore {
     margin-bottom: 80px;
     text-align: center;
     align-items: center;
     margin-left: 0% !important;
+    font-family: Poppins, sans-serif;
     width: 250px;
   }

@@ -22,7 +22,7 @@ const OurServices = () => {
       <Container className="services">
         <Row>
           <Col md={4}>
-            <h5 className="sub-title">Heavy Machine</h5>
+            <h5 className="sub-title">Heavy Machine & Equipments</h5>
             <Image className="img" src="images/services/heavy.svg" fluid />
             <p className="sub-desc">
               No need to worry of labour costing more. Just rent all types of
@@ -43,8 +43,8 @@ const OurServices = () => {
             </p>
           </Col>
           <Col md={4}>
-            <h5 className="sub-title">Consumer</h5>
-            <Image className="img" src="images/services/consumer.svg" fluid />
+            <h5 className="sub-title">Farmer</h5>
+            <Image className="img" src="images/services/51899.jpg" fluid />
             <p className="sub-desc">
               Why to visit Super Store and Pay High? Order all products and get
               deliver at your doorstep.
