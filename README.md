@@ -1,20 +1,14 @@
 
-## 🌱Agricultural Web Application Built with Reactjs + Expressjs + Nodejs + MongoDB (MERN)💻
+## Agricultural Web Application Built with MERN
 
 
 ## Features
 
-- ChatBot
 - Add/Delete Products
 - Edit Profile
-- Add/Edit Personal & Company Address
-- Add/Delete Grains
-- Edit Profile
 - Add/Edit Address
-- Buy Seeds/Pesticides or Rent Machines
+- Rent Machines based on Hours, Days, and Weeks
 - Consumer
-- Add/Edit Address
-- Buy Materials From Farmer
 - Payapal Gateway
 - Cart Page
 - Change Quantity

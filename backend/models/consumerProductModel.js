@@ -24,35 +24,35 @@ const consumerProductSchema = mongoose.Schema({
         ref: 'User'
     },
     prod_name: {
-        type: String,
-        required: true
+        type: String
+        // required: true
     },
     seller_name: {
-        type: String,
-        required: true
+        type: String
+        // required: true
     },
     image: {
-        type: String,
-        required: true
+        type: String
+        // required: true
     },
     price: {
         type: Number,
-        required: true,
+        // required: true,
         default: 0
     },
-    prod_size: {
+    description: {
         type: String,
-        required: true,
+        // required: true,
     },
     reviews: [consumerProductReviewSchema],
     quantity: {
         type: Number,
-        required: true,
+        // required: true,
         default: 0
     },
     avalaible_location: {
-        type: String,
-        required: true
+        type: String
+        // required: true
     }
 }, {
     timestamps: true

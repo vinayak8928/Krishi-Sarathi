@@ -226,6 +226,12 @@ const LendMachineProduct = ({ history, match }) => {
                   </p>
                 </ListGroup.Item>
                 <ListGroup.Item>
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>Seller Name:</span>
+                    <br /> {productLendMachines.seller}
+                  </p>
+                </ListGroup.Item>
+                <ListGroup.Item>
                   <p>Quantity Available: {productLendMachines.quantity}</p>
                 </ListGroup.Item>
               </ListGroup>

@@ -72,7 +72,7 @@ const AddSupplierProduct = () => {
         try {
             const config = {
                 headers: {
-                    'Content-type': 'multipart/form-data'
+                    // 'Content-type': 'multipart/form-data'
                 }
             }
 

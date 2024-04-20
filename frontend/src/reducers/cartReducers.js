@@ -1,3 +1,4 @@
+
 // import { 
 //     CART_ADD_ITEM, 
 //     CART_REMOVE_ITEM, 
@@ -142,6 +143,7 @@
 import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
+   CART_RESET,
     CART_SAVE_SHIPPING_ADDRESSS,
     CART_SAVE_PAYMENT_METHOD,
     SET_AMT
@@ -175,6 +177,11 @@ export const cartSeedReducer = (state = { cartItems: [], shippingAddress: [], am
             return {
                 ...state,
                 cartItems: state.cartItems.filter(x => x.seed !== action.payload),
+            }
+        case CART_RESET:
+            return {
+                ...state,
+                cartItems: []
             }
         case CART_SAVE_SHIPPING_ADDRESSS:
             return {

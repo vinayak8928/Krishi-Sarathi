@@ -51,6 +51,7 @@ const ConsumerProductDetailScreen = ({ history, match }) => {
                                     <Col md={6}>
                                         <Image className="mx-auto image-seed"
                                             src={consumerProduct.image}
+                                            // src={`http://localhost:5000${consumerProduct.image}`}
                                             alt={consumerProduct.prod_name}
                                             width={300}
                                         />
@@ -65,6 +66,9 @@ const ConsumerProductDetailScreen = ({ history, match }) => {
                                             </ListGroup.Item>
                                             <ListGroup.Item>
                                                 <h4>Price: {consumerProduct.price}</h4>
+                                            </ListGroup.Item>
+                                            <ListGroup.Item>
+                                                <h6>Description: {consumerProduct.description}</h6>
                                             </ListGroup.Item>
                                             <ListGroup.Item>
                                                 <p>Avalaible Location: {consumerProduct.avalaible_location}</p>

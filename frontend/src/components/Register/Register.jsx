@@ -57,7 +57,7 @@ const Register = ({ location, history }) => {
 
   return (
     <FormContainer>
-      <Meta title="KRISHI SARATHI | Register" />
+      <Meta title="Krishi Sarathi | Register" />
       <h1 style={{ marginTop: "120px" }}>Sign Up</h1>
       {message && <Message variant="danger">{message}</Message>}
       {error && <Message variant="danger">{error}</Message>}

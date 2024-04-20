@@ -13,7 +13,7 @@ const ProductListScreen = () => {
             <Container fluid>
                 <Row>
                     <Col md={3}>
-                        <h4>Agroic Products</h4>
+                        <h4>Krishi Sarathi Products</h4>
                     </Col>
                     <Col md={9}>
                         <h4 style={{ marginLeft: "30px" }}>Product List</h4>

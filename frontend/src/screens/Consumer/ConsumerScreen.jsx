@@ -38,7 +38,7 @@ const ConsumerScreen = () => {
         <div className="consumerProductScreen">
             <Meta
 
-                title="KRISHI SARATHI | Consumer"
+                title="Krishi Sarathi | Consumer"
 
             />
             <Container className='consumerContainer'>
@@ -62,7 +62,7 @@ const ConsumerScreen = () => {
                                                     seller_name={consumer.seller_name}
                                                     image={consumer.image}
                                                     price={consumer.price}
-                                                    prod_size={consumer.prod_size}
+                                                    description={consumer.description}
                                                     avalaible_location={consumer.avalaible_location}
                                                     quantity={consumer.quantity}
                                                 />
@@ -70,7 +70,7 @@ const ConsumerScreen = () => {
                                     }
                                     {
                                         numberOfItems >= consumerProducts.length
-                                            ? <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">Finished</Alert>
+                                            ? <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
                                             : ''
                                     }
                                     <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>Show more</Button>

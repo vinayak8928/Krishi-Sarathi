@@ -16,13 +16,14 @@ import { listLendMachineProductsDetails, updateLendMachine } from './../../../ac
 import { MACHINE_UPDATE_RESET } from '../../../constants/productConstants'
 import Meta from '../../../components/Helmet/Meta'
 
-const SeedListEdit = ({ match }) => {
+const MachineListEdit = ({ match }) => {
 
     const [name, setName] = useState('')
     const [image, setImage] = useState('')
+    const [seller, setSeller] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
-    const [target_plant, setTarget_plant] = useState('')
+    const [category, setCategory] = useState('')
     const [quantity, setQuantity] = useState('')
     const [machine_power, setMachine_power] = useState('')
     const [uploading, setUploading] = useState(false)
@@ -41,7 +42,9 @@ const SeedListEdit = ({ match }) => {
     useEffect(() => {
         if (successUpdate) {
             dispatch({ type: MACHINE_UPDATE_RESET })
-            history.push('/admin/productlist')
+            // history.push('/admin/productlist')
+            history.push(`/farmers/lendMachines/${productLendMachines._id}`)
+
         } else {
             if (!productLendMachines.name || productLendMachines._id !== productId) {
                 dispatch(listLendMachineProductsDetails(productId))
@@ -50,7 +53,8 @@ const SeedListEdit = ({ match }) => {
                 setDescription(productLendMachines.description)
                 setPrice(productLendMachines.price)
                 setImage(productLendMachines.image)
-                setTarget_plant(productLendMachines.target_plant)
+                setSeller(productLendMachines.seller)
+                setCategory(productLendMachines.target_plant)
                 setQuantity(productLendMachines.quantity)
                 setMachine_power(productLendMachines.machine_power)
             }
@@ -64,8 +68,9 @@ const SeedListEdit = ({ match }) => {
             name,
             image,
             price,
+            seller,
             description,
-            target_plant,
+            category,
             quantity,
             machine_power
         }))
@@ -147,7 +152,18 @@ const SeedListEdit = ({ match }) => {
                                     onChange={(e) => setPrice(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
-                            <Form.Group controlId='description'>
+                            <Form.Group controlId='seller'>
+                                <Form.Label>Seller Name</Form.Label>
+                                <Form.Control
+                                    type="name"
+                                    placeholder="Enter seller name"
+                                    value={seller}
+                                    onChange={(e) => setSeller(e.target.value)}
+                                ></Form.Control>
+                            </Form.Group>
+                        </Col>
+                        <Col md={6}>
+                        <Form.Group controlId='description'>
                                 <Form.Label>Description</Form.Label>
                                 <Form.Control
                                     as="textarea"
@@ -158,22 +174,20 @@ const SeedListEdit = ({ match }) => {
                                     onChange={(e) => setDescription(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
-                        </Col>
-                        <Col md={6}>
-                            <Form.Group controlId='countInStock'>
-                                <Form.Label>Target Plant</Form.Label>
+                        <Form.Group controlId='category'>
+                                <Form.Label>Category</Form.Label>
                                 <Form.Control
-                                    type="countInStock"
-                                    placeholder="Enter target plant"
-                                    value={target_plant}
-                                    onChange={(e) => setTarget_plant(e.target.value)}
+                                    type="category"
+                                    placeholder="Enter Category"
+                                    value={category}
+                                    onChange={(e) => setCategory(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
                             <Form.Group controlId='quantity'>
                                 <Form.Label>Quantity</Form.Label>
                                 <Form.Control
                                     type="countInStock"
-                                    placeholder="Enter qunatity"
+                                    placeholder="Enter quantity"
                                     value={quantity}
                                     onChange={(e) => setQuantity(e.target.value)}
                                 ></Form.Control>
@@ -196,4 +210,4 @@ const SeedListEdit = ({ match }) => {
     )
 }
 
-export default SeedListEdit 
+export default MachineListEdit 

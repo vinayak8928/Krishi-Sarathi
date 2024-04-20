@@ -109,7 +109,7 @@ const Footer = () => {
               />
               <p>
                 <Link to="/faq" className="dark-grey-text">
-                  Faq
+                  FAQs
                 </Link>
               </p>
               <p>

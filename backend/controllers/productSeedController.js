@@ -43,21 +43,108 @@ const deleteSeedProduct = asyncHandler(async (req, res) => {
 // @desc    Create Product Seed
 // @rout    POST /seeds/
 // @access  private/ Admin
-const createSeedProduct = asyncHandler(async (req, res) => {
-    const productSeed = new ProductSeeds({
-        name: 'Sample Seed',
-        user: req.user._id,
-        image: '/images/sample.png',
-        description: 'Sample Description',
-        category: 'Sample Category',
-        price: 0,
-        countInStock: 0,
-        numReviews: 0
-    })
 
-    const createdProduct = await productSeed.save()
-    res.status(201).json(createdProduct)
-})
+// const createSeedProduct = asyncHandler(async (req, res) => {
+//     // const product = req.body
+
+//     // const ProductExists = await ProductSeeds.findById(req.params.id)
+
+//     // if (ProductExists) {
+//     //     res.status(400)
+//     //     throw new Error('Product already exists')
+//     // }
+//     const updateProductSeed = new ProductSeeds({
+//                 name,
+//                 user: req.user._id,
+//                 image,
+//                 description,
+//                 category,
+//                 price,
+//                 countInStock,
+//                 numReviews
+//             })
+//     console.log(updateProductSeed)
+
+//     // if (updateProductSeed) {
+//     //     res.status(201).json({
+//     //     _id:updateProductSeed.productId,
+//     //     name :updateProductSeed.name,
+//     //     price :updateProductSeed.price,
+//     //     image:updateProductSeed.image,
+//     //     description:updateProductSeed.description,
+//     //     category:updateProductSeed.category,
+//     //     countInStock:updateProductSeed.countInStock
+//     // })
+//     if (updateProductSeed) {
+
+//         updateProductSeed.name = name
+//         updateProductSeed.price = price
+//         updateProductSeed.image = image
+//         updateProductSeed.description = description
+//         updateProductSeed.category = category
+//         updateProductSeed.countInStock = countInStock
+
+//         const updatedProduct = await updateProductSeed.save()
+//         res.status(201).json(updatedProduct)
+//     } else {
+//         res.status(401)
+//         throw new Error('Product not found')
+//     }
+// })
+
+// const createSeedProduct = asyncHandler(async (req, res) => {
+//     const productSeed = new ProductSeeds({
+//         name: 'Sample Seed',
+//         user: req.user._id,
+//         image: '/images/sample.png',
+//         description: 'Sample Description',
+//         category: 'Sample Category',
+//         price: 0,
+//         countInStock: 0,
+//         numReviews: 0
+//     })
+
+//     const createdProduct = await productSeed.save()
+//     res.status(201).json(createdProduct)
+// })
+
+const createSeedProduct = asyncHandler(async (req, res) => {
+    const { name, image, description, category, price, countInStock } = req.body;
+    const productSeed = new ProductSeeds({
+        name,
+        user: req.user._id,
+        image,
+        description,
+        category,
+        price,
+        countInStock,
+        numReviews: 0
+    });
+
+
+    console.log("This is create product")
+    console.log(productSeed)
+    // if (productSeed._id) {
+    //     console.log("If statement")
+    //     res.status(201).json({
+    //         _id: productSeed._id,
+    //         name: productSeed.name,
+    //         image: productSeed.image,
+    //         description: productSeed.description,
+    //         category: productSeed.category,
+    //         price: productSeed.price,
+    //         countInStock: productSeed.countInStock
+    //     })
+    // }
+    try {
+        const createdProduct = await productSeed.save();
+        res.status(201).json(createdProduct);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to save product' });
+    }
+    
+});
 
 // @desc    Update Product Seed
 // @rout    PUT /seeds/:id
@@ -67,6 +154,8 @@ const updateSeedProduct = asyncHandler(async (req, res) => {
 
     const updateProductSeed = await ProductSeeds.findById(req.params.id)
 
+    console.log("This is update product")
+    console.log(updateProductSeed)
     if (updateProductSeed) {
 
         updateProductSeed.name = name

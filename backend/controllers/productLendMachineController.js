@@ -49,8 +49,9 @@ const createLendMachine = asyncHandler(async (req, res) => {
         user: req.user._id,
         image: '/images/farmMachine.jpg',
         description: 'sample description',
-        target_plant: 'sample category',
+        category: 'sample category',
         price: 0,
+        seller:'seller',
         quantity: 0,
         machine_power: '0HP',
     })
@@ -63,7 +64,7 @@ const createLendMachine = asyncHandler(async (req, res) => {
 // @rout    PUT /lendMachines/:id
 // @access  private/ Admin
 const updateLendMachine = asyncHandler(async (req, res) => {
-    const { name, price, image, description, target_plant, quantity, machine_power } = req.body
+    const { name, price,seller, image, description, category, quantity, machine_power } = req.body
 
     const updateLendMachine = await ProductLendMachines.findById(req.params.id)
 
@@ -71,9 +72,10 @@ const updateLendMachine = asyncHandler(async (req, res) => {
 
         updateLendMachine.name = name
         updateLendMachine.price = price
+        updateLendMachine.seller = seller
         updateLendMachine.image = image
         updateLendMachine.description = description
-        updateLendMachine.target_plant = target_plant
+        updateLendMachine.category = category
         updateLendMachine.quantity = quantity
         updateLendMachine.machine_power = machine_power
 

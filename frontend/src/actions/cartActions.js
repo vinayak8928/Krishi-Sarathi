@@ -209,6 +209,7 @@ import axios from 'axios'
 import { 
     CART_ADD_ITEM, 
     CART_REMOVE_ITEM,
+    CART_RESET,
     CART_SAVE_SHIPPING_ADDRESSS,
     CART_SAVE_PAYMENT_METHOD,
     SET_AMT
@@ -270,10 +271,20 @@ export const removeFromCart = (id) => (dispatch, getState) => {
     localStorage.setItem('cartItems', JSON.stringify(getState().cartSeed.cartItems))
 }
 
+
 export const setAmt = (amt) => ({
     type: SET_AMT,
     payload: amt,
   });
+
+export const removeAllFromCart = () => (dispatch, getState) => {
+    dispatch({
+        type: CART_RESET,
+    })
+
+    localStorage.setItem('cartItems', JSON.stringify(getState().cartSeed.cartItems))
+}
+
 
 export const saveShippingAddress = (data) => (dispatch) => {
     dispatch({
