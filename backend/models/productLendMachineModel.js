@@ -35,7 +35,7 @@ const productLendMachineSchema = mongoose.Schema({
         type: String,
         required: true,
     }, 
-    target_plant: {
+    category: {
         type: String,
         required: true
     },
@@ -52,6 +52,11 @@ const productLendMachineSchema = mongoose.Schema({
     },
     price: {
         type: Number,
+        required: true,
+        default: 0
+    },
+    seller: {
+        type: String,
         required: true,
         default: 0
     },

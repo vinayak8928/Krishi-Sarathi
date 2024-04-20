@@ -40,7 +40,8 @@ const SeedListEdit = ({ match }) => {
     useEffect(() => {
         if (successUpdate) {
             dispatch({ type: SEED_UPDATE_RESET })
-            history.push('/admin/productlist')
+            // history.push('/admin/productlist')
+            history.push(`/farmers/purchaseSeeds/${productSeed._id}`)
         } else {
             if (!productSeed.name || productSeed._id !== productId) {
                 dispatch(listSeedProductsDetails(productId))
@@ -77,7 +78,7 @@ const SeedListEdit = ({ match }) => {
         try {
             const config = {
                 headers: {
-                    'Content-type': 'multipart/form-data'
+                    // 'Content-type': 'multipart/form-data'
                 }
             }
 
@@ -152,7 +153,7 @@ const SeedListEdit = ({ match }) => {
                                 <Form.Label>Category</Form.Label>
                                 <Form.Control
                                     type="category"
-                                    placeholder="Enter price"
+                                    placeholder="Enter category"
                                     value={category}
                                     onChange={(e) => setCategory(e.target.value)}
                                 ></Form.Control>

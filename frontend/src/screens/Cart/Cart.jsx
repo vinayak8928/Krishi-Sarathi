@@ -344,6 +344,7 @@ import {
   Container,
   Card,
 } from "react-bootstrap";
+import './Cart.css';
 import Meta from "../../components/Helmet/Meta";
 
 let val;
@@ -363,8 +364,10 @@ const Cart = ({ match, location }) => {
   const cartSeed = useSelector((state) => state.cartSeed);
   const { cartItems } = cartSeed;
 
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
 
   const [durationOptions, setDurationOptions] = useState({});
   const [durationInput, setDurationInput] = useState({});
@@ -468,20 +471,37 @@ const Cart = ({ match, location }) => {
       <Meta title="Krishi Sarathi | Cart" />
       <Row>
         <Col md={8}>
-          <Row>
-            <h1>Shopping Cart</h1>
-          </Row>
-          {!userInfo && (
-            <Row>
-              <div className="note-text">
-                <h6>NOTE:</h6>
-                <p>
-                  Hey, Guest User! Please log in to proceed after adding items
-                  to your cart.
-                </p>
-              </div>
-            </Row>
-          )}
+
+//           <Row>
+//             <h1>Shopping Cart</h1>
+//           </Row>
+//           {!userInfo && (
+//             <Row>
+//               <div className="note-text">
+//                 <h6>NOTE:</h6>
+//                 <p>
+//                   Hey, Guest User! Please log in to proceed after adding items
+//                   to your cart.
+//                 </p>
+//               </div>
+//             </Row>
+//           )}
+
+        <Row>
+      <h1>Shopping Cart</h1>
+    </Row>
+    {!userInfo && (
+      <Row>
+        <div className="note-text">
+          <h6>NOTE:</h6>
+          <p>
+            Hey, Guest User! Please log in to proceed after adding items to
+            your cart.
+          </p>
+        </div>
+      </Row>
+    )}
+
           {cartItems.length === 0 ? (
             <Message variant="danger">
               Your cart is empty <Link to="/">GO BACK</Link>

@@ -22,7 +22,7 @@ const ConsumerListEdit = ({ match }) => {
     const [image, setImage] = useState('')
     const [sellerName, setSellerName] = useState('')
     const [price, setPrice] = useState('')
-    const [prodSize, setProdSize] = useState('')
+    const [description, setDescription] = useState('')
     const [quantity, setQuantity] = useState('')
     const [avalaibleLoc, setAvalaibleLoc] = useState('')
     const [uploading, setUploading] = useState(false)
@@ -41,7 +41,8 @@ const ConsumerListEdit = ({ match }) => {
     useEffect(() => {
         if (successUpdate) {
             dispatch({ type: CONSUMER_UPDATE_RESET })
-            history.push('/admin/productlist')
+            // history.push('/admin/productlist')
+            history.push(`/consumer/${consumerProduct._id}`)
         } else {
             if (!consumerProduct.prod_name || consumerProduct._id !== productId) {
                 dispatch(listConsumerProductsDetails(productId))
@@ -50,7 +51,7 @@ const ConsumerListEdit = ({ match }) => {
                 setSellerName(consumerProduct.seller_name)
                 setPrice(consumerProduct.price)
                 setImage(consumerProduct.image)
-                setProdSize(consumerProduct.prod_size)
+                setDescription(consumerProduct.description)
                 setQuantity(consumerProduct.quantity)
                 setAvalaibleLoc(consumerProduct.avalaible_location)
             }
@@ -65,7 +66,7 @@ const ConsumerListEdit = ({ match }) => {
             image: image,
             price: price,
             seller_name: sellerName,
-            prod_size: prodSize,
+            description: description,
             quantity: quantity,
             avalaible_location: avalaibleLoc
         }))
@@ -86,7 +87,10 @@ const ConsumerListEdit = ({ match }) => {
 
             const { data } = await axios.post('/api/upload', formData, config)
 
-            setImage(data)
+            // setImage(data)
+            const imagePath = data.replace(/\\/g, '/');
+            console.log(imagePath)
+            setImage(imagePath);
             setUploading(false)
 
         } catch (error) {
@@ -159,19 +163,21 @@ const ConsumerListEdit = ({ match }) => {
                         </Col>
                         <Col md={6}>
                             <Form.Group controlId='prodSize'>
-                                <Form.Label>Product Size</Form.Label>
+                                <Form.Label>Description</Form.Label>
                                 <Form.Control
-                                    type="prodSize"
-                                    placeholder="Enter product size"
-                                    value={prodSize}
-                                    onChange={(e) => setProdSize(e.target.value)}
+                                    as="textarea"
+                                    rows={3}
+                                    type="description"
+                                    placeholder="Enter Description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
                             <Form.Group controlId='quantity'>
                                 <Form.Label>Quantity</Form.Label>
                                 <Form.Control
                                     type="countInStock"
-                                    placeholder="Enter qunatity"
+                                    placeholder="Enter quantity"
                                     value={quantity}
                                     onChange={(e) => setQuantity(e.target.value)}
                                 ></Form.Control>
@@ -180,7 +186,7 @@ const ConsumerListEdit = ({ match }) => {
                                 <Form.Label>Machine Power</Form.Label>
                                 <Form.Control
                                     type="avalaibleLoc"
-                                    placeholder="Enter avalaible location"
+                                    placeholder="Enter Machine Power"
                                     value={avalaibleLoc}
                                     onChange={(e) => setAvalaibleLoc(e.target.value)}
                                 ></Form.Control>

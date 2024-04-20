@@ -209,6 +209,7 @@ import axios from 'axios'
 import { 
     CART_ADD_ITEM, 
     CART_REMOVE_ITEM,
+    CART_RESET,
     CART_SAVE_SHIPPING_ADDRESSS,
     CART_SAVE_PAYMENT_METHOD,
     SET_AMT
@@ -242,7 +243,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
                     qty,
                 }
             })
-        } catch (error) { 
+        } catch (error) {
             const { data } = await axios.get(`/api/consumer/${id}`)
             dispatch({
                 type: CART_ADD_ITEM,
@@ -270,10 +271,13 @@ export const removeFromCart = (id) => (dispatch, getState) => {
     localStorage.setItem('cartItems', JSON.stringify(getState().cartSeed.cartItems))
 }
 
-export const setAmt = (amt) => ({
-    type: SET_AMT,
-    payload: amt,
-  });
+export const removeAllFromCart = () => (dispatch, getState) => {
+    dispatch({
+        type: CART_RESET,
+    })
+
+    localStorage.setItem('cartItems', JSON.stringify(getState().cartSeed.cartItems))
+}
 
 export const saveShippingAddress = (data) => (dispatch) => {
     dispatch({
@@ -292,7 +296,3 @@ export const savePaymentMethod = (data) => (dispatch) => {
 
     localStorage.setItem('paymentMethod', JSON.stringify(data))
 }
-
-
-
-

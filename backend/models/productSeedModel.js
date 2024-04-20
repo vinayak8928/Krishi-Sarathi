@@ -30,19 +30,19 @@ const productSeedSchema = mongoose.Schema({
     },
     name: {
         type: String,
-        required: true
+        // required: true
     },
     image: {
         type: String,
-        required: true
+        // required: true
     },
     description: {
         type: String,
-        required: true,
+        // required: true,
     },
     category: {
         type: String,
-        required: true
+        // required: true,
     },
     reviews: [seedReviewSchema],
     rating: {
@@ -52,12 +52,12 @@ const productSeedSchema = mongoose.Schema({
     },
     countInStock: {
         type: Number,
-        required: true,
+        // required: true,
         default: 0
     },
     price: {
         type: Number,
-        required: true,
+        // required: true,
         default: 0
     },
     numReviews: {

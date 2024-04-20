@@ -62,7 +62,7 @@ const SeedList = () => {
                 </Col>
                 <Col className="text-right">
                     <Button className='my-3' onClick={createMachineProductHandler}>
-                        <i className='fas fa-plus'></i> Create Product
+                        <i className='fas fa-plus'></i> Create Productss
                     </Button>
                 </Col>
             </Row>

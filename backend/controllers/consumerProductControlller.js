@@ -43,27 +43,53 @@ const deleteConsumerProduct = asyncHandler(async (req, res) => {
 // @desc    Create Consumer
 // @rout    POST /consumer/
 // @access  private/ Admin
+// const createConsumer = asyncHandler(async (req, res) => {
+//     const consumerProduct = new ConsumerProducts({
+//         prod_name: "",
+//         user: req.user._id,
+//         seller_name: "",
+//         image: '/images/consumer/mogra_rice.jpg',
+//         price: 0,
+//         description: "",
+//         quantity: 0,
+//         avalaible_location: ""
+//     })
+
+//     const createdconsumerProduct = await consumerProduct.save()
+//     res.status(201).json(createdconsumerProduct)
+// })
 const createConsumer = asyncHandler(async (req, res) => {
+    const {
+        prod_name,
+        seller_name,
+        image,
+        price,
+        description,
+        quantity,
+        avalaible_location
+    } = req.body;
+
     const consumerProduct = new ConsumerProducts({
-        prod_name: "Sample name",
+        prod_name,
         user: req.user._id,
-        seller_name: "Sample seller",
-        image: '/images/consumer/mogra_rice.jpg',
-        price: 0,
-        prod_size: "0kg",
-        quantity: 0,
-        avalaible_location: "Sample location"
+        seller_name,
+        image,
+        price,
+        description,
+        quantity,
+        avalaible_location
     })
 
     const createdconsumerProduct = await consumerProduct.save()
     res.status(201).json(createdconsumerProduct)
 })
 
+
 // @desc    Update Consumer
 // @rout    PUT /consumer/:id
 // @access  private/ Admin
 const updateConsumer = asyncHandler(async (req, res) => {
-    const { prod_name, price, image, seller_name, prod_size, quantity, avalaible_location } = req.body
+    const { prod_name, price, image, seller_name, description, quantity, avalaible_location } = req.body
 
     const updateConsumerproduct = await ConsumerProducts.findById(req.params.id)
 
@@ -74,7 +100,7 @@ const updateConsumer = asyncHandler(async (req, res) => {
         updateConsumerproduct.image = image
         updateConsumerproduct.seller_name = seller_name
         updateConsumerproduct.quantity = quantity
-        updateConsumerproduct.prod_size = prod_size
+        updateConsumerproduct.description = description
         updateConsumerproduct.avalaible_location = avalaible_location
 
         const updatedConsumer = await updateConsumerproduct.save()
