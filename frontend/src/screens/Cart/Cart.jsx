@@ -472,21 +472,6 @@ const Cart = ({ match, location }) => {
       <Row>
         <Col md={8}>
 
-{/* //           <Row>
-//             <h1>Shopping Cart</h1>
-//           </Row>
-//           {!userInfo && (
-//             <Row>
-//               <div className="note-text">
-//                 <h6>NOTE:</h6>
-//                 <p>
-//                   Hey, Guest User! Please log in to proceed after adding items
-//                   to your cart.
-//                 </p>
-//               </div>
-//             </Row>
-//           )} */}
-
         <Row>
       <h1>Shopping Cart</h1>
     </Row>
