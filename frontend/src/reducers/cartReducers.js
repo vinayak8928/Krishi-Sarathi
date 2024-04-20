@@ -3,7 +3,7 @@ import {
     CART_REMOVE_ITEM, 
     CART_RESET,
     CART_SAVE_SHIPPING_ADDRESSS,
-    CART_SAVE_PAYMENT_METHOD,,
+    CART_SAVE_PAYMENT_METHOD,
     SET_AMT
 } from './../constants/cartConstants'
 // const initialState = {

@@ -472,7 +472,7 @@ const Cart = ({ match, location }) => {
       <Row>
         <Col md={8}>
 
-//           <Row>
+{/* //           <Row>
 //             <h1>Shopping Cart</h1>
 //           </Row>
 //           {!userInfo && (
@@ -485,7 +485,7 @@ const Cart = ({ match, location }) => {
 //                 </p>
 //               </div>
 //             </Row>
-//           )}
+//           )} */}
 
         <Row>
       <h1>Shopping Cart</h1>
