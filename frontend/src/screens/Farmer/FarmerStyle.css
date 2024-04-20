@@ -7,22 +7,32 @@
 .farmer-title {
     text-align: center;
     font-size: 22px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 40px;
 }
 
 .card-titile {
     text-align: center;
     margin-bottom: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 40px;
 }
 
 .title {
     text-align: center; 
     font-weight: bold; 
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-size: 35px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 40px;
 }
 
 .btn-explore {
-    margin-bottom: 10px;
+    margin-bottom: 80px;
     text-align: center;
     align-items: center;
-    margin-left: 25% !important;
+    margin-left: 0% !important;
+    width: 250px;
   }

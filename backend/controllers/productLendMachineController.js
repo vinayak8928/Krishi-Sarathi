@@ -45,14 +45,14 @@ const deleteLendMachnine = asyncHandler(async(req, res) => {
 // @access  private/ Admin
 const createLendMachine = asyncHandler(async (req, res) => {
     const lendMachine = new ProductLendMachines({
-        name: 'sample machine',
+        seller: req.user.name,
+        name: '',
         user: req.user._id,
-        image: '/images/farmMachine.jpg',
-        description: 'sample description',
-        category: 'sample category',
-        price: 0,
-        seller:'seller',
-        quantity: 0,
+        image: '',
+        description: '',
+        category: '',
+        price: '',
+        quantity: 1,
         machine_power: '0HP',
     })
 

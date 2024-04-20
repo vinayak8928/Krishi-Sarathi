@@ -46,13 +46,13 @@ router
 router
     .route('/lendMachines')
     .get(getLendMachnines)
-    .post(protect, admin, createLendMachine)
+    .post(protect, createLendMachine)
 
 router
     .route('/lendMachines/:id')
     .get(getLendMachnineById)
-    .delete(protect, admin, deleteLendMachnine)
-    .put(protect, admin, updateLendMachine)
+    .delete(protect, deleteLendMachnine)
+    .put(protect, updateLendMachine)
 
 router
     .route('/consumer')

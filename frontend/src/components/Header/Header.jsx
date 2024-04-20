@@ -61,9 +61,9 @@ const Header = () => {
             <Nav.Link className="nav-cal">FARMER</Nav.Link>
           </LinkContainer>
 
-          <LinkContainer to="/consumer">
+          {/* <LinkContainer to="/consumer">
             <Nav.Link className="nav-cal">CONSUMER</Nav.Link>
-          </LinkContainer>
+          </LinkContainer> */}
 
           <LinkContainer to="/supplier">
             <Nav.Link className="nav-cal">SUPPLIER</Nav.Link>

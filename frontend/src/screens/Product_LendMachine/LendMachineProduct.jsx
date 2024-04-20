@@ -159,17 +159,34 @@ import {
 } from "react-bootstrap";
 import "./LendMachineScreen.css";
 
-import { listLendMachineProductsDetails } from "./../../actions/productLendMachinesActions";
+import { listLendMachineProductsDetails, updateLendMachine } from "./../../actions/productLendMachinesActions";
+import { MACHINE_UPDATE_RESET } from '../../constants/productConstants'
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
 import Meta from "../../components/Helmet/Meta";
 
 const LendMachineProduct = ({ history, match }) => {
 
+  const [name, setName] = useState('')
+  const [image, setImage] = useState('')
+  const [seller, setSeller] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState('')
+  const [category, setCategory] = useState('')
+  const [quantity, setQuantity] = useState('')
+  const [machine_power, setMachine_power] = useState('')
+  const [uploading, setUploading] = useState(false)
+
+  
+  const productId = match.params.id
+
   const [qty, setQty] = useState(1);
   const [duration, setDuration] = useState("hours");
   const [durationValue, setDurationValue] = useState(""); // State to hold the input value for duration
   const dispatch = useDispatch();
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
 
   const productLendMachinesDetails = useSelector(
     (state) => state.productLendMachinesDetails
@@ -188,6 +205,25 @@ const LendMachineProduct = ({ history, match }) => {
     // Append the duration to the URL as a query parameter
     history.push(`/cart/${match.params.id}?duration=${durationString}&qty=${qty}`);
   };
+
+  const EditHandler = () => {
+    if (userInfo && userInfo._id === productLendMachines.user) {
+      // Run your update code here
+      history.push(`/admin/productlist/machine/${match.params.id}/edit`)
+      // dispatch(updateLendMachine({
+      //   _id: productId,
+      //   name,
+      //   image,
+      //   price,
+      //   seller,
+      //   description,
+      //   category,
+      //   quantity,
+      //   machine_power
+      // }));
+    }
+  };
+  
 
 
   return (
@@ -329,8 +365,27 @@ const LendMachineProduct = ({ history, match }) => {
                       Add To Cart
                     </Button>
                   </ListGroup.Item>
+
+                  {/* <ListGroup.Item>
+                      {userInfo && userInfo._id === productLendMachines.user && (
+                      <Button
+                        type="button"
+                        className="btn btn-block"
+                        onClick={EditHandler}>
+                        Edit Item
+                      </Button>
+                    )}
+                  </ListGroup.Item> */}
                 </ListGroup>
               </Card>
+              {userInfo && userInfo._id === productLendMachines.user && (
+              <Button
+                type="button"
+                className="btn btn-block mt-3 btn-secondary"
+                onClick={EditHandler}>
+                Edit Item
+              </Button>
+            )}
             </Col>
           </Row>
         )}

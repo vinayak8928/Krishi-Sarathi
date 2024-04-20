@@ -148,6 +148,7 @@ const SeedListEdit = ({match}) => {
     }
 
     const createMachineProductHandler = () => {
+        console.log(userInfo)
         dispatch(createLendMachine())
     }
 
