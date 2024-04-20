@@ -143,11 +143,19 @@ import {
     CART_ADD_ITEM,
     CART_REMOVE_ITEM,
     CART_SAVE_SHIPPING_ADDRESSS,
-    CART_SAVE_PAYMENT_METHOD
+    CART_SAVE_PAYMENT_METHOD,
+    SET_AMT
 } from './../constants/cartConstants'
-
-export const cartSeedReducer = (state = { cartItems: [], shippingAddress: [] }, action) => {
+// const initialState = {
+//     amt: null,
+//   };
+export const cartSeedReducer = (state = { cartItems: [], shippingAddress: [], amt: null, }, action) => {
     switch (action.type) {
+        case SET_AMT:
+      return {
+        ...state,
+        amt: action.payload,
+      };
         case CART_ADD_ITEM:
             const item = action.payload
             const existItem = state.cartItems.find(x => x.seed === item.seed)

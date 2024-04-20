@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import CheckoutSteps from "./../../components/CheckoutSteps/CheckoutSteps";
@@ -7,13 +7,16 @@ import { savePaymentMethod } from "./../../actions/cartActions.js";
 import Meta from "../../components/Helmet/Meta";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { setAmt } from "./../../actions/cartActions";
+
 let val;
+
 const PaymentScreen = ({}) => {
   const history = useHistory();
   const location = useLocation();
   const data = location.state;
-   val = data.amt;
-console.log("pay is",val);
+  val = data && data.amt ? data.amt : 0;
+  console.log("pay is", val);
   const cart = useSelector((state) => state.cartSeed);
   const { shippingAddress } = cart;
 
@@ -25,14 +28,18 @@ console.log("pay is",val);
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(setAmt(val));
+  }, [dispatch, val]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
     // history.push("/placeorder");
     history.push({
-        pathname: '/placeorder',
-        state: { amt: val }
-      });
+      pathname: "/placeorder",
+      state: { amt: val },
+    });
   };
 
   return (

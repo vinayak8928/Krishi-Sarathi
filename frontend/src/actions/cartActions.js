@@ -210,7 +210,8 @@ import {
     CART_ADD_ITEM, 
     CART_REMOVE_ITEM,
     CART_SAVE_SHIPPING_ADDRESSS,
-    CART_SAVE_PAYMENT_METHOD
+    CART_SAVE_PAYMENT_METHOD,
+    SET_AMT
 } from './../constants/cartConstants'
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
@@ -268,6 +269,11 @@ export const removeFromCart = (id) => (dispatch, getState) => {
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cartSeed.cartItems))
 }
+
+export const setAmt = (amt) => ({
+    type: SET_AMT,
+    payload: amt,
+  });
 
 export const saveShippingAddress = (data) => (dispatch) => {
     dispatch({

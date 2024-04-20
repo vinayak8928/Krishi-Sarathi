@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import CheckoutSteps from "./../../components/CheckoutSteps/CheckoutSteps";
@@ -7,13 +7,16 @@ import { saveShippingAddress } from "./../../actions/cartActions.js";
 import Meta from "../../components/Helmet/Meta";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { setAmt } from "./../../actions/cartActions";
 
 let val;
 const ShippingScreen = ({}) => {
   const history = useHistory();
   const location = useLocation();
   const data = location.state;
-  val=data.amt;
+  // val=data.amt;
+  val = data && data.amt ? data.amt : 0;
+
 
   const cart = useSelector((state) => state.cartSeed);
   const { shippingAddress } = cart;
@@ -24,6 +27,10 @@ const ShippingScreen = ({}) => {
   const [country, setCountry] = useState(shippingAddress.country);
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setAmt(val));
+  }, [dispatch, val]);
+
   
   const submitHandler = (e) => {
     e.preventDefault();

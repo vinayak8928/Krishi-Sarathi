@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Button,
@@ -13,17 +13,22 @@ import CheckoutSteps from "./../../components/CheckoutSteps/CheckoutSteps";
 import Message from "../../components/Message/Message";
 import { createOrder } from "./../../actions/orderAction";
 import Meta from "../Helmet/Meta";
-
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { setAmt } from "./../../actions/cartActions";
+import { useLocation} from "react-router-dom";
 import { useHistory } from "react-router-dom";
+
 let val;
 const PlaceOrder = ({}) => {
   const history = useHistory();
   const location = useLocation();
   const data = location.state;
-  val = data.amt; //item amt
+  val = data && data.amt ? data.amt : 0;//item amt
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(setAmt(val));
+  }, [dispatch, val]);
+  
   const cart = useSelector((state) => state.cartSeed);
   // const { cartItems, shippingAddress, paymentMethod } = cart;
   // const {
