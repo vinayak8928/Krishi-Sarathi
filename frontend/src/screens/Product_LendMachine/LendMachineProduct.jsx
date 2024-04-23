@@ -165,7 +165,6 @@ import Message from "../../components/Message/Message";
 import Meta from "../../components/Helmet/Meta";
 
 const LendMachineProduct = ({ history, match }) => {
-
   const [qty, setQty] = useState(1);
   const [duration, setDuration] = useState("hours");
   const [durationValue, setDurationValue] = useState(""); // State to hold the input value for duration
@@ -175,6 +174,9 @@ const LendMachineProduct = ({ history, match }) => {
     (state) => state.productLendMachinesDetails
   );
   const { loading, error, productLendMachines } = productLendMachinesDetails;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  // console.log("Product seller:", productLendMachines.seller);
 
   useEffect(() => {
     dispatch(listLendMachineProductsDetails(match.params.id));
@@ -186,10 +188,14 @@ const LendMachineProduct = ({ history, match }) => {
     const durationString = `${durationValue} ${duration}`;
 
     // Append the duration to the URL as a query parameter
-    history.push(`/cart/${match.params.id}?duration=${durationString}&qty=${qty}`);
+    history.push(
+      `/cart/${match.params.id}?duration=${durationString}&qty=${qty}`
+    );
   };
 
-
+  const isSeller = () => {
+    return userInfo && userInfo.name === productLendMachines.seller;
+  };
   return (
     <div className="productScreen">
       <Meta title="Threshers" />
@@ -340,6 +346,3 @@ const LendMachineProduct = ({ history, match }) => {
 };
 
 export default LendMachineProduct;
-
-
-                                

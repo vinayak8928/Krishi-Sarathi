@@ -78,7 +78,7 @@ const SeedList = () => {
                                 <tr>
                                     <td>ID</td>
                                     <td>NAME</td>
-                                    <td>TARGET PLANT</td>
+                                    <td>CATEGORY</td>
                                     <td>MACHINE POWER</td>
                                     <td>EDIT / DELETE</td>
                                 </tr>
@@ -89,8 +89,10 @@ const SeedList = () => {
                                         <tr key={machine._id}>
                                             <td>{machine._id}</td>
                                             <td>{machine.name}</td>
-                                            <td>{machine.target_plant}</td>
+                                            <td>{machine.category}</td>
+                                            {/* <td>{machine.target_plant}</td> */}
                                             <td>{machine.machine_power}</td>
+                                            
                                             <td>
                                                 <LinkContainer to={`/admin/productlist/machine/${machine._id}/edit`}>
                                                     <Button variant="light" className="btn btn-sm">

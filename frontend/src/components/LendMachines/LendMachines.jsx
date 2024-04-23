@@ -18,10 +18,12 @@ const LendMachines = ({ _id, name, image, targetPlant, price }) => {
               <strong>{name}</strong>
             </Card.Title>
           </LinkContainer>
-          <Card.Text>
+
+          {/* <Card.Text>
             <span style={{ fontWeight: "bold" }}>Target Plants </span>
             <br /> {targetPlant}
-          </Card.Text>
+          </Card.Text> */}
+
           <Card.Text>
             <h3>RS.{price}</h3>
           </Card.Text>
