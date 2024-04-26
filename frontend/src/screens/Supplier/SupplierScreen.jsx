@@ -153,14 +153,15 @@ const SeedListEdit = ({match}) => {
     }
 
     return (
-        <Container style={{ marginBottom: '50px' }}>
+        <Container style={{ marginBottom: '50px' ,marginTop: '12px'}}>
             <Meta
 
                 title="Krishi Sarathi | Supplier"
 
             />
             <FormContainer className="text-right">
-                <h2 style={{ marginTop: '120px', textAlign: 'center' }}>Lend Machines</h2>
+                {/* <h2 style={{ marginTop: '120px', textAlign: 'center' }}>Lend Machines</h2> */}
+                <h1 className='title' style={{ fontWeight: 'bold' , marginTop: '120px', textAlign: 'center'}}>Lend Machines</h1>
                 <Link to='/farmer' className='btn btn-light my-3'>
                     GO BACK
                 </Link>

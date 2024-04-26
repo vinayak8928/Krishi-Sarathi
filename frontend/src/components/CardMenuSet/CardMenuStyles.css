@@ -23,3 +23,17 @@
   align-items: center;
   margin-left: 30% !important;
 }
+
+.card-body:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  border-color: #28a745; /* Change border color on hover */
+}
+
+.card {
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Add a shadow on hover */
+}
