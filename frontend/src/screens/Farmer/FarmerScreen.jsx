@@ -14,12 +14,12 @@ const FarmerScreen = () => {
     return (
         <div>
             <Meta
-                title="Krishi Sarathi | CONSUMER"
+                title="Krishi Sarathi | Consumer"
             />
             <Container className='farmerContainer'>
 
                 {/* <h1 className='title'>CONSUMER</h1> */}
-                <h1 className='title' style={{ fontWeight: 'bold' }}>Farmers</h1>
+                <h1 className='title' style={{ fontWeight: 'bold' }}>Hey Farmers!</h1>
                 <h4 className="farmer-title">Welcome to Krishi Sarathi! Discover a convenient platform for renting heavy machines and farming equipment. Reduce your financial burden by renting equipment from fellow farmers, promoting cost-effective and collaborative farming practices.</h4>
 
 
