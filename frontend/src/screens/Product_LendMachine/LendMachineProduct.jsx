@@ -179,7 +179,7 @@ const LendMachineProduct = ({ history, match }) => {
 
   
   const productId = match.params.id
-
+  
   const [qty, setQty] = useState(1);
   const [duration, setDuration] = useState("hours");
   const [durationValue, setDurationValue] = useState(""); // State to hold the input value for duration
@@ -192,6 +192,9 @@ const LendMachineProduct = ({ history, match }) => {
     (state) => state.productLendMachinesDetails
   );
   const { loading, error, productLendMachines } = productLendMachinesDetails;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  // console.log("Product seller:", productLendMachines.seller);
 
   useEffect(() => {
     dispatch(listLendMachineProductsDetails(match.params.id));
@@ -203,7 +206,9 @@ const LendMachineProduct = ({ history, match }) => {
     const durationString = `${durationValue} ${duration}`;
 
     // Append the duration to the URL as a query parameter
-    history.push(`/cart/${match.params.id}?duration=${durationString}&qty=${qty}`);
+    history.push(
+      `/cart/${match.params.id}?duration=${durationString}&qty=${qty}`
+    );
   };
 
   const EditHandler = () => {
@@ -225,6 +230,9 @@ const LendMachineProduct = ({ history, match }) => {
   };
   
 
+  const isSeller = () => {
+    return userInfo && userInfo.name === productLendMachines.seller;
+  };
 
   return (
     <div className="productScreen">
@@ -395,6 +403,3 @@ const LendMachineProduct = ({ history, match }) => {
 };
 
 export default LendMachineProduct;
-
-
-                                

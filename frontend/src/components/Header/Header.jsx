@@ -58,7 +58,7 @@ const Header = () => {
             <Nav.Link className="nav-cal">HOME</Nav.Link>
           </LinkContainer> */}
           <LinkContainer to="/farmer">
-            <Nav.Link className="nav-cal">FARMER</Nav.Link>
+            <Nav.Link className="nav-cal">CONSUMER</Nav.Link>
           </LinkContainer>
 
           {/* <LinkContainer to="/consumer">
@@ -97,6 +97,7 @@ const Header = () => {
               CART
             </Nav.Link>
           </LinkContainer>
+          
           {userInfo ? (
             // Display user-related options when logged in
             <>
