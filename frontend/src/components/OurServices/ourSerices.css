@@ -11,10 +11,17 @@
 
 .description {
   padding: 0 10%; /* Increase padding for better readability */
+  font-weight: 300;
+  font-style: normal;
+  font-family: Poppins, sans-serif;
+  
 }
 
 .sub-title {
   margin-bottom: 30px;
+  font-weight: 400;
+  font-style: normal;
+  font-family: Poppins, sans-serif;
 }
 
 .services {
@@ -29,8 +36,16 @@
   height: 200px;
   margin: auto;
   display: block;
+  transition: transform 0.3s ease; /* Add a transition for the transform property */
+}
+
+.img:hover {
+  transform: scale(1.2); /* Scale the image by 10% on hover */
 }
 
 .sub-desc {
   margin-top: 40px;
+  font-weight: 300;
+  font-style: normal;
+  font-family: Poppins, sans-serif;
 }

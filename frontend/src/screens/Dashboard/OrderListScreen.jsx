@@ -13,7 +13,7 @@ const OrderListScreen = () => {
             <Container fluid>
                 <Row>
                     <Col md={3}>
-                        <h4>Agroic Orders</h4>
+                        <h4>Krishi Sarathi Orders</h4>
                     </Col>
                     <Col md={9}>
                         <h4 style={{ marginLeft: "30px" }}>All Orders</h4>

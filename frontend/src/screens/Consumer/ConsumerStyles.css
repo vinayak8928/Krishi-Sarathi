@@ -13,7 +13,9 @@
     text-align: center;
     margin-bottom: 20px;   
     font-weight: bold !important; 
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
 }
 
 .consumerProductScreen

@@ -4,24 +4,41 @@
 }
 
 .farmer-title {
-  text-align: center;
-  font-size: 22px;
+    text-align: center;
+    font-size: 22px;
+    font-family: Poppins, sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+  font-style: normal;
 }
 
-.card-titile {
-  text-align: center;
-  margin-bottom: 20px;
+.card-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Poppins, sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+  font-style: normal;
 }
 
 .title {
-  text-align: center;
-  font-weight: bold;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    /* Use Poppins font family */
+    font-family: Poppins, sans-serif;
+    font-optical-sizing: auto;
+    /* Adjust font weight as needed */
+    font-weight: 1000;
+    font-style: bold;
+  }
 
 .btn-explore {
-  margin-bottom: 10px;
-  text-align: center;
-  align-items: center;
-  margin-left: 35% !important;
-}
+    margin-bottom: 80px;
+    text-align: center;
+    align-items: center;
+    margin-left: 0% !important;
+    font-family: Poppins, sans-serif;
+    width: 250px;
+  }
+

@@ -18,9 +18,9 @@ import Meta from '../../../components/Helmet/Meta'
 
 const MachineListEdit = ({ match }) => {
 
+    const [seller, setSeller] = useState('')
     const [name, setName] = useState('')
     const [image, setImage] = useState('')
-    const [seller, setSeller] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
     const [category, setCategory] = useState('')
@@ -46,15 +46,15 @@ const MachineListEdit = ({ match }) => {
             history.push(`/farmers/lendMachines/${productLendMachines._id}`)
 
         } else {
-            if (!productLendMachines.name || productLendMachines._id !== productId) {
+            if (!productLendMachines.seller || productLendMachines._id !== productId) {
                 dispatch(listLendMachineProductsDetails(productId))
             } else {
+                setSeller(productLendMachines.seller)
                 setName(productLendMachines.name)
                 setDescription(productLendMachines.description)
                 setPrice(productLendMachines.price)
                 setImage(productLendMachines.image)
-                setSeller(productLendMachines.seller)
-                setCategory(productLendMachines.target_plant)
+                setCategory(productLendMachines.category)
                 setQuantity(productLendMachines.quantity)
                 setMachine_power(productLendMachines.machine_power)
             }
@@ -100,14 +100,18 @@ const MachineListEdit = ({ match }) => {
         }
     }
 
+    const goBackHandler = () => {
+        history.push(`/farmers/lendMachines/${productLendMachines._id}`);
+      };
+
     return (
         <Container style={{ marginBottom: '50px' }}>
             <Meta
-                title="Krishi Sarathi | Admin Machine Edit"
+                title="Krishi Sarathi | Machine Edit"
             />
             <FormContainer>
-                <h2 style={{ marginTop: '120px', textAlign: 'center' }}>Lend Machine Profile</h2>
-                <Link to='/admin/productlist' className='btn btn-light my-3'>
+                <h2 style={{ marginTop: '120px', textAlign: 'center' }}>Lend Machines</h2>
+                <Link to="#" className="btn btn-light my-3" onClick={goBackHandler}>
                     GO BACK
                 </Link>
                 {loading && <Loader />}
