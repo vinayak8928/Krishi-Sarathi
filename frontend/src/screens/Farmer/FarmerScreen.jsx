@@ -39,7 +39,7 @@ const FarmerScreen = () => {
                                     <Button className="btn-explore btn-md m-2">EXPLORE MORE</Button>
                                 </LinkContainer>
                             </Card.Body>
-                        </Card> */}
+                        </Card> }
                         <Card border="primary" style={{ width: '35rem' }}>
                             <Card.Body>
                                 <Card.Title className="card-titile">Sell Your Producing Material through Us</Card.Title>
