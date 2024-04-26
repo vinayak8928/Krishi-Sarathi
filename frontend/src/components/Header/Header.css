@@ -2,6 +2,7 @@
   background-color: #008f11 !important;
   width: auto;
   color: white !important;
+  /* font-family: Poppins, sans-serif; */
 }
 .nav {
   margin-right: auto;
@@ -9,19 +10,29 @@
 
 .nav-dropdown {
   position: relative;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  /* font-family: Poppins, sans-serif; */
 }
 .nav-dropdown .dropdown-menu {
   left: auto;
   right: 0;
+  font-weight: 400;
+  font-style: normal;
+  /* font-family: Poppins, sans-serif; */
 }
 .nav-cal {
   width: auto;
   color: white !important;
   font-size: 16px;
+  /* font-family: Poppins, sans-serif;  */
 }
 
 #search-by-category{
   font-size: 16px;
+  font-weight: normal;
+  /* font-family: Poppins, sans-serif;  */
  
 }
 .nav-dropdown:hover .dropdown-menu {
@@ -40,26 +51,33 @@
   width: auto;
   color: white !important;
   font-size: 14px;
+  /* font-family: Poppins, sans-serif;  */
 }
 .nav-name {
   width: 20px;
   color: white !important;
   font-size: 20px;
   font-weight: bolder;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial,
-    sans-serif;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  /* font-family: Poppins, sans-serif; */
 }
 
 .krishi-saarathi {
-  margin-left: 10px;
-  font-size: 20px;
+  margin-left: 25px;
+  font-size: 22px;
   font-weight: bold;
+  font-weight: 600;
+  font-style: normal;
+  /* font-family: Poppins, sans-serif;  */
 }
 
 #username,
 #adminmenu {
   color: white !important;
   font-size: 16px;
+  /* font-family: Poppins, sans-serif;  */
 }
 
 
@@ -68,6 +86,7 @@
   margin-left: 0rem !important;
   font-size: 13px !important;
   color: white !important;
+  /* font-family: Poppins, sans-serif;  */
 }
 
 .fa-shopping-cart {
@@ -84,6 +103,7 @@
     float: right !important;
     color: white !important;
     font-size: 16px !important;
+    /* font-family: Poppins, sans-serif;  */
     
   }
   .nav-cal {
@@ -101,5 +121,6 @@
 @media only screen and (max-width: 320px) {
   .nav-cal {
     font-size: 15px !important;
+    /* font-family: Poppins, sans-serif;  */
   }
 }

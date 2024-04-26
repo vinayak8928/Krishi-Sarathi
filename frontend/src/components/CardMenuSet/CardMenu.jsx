@@ -37,7 +37,7 @@ const CardMenu = () => {
                     <Card.Body className="text-center">
                         <Card.Title className='title'>Consumer</Card.Title>
                         <Card.Text className='card-text'>
-                            No need to visit field to get grains!!! Just order here and and get all kinds of grains deliverd at your doorstep. Why to wait? Go and order.
+                            No need to buy heavy machines and equipments everytime!!! Just order here and and get all kinds of equipments for rent at cheaper rate. Why to wait? Go and order.
                         </Card.Text>
                         <Link to='/consumer'>
                             <Button variant="success" className="btn-explore btn-md m-2">EXPLORE MORE</Button>

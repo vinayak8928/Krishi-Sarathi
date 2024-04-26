@@ -36,8 +36,12 @@
   height: 200px;
   margin: auto;
   display: block;
+  transition: transform 0.3s ease; /* Add a transition for the transform property */
 }
 
+.img:hover {
+  transform: scale(1.2); /* Scale the image by 10% on hover */
+}
 
 .sub-desc {
   margin-top: 40px;

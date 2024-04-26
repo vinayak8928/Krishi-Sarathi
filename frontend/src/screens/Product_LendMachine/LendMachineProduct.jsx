@@ -263,7 +263,7 @@ const LendMachineProduct = ({ history, match }) => {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <p>
-                    <span style={{ fontWeight: "bold" }}>Seller Name:</span>
+                    <span style={{ fontWeight: "bold"}}>Seller Name:</span>
                     <br /> {productLendMachines.seller}
                   </p>
                 </ListGroup.Item>
@@ -274,12 +274,12 @@ const LendMachineProduct = ({ history, match }) => {
             </Col>
             <Col md={3}>
               <Card>
-                <ListGroup variant="flush">
+                <ListGroup className="side" variant="flush">
                   <ListGroup.Item>
                     <Row>
                       <Col>Machine Power:</Col>
                       <Col>
-                        <strong>{productLendMachines.machine_power}</strong>
+                        {productLendMachines.machine_power}
                       </Col>
                     </Row>
                   </ListGroup.Item>

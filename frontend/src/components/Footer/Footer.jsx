@@ -91,7 +91,7 @@ const Footer = () => {
                 className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
                 style={{ width: "60px" }}
               />
-              <p>
+              <p className="desc">
                 Krishi Sarathi serves as a transformative platform for farms,
                 offering a seamless solution to rent essential farm equipment.
                 Designed to empower farmers and boost productivity, our platform
@@ -153,7 +153,10 @@ const Footer = () => {
               <h6 className="text-uppercase font-weight-bold">
                 <strong>Get in touch</strong>
               </h6>
-
+              <hr
+                className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+                style={{ width: "60px" }}
+              />
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
@@ -184,7 +187,7 @@ const Footer = () => {
                     Comment must have more than 6 characters.
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" className="button">
                   Send message
                 </Button>
               </Form>
@@ -192,7 +195,7 @@ const Footer = () => {
           </MDBRow>
         </MDBContainer>
         <div className="footer-copyright text-center py-3">
-          <MDBContainer fluid>
+          <MDBContainer fluid className="MDB">
             &copy; {new Date().getFullYear()} Copyright: Krishi Sarathi
           </MDBContainer>
         </div>
