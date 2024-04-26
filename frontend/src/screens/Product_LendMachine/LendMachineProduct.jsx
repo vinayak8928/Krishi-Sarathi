@@ -192,8 +192,6 @@ const LendMachineProduct = ({ history, match }) => {
     (state) => state.productLendMachinesDetails
   );
   const { loading, error, productLendMachines } = productLendMachinesDetails;
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
   // console.log("Product seller:", productLendMachines.seller);
 
   useEffect(() => {
