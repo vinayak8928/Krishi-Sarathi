@@ -3,15 +3,15 @@ import mongoose from 'mongoose'
 const machineReviewSchema = mongoose.Schema({
     name: {
         type: String,
-        requried: true,
+        // requried: true,
     },
     rating: {
         type: Number,
-        requried: true,
+        // requried: true,
     },
     comment: {
         type: String,
-        requried: true,
+        // requried: true,
     }
 }, {
     timestamps: true
@@ -25,24 +25,24 @@ const productLendMachineSchema = mongoose.Schema({
     },
     name: {
         type: String,
-        required: true
+        // required: true
     },
     image: {
         type: String,
-        required: true
+        // required: true
     },
     description: {
         type: String,
-        required: true,
+        // required: true,
     }, 
     category: {
         type: String,
-        required: true
+        // required: true
     },
     reviews: [machineReviewSchema],
     rating: {
         type: Number,
-        required: true,
+        // required: true,
         default: 0
     },
     machine_power: {
@@ -52,13 +52,12 @@ const productLendMachineSchema = mongoose.Schema({
     },
     price: {
         type: Number,
-        required: true,
+        // required: true,
         default: 0
     },
     seller: {
         type: String,
         required: true,
-        default: 0
     },
     
     numReviews: {
@@ -67,8 +66,8 @@ const productLendMachineSchema = mongoose.Schema({
     },
     quantity: {
         type: Number,
-        required: true,
-        default: 0
+        // required: true,
+        default: 1
     },
 })
 

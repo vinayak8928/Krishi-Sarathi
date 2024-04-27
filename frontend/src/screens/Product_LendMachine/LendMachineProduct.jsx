@@ -163,7 +163,8 @@ import {
 } from "./../../actions/productSeedActions";
 
 import Rating from "../Map/Rating/Rating";
-import { listLendMachineProductsDetails } from "./../../actions/productLendMachinesActions";
+import { listLendMachineProductsDetails, updateLendMachine } from "./../../actions/productLendMachinesActions";
+import { MACHINE_UPDATE_RESET } from '../../constants/productConstants'
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
 import Meta from "../../components/Helmet/Meta";
@@ -172,6 +173,20 @@ import { PRODUCT_CREATE_REVIEW_RESET } from "../../constants/productConstants";
 
 
 const LendMachineProduct = ({ history, match }) => {
+
+  const [name, setName] = useState('')
+  const [image, setImage] = useState('')
+  const [seller, setSeller] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState('')
+  const [category, setCategory] = useState('')
+  const [quantity, setQuantity] = useState('')
+  const [machine_power, setMachine_power] = useState('')
+  const [uploading, setUploading] = useState(false)
+
+  
+  const productId = match.params.id
+  
   const [qty, setQty] = useState(1);
   const [duration, setDuration] = useState("hours");
   const [durationValue, setDurationValue] = useState(""); // State to hold the input value for duration
@@ -179,12 +194,13 @@ const LendMachineProduct = ({ history, match }) => {
   const [comment, setComment] = useState("");
   const dispatch = useDispatch();
 
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
   const productLendMachinesDetails = useSelector(
     (state) => state.productLendMachinesDetails
   );
   const { loading, error, productLendMachines } = productLendMachinesDetails;
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
   // console.log("Product seller:", productLendMachines.seller);
 
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
@@ -209,9 +225,29 @@ const LendMachineProduct = ({ history, match }) => {
     );
   };
 
+  const EditHandler = () => {
+    if (userInfo && userInfo._id === productLendMachines.user) {
+      // Run your update code here
+      history.push(`/admin/productlist/machine/${match.params.id}/edit`)
+      // dispatch(updateLendMachine({
+      //   _id: productId,
+      //   name,
+      //   image,
+      //   price,
+      //   seller,
+      //   description,
+      //   category,
+      //   quantity,
+      //   machine_power
+      // }));
+    }
+  };
+  
+
   const isSeller = () => {
     return userInfo && userInfo.name === productLendMachines.seller;
   };
+
   return (
     <div className="productScreen">
       <Meta title="Threshers" />
@@ -249,7 +285,7 @@ const LendMachineProduct = ({ history, match }) => {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <p>
-                    <span style={{ fontWeight: "bold" }}>Seller Name:</span>
+                    <span style={{ fontWeight: "bold"}}>Seller Name:</span>
                     <br /> {productLendMachines.seller}
                   </p>
                 </ListGroup.Item>
@@ -260,12 +296,12 @@ const LendMachineProduct = ({ history, match }) => {
             </Col>
             <Col md={3}>
               <Card>
-                <ListGroup variant="flush">
+                <ListGroup className="side" variant="flush">
                   <ListGroup.Item>
                     <Row>
                       <Col>Machine Power:</Col>
                       <Col>
-                        <strong>{productLendMachines.machine_power}</strong>
+                        {productLendMachines.machine_power}
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -351,8 +387,27 @@ const LendMachineProduct = ({ history, match }) => {
                       Add To Cart
                     </Button>
                   </ListGroup.Item>
+
+                  {/* <ListGroup.Item>
+                      {userInfo && userInfo._id === productLendMachines.user && (
+                      <Button
+                        type="button"
+                        className="btn btn-block"
+                        onClick={EditHandler}>
+                        Edit Item
+                      </Button>
+                    )}
+                  </ListGroup.Item> */}
                 </ListGroup>
               </Card>
+              {userInfo && userInfo._id === productLendMachines.user && (
+              <Button
+                type="button"
+                className="btn btn-block mt-3 btn-secondary"
+                onClick={EditHandler}>
+                Edit Item
+              </Button>
+            )}
             </Col>
           </Row>
         )}

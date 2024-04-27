@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Container, Row, Image } from "react-bootstrap";
 import "./ourSerices.css";
+import { Link } from 'react-router-dom';
 
 const OurServices = () => {
   return (
@@ -22,12 +23,14 @@ const OurServices = () => {
       <Container className="services">
         <Row>
           <Col md={4}>
-            <h5 className="sub-title">Heavy Machine</h5>
-            <Image className="img" src="images/services/heavy.svg" fluid />
+            <Link to="/supplier">
+            <h5 className="sub-title">Heavy Machine & Equipments</h5>
+            <Image className="img" src="images/services/heavyg2.svg" fluid />
             <p className="sub-desc">
               No need to worry of labour costing more. Just rent all types of
-              machine here!!
+              equipments here.
             </p>
+            </Link>
           </Col>
           {/* <Col md={3}>
                         <h5 className="sub-title">Gardening Kits</h5>
@@ -35,20 +38,22 @@ const OurServices = () => {
                         <p className="sub-desc">We provides all of the gardening related products i.e seeds, pestisides and heavy machine.</p>
                     </Col> */}
           <Col md={4}>
+          <Link to="/supplier">
             <h5 className="sub-title">Supplier</h5>
-            <Image className="img" src="images/services/supplier.svg" fluid />
+            <Image className="img" src="images/services/supplierb1.svg" fluid />
             <p className="sub-desc">
-              Now you produce. And we are here to sell your product. Just list
-              your sell, and get proper pay for it.
+              Just list your equipment, and get proper pay for it by renting.
             </p>
+            </Link>
           </Col>
           <Col md={4}>
+          <Link to="/farmer">
             <h5 className="sub-title">Consumer</h5>
-            <Image className="img" src="images/services/consumer.svg" fluid />
+            <Image className="img" src="images/services/consumerb1.svg" fluid />
             <p className="sub-desc">
-              Why to visit Super Store and Pay High? Order all products and get
-              deliver at your doorstep.
+              Why to visit Super Store and Pay High? Order required equipments and give it back.
             </p>
+          </Link>
           </Col>
         </Row>
       </Container>
