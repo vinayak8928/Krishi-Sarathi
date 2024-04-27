@@ -21,14 +21,14 @@ const FarmerScreen = () => {
                 <h4 className="farmer-title">Welcome to Krishi Sarathi! If you are a farmer then you are at perfect platfrom from where you can rent variety of farming related tools and machines.</h4>
                 <Row className="row-one justify">
                     <CardDeck>
-                        {/* <Card border="primary" style={{ width: '25rem' }}>
+                        <Card border="primary" style={{ width: '25rem' }}>
                             <Card.Body>
                                 <Card.Title className="card-titile">Purchase Seeds, Pesticides & Fertilizer</Card.Title>
                                 <LinkContainer to="/farmers/purchaseSeeds">
                                     <Button className="btn-explore btn-md m-2">EXPLORE MORE</Button>
                                 </LinkContainer>
                             </Card.Body>
-                        </Card> */}
+                        </Card>
                         <Card border="primary" style={{ width: '35rem' }}>
                             <Card.Body>
                                 <Card.Title className="card-titile">Sell Your Producing Material through Us</Card.Title>

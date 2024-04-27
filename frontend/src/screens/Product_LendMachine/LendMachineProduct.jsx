@@ -158,16 +158,25 @@ import {
   Form,
 } from "react-bootstrap";
 import "./LendMachineScreen.css";
+import {
+  createProductReview,
+} from "./../../actions/productSeedActions";
 
+import Rating from "../Map/Rating/Rating";
 import { listLendMachineProductsDetails } from "./../../actions/productLendMachinesActions";
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
 import Meta from "../../components/Helmet/Meta";
+import { PRODUCT_CREATE_REVIEW_RESET } from "../../constants/productConstants";
+
+
 
 const LendMachineProduct = ({ history, match }) => {
   const [qty, setQty] = useState(1);
   const [duration, setDuration] = useState("hours");
   const [durationValue, setDurationValue] = useState(""); // State to hold the input value for duration
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
   const dispatch = useDispatch();
 
   const productLendMachinesDetails = useSelector(
@@ -178,6 +187,13 @@ const LendMachineProduct = ({ history, match }) => {
   const { userInfo } = userLogin;
   // console.log("Product seller:", productLendMachines.seller);
 
+  const productReviewCreate = useSelector((state) => state.productReviewCreate);
+  const {
+    success: successProductReview,
+    loading: loadingProductReview,
+    error: errorProductReview,
+  } = productReviewCreate;
+  
   useEffect(() => {
     dispatch(listLendMachineProductsDetails(match.params.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -340,6 +356,8 @@ const LendMachineProduct = ({ history, match }) => {
             </Col>
           </Row>
         )}
+
+
       </Container>
     </div>
   );
