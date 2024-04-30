@@ -628,7 +628,7 @@ const Cart = ({ match, location }) => {
                 {cartItems
                   .reduce(
                     (acc, item) =>
-                      acc + parseFloat(calculateSubtotal(item) / 2),
+                      acc + parseFloat(calculateSubtotal(item) ),
                     0
                   )
                   .toFixed(2)}
