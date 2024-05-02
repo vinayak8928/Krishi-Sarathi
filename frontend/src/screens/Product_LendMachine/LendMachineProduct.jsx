@@ -159,34 +159,35 @@ import {
 } from "react-bootstrap";
 import "./LendMachineScreen.css";
 
-import { listLendMachineProductsDetails, updateLendMachine } from "./../../actions/productLendMachinesActions";
-import { MACHINE_UPDATE_RESET } from '../../constants/productConstants'
+import {
+  listLendMachineProductsDetails,
+  updateLendMachine,
+} from "./../../actions/productLendMachinesActions";
+import { MACHINE_UPDATE_RESET } from "../../constants/productConstants";
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
 import Meta from "../../components/Helmet/Meta";
 
 const LendMachineProduct = ({ history, match }) => {
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [seller, setSeller] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [machine_power, setMachine_power] = useState("");
+  const [uploading, setUploading] = useState(false);
 
-  const [name, setName] = useState('')
-  const [image, setImage] = useState('')
-  const [seller, setSeller] = useState('')
-  const [description, setDescription] = useState('')
-  const [price, setPrice] = useState('')
-  const [category, setCategory] = useState('')
-  const [quantity, setQuantity] = useState('')
-  const [machine_power, setMachine_power] = useState('')
-  const [uploading, setUploading] = useState(false)
+  const productId = match.params.id;
 
-  
-  const productId = match.params.id
-  
   const [qty, setQty] = useState(1);
   const [duration, setDuration] = useState("hours");
   const [durationValue, setDurationValue] = useState(""); // State to hold the input value for duration
   const dispatch = useDispatch();
 
-  const userLogin = useSelector(state => state.userLogin)
-  const { userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const productLendMachinesDetails = useSelector(
     (state) => state.productLendMachinesDetails
@@ -212,7 +213,7 @@ const LendMachineProduct = ({ history, match }) => {
   const EditHandler = () => {
     if (userInfo && userInfo._id === productLendMachines.user) {
       // Run your update code here
-      history.push(`/admin/productlist/machine/${match.params.id}/edit`)
+      history.push(`/admin/productlist/machine/${match.params.id}/edit`);
       // dispatch(updateLendMachine({
       //   _id: productId,
       //   name,
@@ -226,7 +227,6 @@ const LendMachineProduct = ({ history, match }) => {
       // }));
     }
   };
-  
 
   const isSeller = () => {
     return userInfo && userInfo.name === productLendMachines.seller;
@@ -245,13 +245,14 @@ const LendMachineProduct = ({ history, match }) => {
           <Message variant="danger">{error}</Message>
         ) : (
           <Row className="p-3 seed-product">
-            <Col md={6}>
+            <Col md={6} className="product-image-col">
               <Image
                 className="mx-auto image-machine"
                 src={productLendMachines.image}
                 alt={productLendMachines.name}
                 width={200}
               />
+              
             </Col>
             <Col md={3}>
               <ListGroup className="borderless" variant="flush">
@@ -261,15 +262,15 @@ const LendMachineProduct = ({ history, match }) => {
                 <ListGroup.Item>
                   <h4>Price: RS {productLendMachines.price}/hour</h4>
                 </ListGroup.Item>
-                <ListGroup.Item>
+                {/* <ListGroup.Item>
                   <p>
                     <span style={{ fontWeight: "bold" }}>Description:</span>
                     <br /> {productLendMachines.description}
                   </p>
-                </ListGroup.Item>
+                </ListGroup.Item> */}
                 <ListGroup.Item>
                   <p>
-                    <span style={{ fontWeight: "bold"}}>Seller Name:</span>
+                    <span style={{ fontWeight: "bold" }}>Seller Name:</span>
                     <br /> {productLendMachines.seller}
                   </p>
                 </ListGroup.Item>
@@ -284,16 +285,14 @@ const LendMachineProduct = ({ history, match }) => {
                   <ListGroup.Item>
                     <Row>
                       <Col>Machine Power:</Col>
-                      <Col>
-                        {productLendMachines.machine_power}
-                      </Col>
+                      <Col>{productLendMachines.machine_power}</Col>
                     </Row>
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <Row>
+                    {/* <Row>
                       <Col>Target Plant:</Col>
                       <Col>{productLendMachines.target_plant}</Col>
-                    </Row>
+                    </Row> */}
                   </ListGroup.Item>
                   {productLendMachines.quantity > 0 && (
                     <ListGroup.Item>
@@ -385,17 +384,25 @@ const LendMachineProduct = ({ history, match }) => {
                 </ListGroup>
               </Card>
               {userInfo && userInfo._id === productLendMachines.user && (
-              <Button
-                type="button"
-                className="btn btn-block mt-3 btn-secondary"
-                onClick={EditHandler}>
-                Edit Item
-              </Button>
-            )}
+                <Button
+                  type="button"
+                  className="btn btn-block mt-3 btn-secondary"
+                  onClick={EditHandler}>
+                  Edit Item
+                </Button>
+              )}
             </Col>
           </Row>
         )}
       </Container>
+      <div class="product-description-container">
+      <hr className="line" />
+          <h3 className="description-heading">Product description</h3>
+          <p className="product-description">
+            {productLendMachines.description}
+          </p>
+          <hr className="line" />
+          </div>
     </div>
   );
 };

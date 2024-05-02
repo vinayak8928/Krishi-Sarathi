@@ -17,7 +17,7 @@ const Thresher_LendScreen = () => {
     const { loading, error, productLendMachines } = productLendMachinesList
 
     const [numberOfItems, setNumberOfItems] = useState(3);
-
+    const [showAlert, setShowAlert] = useState(false);
     useEffect(() => {
         dispatch(listLendMachineProducts())
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,8 +26,10 @@ const Thresher_LendScreen = () => {
     const showMore = () => {
         if (numberOfItems + 3 <= productLendMachines.length) {
             setNumberOfItems(numberOfItems + 3)
+            setShowAlert(false); 
         } else {
             setNumberOfItems(productLendMachines.length)
+            setShowAlert(true); 
         }
     }
 
@@ -63,12 +65,11 @@ const Thresher_LendScreen = () => {
                                                 />
                                             ))
                                     }
-                                    {
-                                        numberOfItems >= filteredThreshers.length
-                                            ? <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
-                                            : ''
+                                     {
+                                        showAlert && numberOfItems >= productLendMachines.length && // Display alert conditionally
+                                            <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
                                     }
-                                    <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>show more</Button>
+                                    <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>Show more</Button>
                                 </Row>
                             )
                 }

@@ -78,13 +78,13 @@ const Header = () => {
             id="search-by-category"
             className="nav-dropdown">
             <LinkContainer to="/thresher">
-              <NavDropdown.Item>Thresher</NavDropdown.Item>
+              <NavDropdown.Item>Threshers</NavDropdown.Item>
             </LinkContainer>
             <LinkContainer to="/sprayers">
               <NavDropdown.Item>Sprayers</NavDropdown.Item>
             </LinkContainer>
             <LinkContainer to="/search?category=chippers">
-              <NavDropdown.Item>Chippers</NavDropdown.Item>
+              <NavDropdown.Item>Tractors</NavDropdown.Item>
             </LinkContainer>
           </NavDropdown>
         </Nav>
