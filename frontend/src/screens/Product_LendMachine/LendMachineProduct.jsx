@@ -231,12 +231,13 @@ const LendMachineProduct = ({ history, match }) => {
   const isSeller = () => {
     return userInfo && userInfo.name === productLendMachines.seller;
   };
-
+  
   return (
     <div className="productScreen">
+      
       <Meta title="Threshers" />
       <Container>
-        <Link className="btn btn-go-back btn-dark" to="/farmers/lendMachines">
+        <Link className="btn btn-go-back btn-dark" to={`/${productLendMachines.category}`}>
           GO BACK
         </Link>
         {loading ? (
@@ -251,8 +252,7 @@ const LendMachineProduct = ({ history, match }) => {
                 src={productLendMachines.image}
                 alt={productLendMachines.name}
                 width={200}
-              />
-              
+              /> 
             </Col>
             <Col md={3}>
               <ListGroup className="borderless" variant="flush">

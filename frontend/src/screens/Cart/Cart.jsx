@@ -334,6 +334,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import Message from "./../../components/Message/Message";
 import { addToCart, removeFromCart } from "./../../actions/cartActions";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import {
   Row,
   Col,
@@ -593,7 +595,7 @@ const Cart = ({ match, location }) => {
                         type="button"
                         variant="light"
                         onClick={() => removeFromCartHandler(item.seed)}>
-                        <i className="fas fa-trash"></i>
+                        <FontAwesomeIcon icon={faTrashAlt} />
                       </Button>
                     </Col>
                   </Row>
