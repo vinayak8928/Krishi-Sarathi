@@ -54,6 +54,7 @@ const createLendMachine = asyncHandler(async (req, res) => {
         price: '',
         quantity: 1,
         machine_power: '0HP',
+        numReviews: 0,
     })
 
     const createdLendMachine = await lendMachine.save()
@@ -87,10 +88,49 @@ const updateLendMachine = asyncHandler(async (req, res) => {
     }
 })
 
+// @desc    Update Product Review
+// @rout    POST /seeds/:id/review
+// @access  private/ Admin
+const createMachineProductReview = asyncHandler(async (req, res) => {
+    const { rating, comment } = req.body
+
+    const lendMachine = await ProductLendMachines.findById(req.params.id)
+
+    if (lendMachine) {
+        const alreadyReviewed = lendMachine.reviews.find(r => r.user.toString() === req.user._id.toString())
+        if (alreadyReviewed) {
+            res.status(400)
+            throw new Error('Product already reviewed')
+        }
+
+        const review = {
+            name: req.user.name,
+            rating: Number(rating),
+            comment,
+            user: req.user._id
+        }
+
+        lendMachine.reviews.push(review)
+
+        lendMachine.numReviews = lendMachine.reviews.length
+
+        lendMachine.rating = lendMachine.reviews.reduce((acc, item) => item.rating + acc, 0) / lendMachine.reviews.length
+
+        await lendMachine.save()
+        
+        res.status(201).json({ message: 'Review added' })
+
+    } else {
+        res.status(401)
+        throw new Error('Product not found')
+    }
+})
+
 export { 
     getLendMachnines, 
     getLendMachnineById, 
     deleteLendMachnine,
     createLendMachine,
-    updateLendMachine
+    updateLendMachine,
+    createMachineProductReview
 }

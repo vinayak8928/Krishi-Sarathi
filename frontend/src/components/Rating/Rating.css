@@ -1,8 +1,16 @@
 .rating span
 {
     margin: 0.1rem;
+    margin-right: 5px;
 }
 
 h3{
     padding:  1rem;
 }
+
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

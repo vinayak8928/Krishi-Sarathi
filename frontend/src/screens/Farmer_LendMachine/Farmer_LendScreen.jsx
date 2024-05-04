@@ -55,6 +55,10 @@ const Farmer_LendScreen = () => {
                 targetPlant={machine.target_plant}
                 price={machine.price}
                 quantity={machine.quantity}
+                power={machine.machine_power}
+                reviews={machine.numReviews}
+                rating={machine.reviews.length > 0 ? machine.reviews[0].rating : 0}
+                // rating={5}
               />
             ))}
             {numberOfItems >= productLendMachines.length ? (

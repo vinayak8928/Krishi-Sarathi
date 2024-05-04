@@ -67,7 +67,43 @@ Rating.propTypes ={
 }
 
 Rating.defaultProps = {
-    color: '#47cf38'
+    color: '#f8e825'
 }
 
 export default Rating
+// import React from 'react';
+// import PropTypes from 'prop-types';
+// import './Rating.css';
+
+// const Rating = ({ value, text, color }) => {
+//   const stars = [];
+
+//   for (let i = 1; i <= 5; i++) {
+//     if (i <= value) {
+//       stars.push(<i key={i} className="fas fa-star" style={{ color }}></i>);
+//     } else if (i - value <= 0.5) {
+//       stars.push(<i key={i} className="fas fa-star-half-alt" style={{ color }}></i>);
+//     } else {
+//       stars.push(<i key={i} className="far fa-star" style={{ color }}></i>);
+//     }
+//   }
+
+//   return (
+//     <div className="rating">
+//       {stars}
+//       <span>{text && text}</span>
+//     </div>
+//   );
+// };
+
+// Rating.propTypes = {
+//   value: PropTypes.number.isRequired,
+//   text: PropTypes.string.isRequired,
+//   color: PropTypes.string,
+// };
+
+// Rating.defaultProps = {
+//   color: '#f8e825',
+// };
+
+// export default Rating;
