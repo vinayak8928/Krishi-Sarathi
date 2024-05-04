@@ -80,9 +80,9 @@ const Header = () => {
             <LinkContainer to="/thresher">
               <NavDropdown.Item>THRESHERS</NavDropdown.Item>
             </LinkContainer>
-            <LinkContainer to="/tillages">
+            {/* <LinkContainer to="/tillages">
               <NavDropdown.Item>TILLAGES</NavDropdown.Item>
-            </LinkContainer>
+            </LinkContainer> */}
             <LinkContainer to="/tractors">
               <NavDropdown.Item>TRACTORS</NavDropdown.Item>
             </LinkContainer>
@@ -94,6 +94,15 @@ const Header = () => {
             </LinkContainer>
             <LinkContainer to="/mowers">
               <NavDropdown.Item>MOWERS</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/balers">
+              <NavDropdown.Item>BALERS</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/plows">
+              <NavDropdown.Item>PLOWS</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/seeders">
+              <NavDropdown.Item>SEEDERS</NavDropdown.Item>
             </LinkContainer>
             <LinkContainer to="/irrigations">
               <NavDropdown.Item>IRRIGATION</NavDropdown.Item>
