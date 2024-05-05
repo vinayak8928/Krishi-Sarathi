@@ -10,7 +10,7 @@ import {
   Card,
   Button,
 } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "./../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
@@ -94,12 +94,12 @@ const OrderScreen = ({ match }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <Container style={{ marginTop: "120px" }}>
-          <h2>Order {order._id}</h2>
+          <h2>Order Id : {order._id}</h2>
           <Row>
             <Col md={8}>
               <ListGroup variant="flush" className="mb-3">
                 <ListGroup.Item>
-                  <h1>Shipping</h1>
+                  <h1>Shipping Details</h1>
                   <p>
                     <strong>Name: </strong>
                     {order.user.name}
@@ -146,7 +146,7 @@ const OrderScreen = ({ match }) => {
                       {order.orderItems.map((item, index) => (
                         <ListGroup.Item key={index}>
                           <Row>
-                            <Col md={1}>
+                            <Col md={6}>
                               <Image
                                 src={item.image}
                                 alt={item.name}
@@ -154,7 +154,10 @@ const OrderScreen = ({ match }) => {
                                 rounded
                               />
                             </Col>
-                            <Col>{item.name}</Col>
+                            <Col><Link to={`/farmers/lendMachines/${item.seed}`}>
+                                    {item.name}
+                                  </Link>
+                            </Col>
                             <Col md={4}>
                               {`${item.qty} x RS. ${item.price} = RS. ${
                                 item.qty * item.price
@@ -220,7 +223,6 @@ const OrderScreen = ({ match }) => {
                   )}
                   {loadingDeliver && <Loader />}
                   {userInfo &&
-                    userInfo.isAdmin &&
                     order.isPaid &&
                     !order.isDelivered && (
                       <ListGroup.Item>

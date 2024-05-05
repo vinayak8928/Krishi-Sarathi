@@ -517,7 +517,7 @@ const Cart = ({ match, location }) => {
                       <Image src={item.image} alt={item.name} fluid rounded />
                     </Col>
                     <Col md={3}>
-                      <Link to={`/farmers/purchaseSeeds/${item.seed}`}>
+                      <Link to={`/farmers/lendMachines/${item.seed}`}>
                         {item.name}
                       </Link>
                     </Col>

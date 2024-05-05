@@ -180,12 +180,28 @@ const MachineListEdit = ({ match }) => {
                             </Form.Group>
                         <Form.Group controlId='category'>
                                 <Form.Label>Category</Form.Label>
-                                <Form.Control
+                                {/* <Form.Control
                                     type="category"
                                     placeholder="Enter Category"
                                     value={category}
                                     onChange={(e) => setCategory(e.target.value)}
-                                ></Form.Control>
+                                ></Form.Control> */}
+                                <Form.Control
+                                    type="category"
+                                    as='select'
+                                    // placeholder="Enter Category"
+                                    value={category}
+                                    onChange={(e) => setCategory(e.target.value)}>
+                                    <option value=''>Choose category...</option>
+                                    <option value='1'>Threshers</option>
+                                    <option value='2'>Tillages</option>
+                                    <option value='3'>Tractors</option>
+                                    <option value='4'>Harrows</option>
+                                    <option value='5'>Harvesters</option>
+                                    <option value='6'>Mowers</option>
+                                    <option value='7'>Irrigation</option>
+                                    <option value='8'>Sprayers</option>
+                                </Form.Control>
                             </Form.Group>
                             <Form.Group controlId='quantity'>
                                 <Form.Label>Quantity</Form.Label>

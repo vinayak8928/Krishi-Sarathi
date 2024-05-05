@@ -146,6 +146,9 @@
 
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import {
   Col,
@@ -169,6 +172,10 @@ import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
 import Meta from "../../components/Helmet/Meta";
 import Rating from '../../components/Rating/Rating';
+// import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+// import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+// import { IoChevronBackSharp, IoChevronForwardSharp } from 'react-icons/io5';
+
 
 const LendMachineProduct = ({ history, match }) => {
   const [name, setName] = useState("");
@@ -184,6 +191,65 @@ const LendMachineProduct = ({ history, match }) => {
   const [comment, setComment] = useState('')
 
   const productId = match.params.id;
+
+  const ReviewSlider = ({ reviews }) => {
+    if (reviews.length === 0) {
+      return (
+        <div className="text-center mt-3">
+          {/* <Message>No Reviews</Message> */}
+          <p className="mt-3" style={{ marginLeft: '-100px' }}>Be the first to review this product !</p>
+          <img className="review-image" src="/images/review.svg" alt="Avatar" />
+        </div>
+      );
+    }
+  
+    if (reviews.length === 1) {
+      const review = reviews[0];
+      return (
+        <ListGroup.Item>
+          <Card className="text-center">
+            <div className="avatar">
+              <img src="/images/profile1.svg" alt="Avatar" />
+            </div>
+            <strong style={{ marginBottom: '2px', display: 'block' }}>{review.name}</strong>
+            <p style={{ marginBottom: '2px' }}>Date: {review.createdAt.substring(0, 10)}</p>
+            <p style={{ marginBottom: '-5px' }}>Comment : {review.comment}</p>
+            <Rating value={review.rating} />
+          </Card>
+        </ListGroup.Item>
+      );
+    }
+  
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+  
+    return (
+      <Slider {...settings}>
+        {reviews.map((review) => (
+          <div key={review._id}>
+            <ListGroup.Item>
+              <Card className="text-center">
+                <div className="avatar">
+                  <img src="/images/profile1.svg" alt="Avatar" />
+                </div>
+                <strong style={{ marginBottom: '2px', display: 'block' }}>{review.name}</strong>
+                <p style={{ marginBottom: '2px' }}>Date: {review.createdAt.substring(0, 10)}</p>
+                <p style={{ marginBottom: '-5px' }}>Comment : {review.comment}</p>
+                <Rating value={review.rating} />
+              </Card>
+            </ListGroup.Item>
+          </div>
+        ))}
+      </Slider>
+    );
+  };
+  
+
 
   const [qty, setQty] = useState(1);
   const [duration, setDuration] = useState("hours");
@@ -307,9 +373,6 @@ const LendMachineProduct = ({ history, match }) => {
                     <br /> {userInfo.email}
                   </p>
                 </ListGroup.Item>
-                {/* <ListGroup.Item>
-                  <p>Quantity Available: {productLendMachines.quantity}</p>
-                </ListGroup.Item> */}
                 <ListGroup.Item>
                   <p>
                     <span style={{ fontWeight: "bold" }}>Product Description:</span>
@@ -453,23 +516,22 @@ const LendMachineProduct = ({ history, match }) => {
         <Row className="justify-content-center" style={{ marginLeft: '100px' }}>
             <Col md={5}>
             <h2>Reviews</h2>
-                        {productLendMachines.reviews.length === 0 && <Message>No Reviews</Message>}
+                        {productLendMachines.reviews.length === 0}
                         <ListGroup variant='flush'>
-                            {productLendMachines.reviews.map((review) => (
+                        <ReviewSlider reviews={productLendMachines.reviews} />
+                            {/* {productLendMachines.reviews.map((review) => (
                                 <ListGroup.Item key={review._id}>
                                   <Card className="text-center">
+                                     <div className="avatar">
+                                     <img src="/images/profile1.svg" alt="Avatar" />
+                                      </div>
                                       <strong style={{ marginBottom: '2px', display: 'block' }}>Reviewer: {review.name}</strong>
                                       <p style={{ marginBottom: '2px' }}>Date: {review.createdAt.substring(0, 10)}</p>
                                       <p style={{ marginBottom: '-5px' }}>Comment : {review.comment}</p>
-                                      {/* <div style={{ color: 'gold', fontSize: '24px', marginBottom: '2px' }}>
-                                        {Array.from({ length: review.rating }, (_, index) => (
-                                          <span key={index}>&#9733;</span>
-                                        ))}
-                                      </div> */}
                                       <Rating value={review.rating} />
                                     </Card>
                                 </ListGroup.Item>
-                            ))}
+                            ))} */}
                         </ListGroup>
                     </Col>
 
@@ -493,8 +555,7 @@ const LendMachineProduct = ({ history, match }) => {
                                             <Form.Control
                                                 as='select'
                                                 value={rating}
-                                                onChange={(e) => setRating(e.target.value)}
-                                            >
+                                                onChange={(e) => setRating(e.target.value)}>
                                                 <option value=''>Select...</option>
                                                 <option value='1'>1 - Poor</option>
                                                 <option value='2'>2 - Fair</option>

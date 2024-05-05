@@ -187,7 +187,7 @@ const ProfileScreen = ({ history }) => {
                                         )
                                 }
                             </Row>
-                            <Row>
+                            {/* <Row>
                                 <h2 style={{ marginTop: '110px' }}>My Products</h2>
                                 {loadingProducts ? <Loader />
                                     : errorProducts ? <Message variant="danger">{errorProducts}</Message>
@@ -205,7 +205,7 @@ const ProfileScreen = ({ history }) => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {products.map(product => (
+                                                    {products?.map(product => (
                                                         <tr key={product._id}>
                                                             <td>{product.name}</td>
                                                             <td>{product.email}</td>
@@ -233,9 +233,9 @@ const ProfileScreen = ({ history }) => {
                                                                     containerPadding={10}
                                                                 >
                                                                     <Popover id="popover-contained">
-                                                                        <Popover.Title as="h3">Rating: {product.rating}</Popover.Title>
+                                                                        <Popover.Title as="h3">Rating: {product?.rating}</Popover.Title>
                                                                         {
-                                                                            product.reviews.map(review => (
+                                                                            product?.reviews.map(review => (
                                                                                 <Popover.Content key={review._id}>
                                                                                     <strong>Feedback: {review.comment}</strong>
                                                                                 </Popover.Content>
@@ -257,7 +257,7 @@ const ProfileScreen = ({ history }) => {
                                             </Table>
                                         )
                                 }
-                            </Row>
+                            </Row> */}
                         </Container>
                     </Scrollbar>
                 </Col>
