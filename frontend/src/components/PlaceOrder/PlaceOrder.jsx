@@ -14,21 +14,26 @@ import Message from "../../components/Message/Message";
 import { createOrder } from "./../../actions/orderAction";
 import Meta from "../Helmet/Meta";
 import { setAmt } from "./../../actions/cartActions";
-import { useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 let val;
+let val_duration;
+let val_inp;
 const PlaceOrder = ({}) => {
   const history = useHistory();
   const location = useLocation();
   const data = location.state;
-  val = data && data.amt ? data.amt : 0;//item amt
+
+  val = data && data.amt ? data.amt : 0; //item amt
+  val_duration = data && data.selectedDurations ? data.selectedDurations : 0;
+  val_inp = data && data.enteredDurations ? data.enteredDurations : 0;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setAmt(val));
   }, [dispatch, val]);
-  
+
   const cart = useSelector((state) => state.cartSeed);
   // const { cartItems, shippingAddress, paymentMethod } = cart;
   // const {
@@ -70,12 +75,6 @@ const PlaceOrder = ({}) => {
       history.push(`/order/${order._id}`);
     }
   }, [history, success]);
-
-  //error
-  // useEffect(() => {
-
-  //   dispatch(calculateSubtotal(cartItems, durationOptions, durationInputs));
-  // }, [cartItems, durationOptions, durationInputs, dispatch]);
 
   const placeOrder = () => {
     dispatch(
@@ -131,6 +130,26 @@ const PlaceOrder = ({}) => {
                     {cart.cartItems.map((item, index) => (
                       <ListGroup.Item key={index}>
                         <Row>
+                          {/* Row headings */}
+                          <Col md={1}>
+                            <strong>Item Image</strong>
+                          </Col>
+                          <Col>
+                            <strong>Item Name</strong>
+                          </Col>
+                          <Col md={2}>
+                            <strong>Item Qty</strong>
+                          </Col>
+                          <Col md={2}>
+                            <strong>Price</strong>
+                          </Col>
+                          <Col md={2}>
+                            <strong>Duration</strong>
+                          </Col>
+                          <Col md={3}>
+                            <strong>Amount</strong>
+                          </Col>
+                          {/* Item details */}
                           <Col md={1}>
                             <Image
                               src={item.image}
@@ -141,10 +160,29 @@ const PlaceOrder = ({}) => {
                           </Col>
 
                           <Col>{item.name}</Col>
-                          <Col md={4}>
-                            {`${item.qty} x RS. ${item.price}/hour = RS. ${
-                              item.qty * item.price
-                            }/hour`}
+                          <Col md={2}>{item.qty}</Col>
+                          <Col md={2}>RS. {item.price}</Col>
+                          <Col md={2}>{val_inp[item.seed]} {val_duration[item.seed]}</Col>
+                          <Col md={3}>
+                            {val_duration[item.seed] === "hours"
+                              ? `RS. ${
+                                  item.qty * val_inp[item.seed] * item.price
+                                }`
+                              : val_duration[item.seed] === "weeks"
+                              ? `RS. ${
+                                  item.qty *
+                                  val_inp[item.seed] *
+                                  item.price *
+                                  60
+                                }`
+                              : val_duration[item.seed] === "days"
+                              ? `RS. ${
+                                  item.qty *
+                                  val_inp[item.seed] *
+                                  item.price *
+                                  10
+                                }`
+                              : ""}
                           </Col>
                         </Row>
                       </ListGroup.Item>
