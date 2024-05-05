@@ -9,13 +9,18 @@ import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { setAmt } from "./../../actions/cartActions";
 
-let val;
+let val_amt;
+let val_duration;
+let val_inp;
 const ShippingScreen = ({}) => {
   const history = useHistory();
   const location = useLocation();
   const data = location.state;
-  // val=data.amt;
-  val = data && data.amt ? data.amt : 0;
+  
+  // console.log("vall",vall);
+  val_amt = data && data.amt ? data.amt : 0;
+  val_duration = data && data.selectedDurations ? data.selectedDurations : 0;
+  val_inp = data && data.enteredDurations ? data.enteredDurations : 0;
 
 
   const cart = useSelector((state) => state.cartSeed);
@@ -28,8 +33,8 @@ const ShippingScreen = ({}) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setAmt(val));
-  }, [dispatch, val]);
+    dispatch(setAmt( val_amt));
+  }, [dispatch,  val_amt]);
 
   
   const submitHandler = (e) => {
@@ -38,7 +43,11 @@ const ShippingScreen = ({}) => {
     // history.push("/payment");
     history.push({
         pathname: '/payment',
-        state: { amt: val }
+        state: { amt: val_amt,
+          selectedDurations:val_duration,
+          enteredDurations:val_inp,
+
+        },
       });
     
   };

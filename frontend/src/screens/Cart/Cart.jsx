@@ -334,8 +334,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import Message from "./../../components/Message/Message";
 import { addToCart, removeFromCart } from "./../../actions/cartActions";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import {
   Row,
   Col,
@@ -346,7 +346,7 @@ import {
   Container,
   Card,
 } from "react-bootstrap";
-import './Cart.css';
+import "./Cart.css";
 import Meta from "../../components/Helmet/Meta";
 
 let val;
@@ -366,10 +366,8 @@ const Cart = ({ match, location }) => {
   const cartSeed = useSelector((state) => state.cartSeed);
   const { cartItems } = cartSeed;
 
-
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
 
   const [durationOptions, setDurationOptions] = useState({});
   const [durationInput, setDurationInput] = useState({});
@@ -404,11 +402,26 @@ const Cart = ({ match, location }) => {
       return;
     }
 
-    // Proceed to checkout logic...
+    // const selectedDurations = {};
+    // for (const itemSeed in durationOptions) {
+    //   selectedDurations[itemSeed] = durationOptions[itemSeed];
+    // }
+
+    // Extract user-entered durations
+    const enteredDurations = {};
+    for (const itemSeed in durationOptions) {
+      enteredDurations[itemSeed] = durationInput[itemSeed] || "1";
+    }
+
     history.push({
-            pathname: "/shipping",
-            state: { amt: val },
-          });
+      pathname: "/shipping",
+      state: {
+        //data:variable
+        amt: val,
+        selectedDurations: durationOptions, // Duration options selected through radio buttons
+        enteredDurations: enteredDurations, // Number of days/hours/weeks entered by the user
+      },
+    });
   };
 
   const handleDurationChange = (itemSeed, duration) => {
@@ -418,6 +431,13 @@ const Cart = ({ match, location }) => {
   const handleDurationInputChange = (itemSeed, value) => {
     setDurationInput({ ...durationInput, [itemSeed]: value });
   };
+  // const handleDurationInputChange = (itemSeed, value) => {
+  //   setDurationInput((prevInput) => ({
+  //     ...prevInput,
+  //     [itemSeed]: value,
+  //   }));
+  // };
+  
 
   const handleProceedToCheckout = () => {
     let radioSelected = false;
@@ -473,8 +493,7 @@ const Cart = ({ match, location }) => {
       <Meta title="Krishi Sarathi | Cart" />
       <Row>
         <Col md={8}>
-
-{/* //           <Row>
+          {/* //           <Row>
 //             <h1>Shopping Cart</h1>
 //           </Row>
 //           {!userInfo && (
@@ -489,20 +508,20 @@ const Cart = ({ match, location }) => {
 //             </Row>
 //           )} */}
 
-        <Row>
-      <h1>Shopping Cart</h1>
-    </Row>
-    {!userInfo && (
-      <Row>
-        <div className="note-text">
-          <h6>NOTE:</h6>
-          <p>
-            Hey, Guest User! Please log in to proceed after adding items to
-            your cart.
-          </p>
-        </div>
-      </Row>
-    )}
+          <Row>
+            <h1>Shopping Cart</h1>
+          </Row>
+          {!userInfo && (
+            <Row>
+              <div className="note-text">
+                <h6>NOTE:</h6>
+                <p>
+                  Hey, Guest User! Please log in to proceed after adding items
+                  to your cart.
+                </p>
+              </div>
+            </Row>
+          )}
 
           {cartItems.length === 0 ? (
             <Message variant="danger">
@@ -630,7 +649,7 @@ const Cart = ({ match, location }) => {
                 {cartItems
                   .reduce(
                     (acc, item) =>
-                      acc + parseFloat(calculateSubtotal(item)/2 ),
+                      acc + parseFloat(calculateSubtotal(item) / 2),
                     0
                   )
                   .toFixed(2)}
