@@ -78,13 +78,37 @@ const Header = () => {
             id="search-by-category"
             className="nav-dropdown">
             <LinkContainer to="/thresher">
-              <NavDropdown.Item>Thresher</NavDropdown.Item>
+              <NavDropdown.Item>THRESHERS</NavDropdown.Item>
+            </LinkContainer>
+            {/* <LinkContainer to="/tillages">
+              <NavDropdown.Item>TILLAGES</NavDropdown.Item>
+            </LinkContainer> */}
+            <LinkContainer to="/tractors">
+              <NavDropdown.Item>TRACTORS</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/harrows">
+              <NavDropdown.Item>HARROWS</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/harvesters">
+              <NavDropdown.Item>HARVESTERS</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/mowers">
+              <NavDropdown.Item>MOWERS</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/balers">
+              <NavDropdown.Item>BALERS</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/plows">
+              <NavDropdown.Item>PLOWS</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/seeders">
+              <NavDropdown.Item>SEEDERS</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/irrigations">
+              <NavDropdown.Item>IRRIGATION</NavDropdown.Item>
             </LinkContainer>
             <LinkContainer to="/sprayers">
-              <NavDropdown.Item>Sprayers</NavDropdown.Item>
-            </LinkContainer>
-            <LinkContainer to="/search?category=chippers">
-              <NavDropdown.Item>Chippers</NavDropdown.Item>
+              <NavDropdown.Item>SPRAYERS</NavDropdown.Item>
             </LinkContainer>
           </NavDropdown>
         </Nav>

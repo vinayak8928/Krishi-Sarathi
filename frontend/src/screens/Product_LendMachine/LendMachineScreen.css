@@ -1,7 +1,7 @@
 .machine-product
 {
     margin-top:30px;
-    margin-bottom:50px
+    margin-bottom:50px;
 }
 
 .btn-go-back
@@ -13,13 +13,21 @@
 
 .productScreen
 {
-    margin-top: 100px
+    margin-top: 100px;
+    margin-left: -200px;
+    margin-right: -50px;
+    
 }
 
 .side{
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-style: normal;
+    position: absolute;
+    top: 50%; /* Align to the vertical center of the screen */
+    transform: translateY(-50%); /* Center vertically */
+    right: 5vw; /* Adjust the distance from the right side */
+    /* margin-right: 20px; */
 }
 .image-machine
 {
@@ -27,7 +35,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .borderless{
@@ -39,3 +47,115 @@
 .borderless .listGroup.Item{
     color:"black";
 }
+
+.product-image-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .line {
+    border: 0;
+    height: 0.1px;
+    background-color: #ccc;
+    margin-left: 20px;
+    margin-right: -45px;
+  }
+  
+  .description-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  
+  .product-description-container {
+    max-width:100%; 
+    margin: 0 auto;
+    margin-top: -200px auto;
+    padding: 0px;
+    width: calc(100% - 20px);
+    margin-left: 535px;
+    margin-right: 20px;
+    text-align: justify;
+    font-size: 16px;
+  }
+
+  /* .product-description {
+    border: 0;
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: justify;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100%;
+  }  */
+  .product-description {
+    font-size: 16px;
+    line-height: 2;
+    text-align: justify;
+    margin-left: 40px;
+    width: 100%;
+  }
+
+  h2{
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  .avatar {
+    width: 100px; /* Set the width of the avatar */
+    height: 100px; /* Set the height of the avatar */
+    border-radius: 50%; /* Make the avatar circular */
+    overflow: hidden; /* Hide any content that overflows the avatar */
+    margin: 5px auto 5px; /* Center the avatar and add some bottom margin */
+  }
+  
+  .avatar img {
+    width: 100%; /* Make the image inside the avatar fill the entire space */
+    height: auto; /* Maintain the aspect ratio of the image */
+  }
+
+  .slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    color: #000000 !important;
+    cursor: pointer;
+    font-size: 0px;
+  }
+  
+  .slick-prev {
+    left: 10px;
+  }
+  
+  .slick-next {
+    right: 10px;
+  }
+
+  .card-body:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    border-color: #28a745; /* Change border color on hover */
+  }
+
+  .card {
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Add a shadow on hover */
+  }
+
+  .review-image {
+    width: 250px; /* Adjust the width as needed */
+    height: 250px; /* Adjust the height as needed */
+    /* transform: translateY(-50%); Adjust the transformation as needed */
+    margin-top : -45px; /* Remove bottom margin */
+  }
+  
+  
+  
+

@@ -334,6 +334,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import Message from "./../../components/Message/Message";
 import { addToCart, removeFromCart } from "./../../actions/cartActions";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import {
   Row,
   Col,
@@ -515,7 +517,7 @@ const Cart = ({ match, location }) => {
                       <Image src={item.image} alt={item.name} fluid rounded />
                     </Col>
                     <Col md={3}>
-                      <Link to={`/farmers/purchaseSeeds/${item.seed}`}>
+                      <Link to={`/farmers/lendMachines/${item.seed}`}>
                         {item.name}
                       </Link>
                     </Col>
@@ -593,7 +595,7 @@ const Cart = ({ match, location }) => {
                         type="button"
                         variant="light"
                         onClick={() => removeFromCartHandler(item.seed)}>
-                        <i className="fas fa-trash"></i>
+                        <FontAwesomeIcon icon={faTrashAlt} />
                       </Button>
                     </Col>
                   </Row>
@@ -628,7 +630,7 @@ const Cart = ({ match, location }) => {
                 {cartItems
                   .reduce(
                     (acc, item) =>
-                      acc + parseFloat(calculateSubtotal(item) / 2),
+                      acc + parseFloat(calculateSubtotal(item) ),
                     0
                   )
                   .toFixed(2)}

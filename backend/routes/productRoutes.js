@@ -14,7 +14,8 @@ import {
     getLendMachnineById,
     deleteLendMachnine,
     updateLendMachine,
-    createLendMachine
+    createLendMachine,
+    createMachineProductReview
 } from './../controllers/productLendMachineController.js'
 import {
     getConsumerProducts,
@@ -53,6 +54,10 @@ router
     .get(getLendMachnineById)
     .delete(protect, deleteLendMachnine)
     .put(protect, updateLendMachine)
+
+router
+    .route('/lendMachines/:id/reviews')
+    .post(protect, createMachineProductReview)
 
 router
     .route('/consumer')

@@ -4,7 +4,7 @@
     font-family: "Poppins", sans-serif;
     /* font-weight: 500;
     font-style: normal; */
-    font-size: 22px;
+    font-size: 24px !important;
     text-decoration: none;
     font-weight: 400 !important;
 }
@@ -14,3 +14,12 @@
     align-items: center;
     margin-left: 25% !important;
 }
+
+.my-card {
+    height: 90%; /* Adjust the height of the card */
+  }
+  
+  .card-image {
+    object-fit: contain; /* Ensure the entire image fits within the container */
+    height: 200px; /* Set the height of the image */
+  }

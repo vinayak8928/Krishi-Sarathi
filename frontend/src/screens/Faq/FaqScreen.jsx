@@ -5,7 +5,9 @@ import { Card, Accordion, Button } from "react-bootstrap";
 const FaqScreen = () => {
   return (
     <div className="container mt-5">
-      <h2 className="mb-4"><b>How can we Help?</b></h2>
+      <h2 className="mb-4">
+        <b>How can we Help?</b>
+      </h2>
       <Accordion defaultActiveKey="0">
         {/* Question 1 */}
         <Card>
@@ -42,16 +44,15 @@ const FaqScreen = () => {
         {/* Question 3 */}
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="2">
-              Can I cancel my equipment rental order?
+            <Accordion.Toggle as={Button} variant="link" eventKey="4">
+              What payment methods do you accept?
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse eventKey="2">
+          <Accordion.Collapse eventKey="4">
             <Card.Body>
-              Yes, you can cancel your equipment rental order. However, please
-              note that cancellation fees may apply depending on the timing of
-              your cancellation. Contact our customer support for assistance
-              with cancellations.
+              We accept various payment methods, including credit cards, debit
+              cards, PayPal, and bank transfers. Choose the option that is most
+              convenient for you during the checkout process.
             </Card.Body>
           </Accordion.Collapse>
         </Card>

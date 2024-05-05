@@ -12,7 +12,12 @@ const machineReviewSchema = mongoose.Schema({
     comment: {
         type: String,
         // requried: true,
-    }
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
 }, {
     timestamps: true
 })
@@ -63,6 +68,10 @@ const productLendMachineSchema = mongoose.Schema({
         type: Number,
         // required: true,
         default: 1
+    },
+    numReviews: {
+        type: Number,
+        default: 0
     },
 })
 

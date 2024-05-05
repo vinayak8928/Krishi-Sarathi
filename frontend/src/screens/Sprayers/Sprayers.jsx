@@ -17,6 +17,7 @@ const Sprayer_LendScreen = () => {
     const { loading, error, productLendMachines } = productLendMachinesList
 
     const [numberOfItems, setNumberOfItems] = useState(3);
+    const [showAlert, setShowAlert] = useState(false);
 
     useEffect(() => {
         dispatch(listLendMachineProducts())
@@ -26,11 +27,13 @@ const Sprayer_LendScreen = () => {
     const showMore = () => {
         if (numberOfItems + 3 <= productLendMachines.length) {
             setNumberOfItems(numberOfItems + 3)
+            setShowAlert(false); 
         } else {
             setNumberOfItems(productLendMachines.length)
+            setShowAlert(true);
         }
     }
-    const filteredSprayers = productLendMachines.filter(machine => machine.name.toLowerCase().includes('sprayers'));
+    const filteredSprayers = productLendMachines.filter(machine => machine.category.toLowerCase().includes('sprayers'));
     return (
 
         <div className="MachineLendScreen">
@@ -54,18 +57,17 @@ const Sprayer_LendScreen = () => {
                                                     _id={machine._id}
                                                     name={machine.name}
                                                     image={machine.image}
-                                                    targetPlant={machine.target_plant}
+                                                    // targetPlant={machine.target_plant}
                                                     price={machine.price}
                                                     quantity={machine.quantity}
                                                 />
                                             ))
                                     }
-                                    {/* {
-                                        numberOfItems >= productLendMachines.length
-                                            ? <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
-                                            : ''
-                                    } */}
-                                    <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>show more</Button>
+                                    {
+                                        showAlert && numberOfItems >= productLendMachines.length && // Display alert conditionally
+                                            <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
+                                    }
+                                    <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>Show more</Button>
                                 </Row>
                             )
                 }

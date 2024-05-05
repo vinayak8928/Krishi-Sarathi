@@ -6,11 +6,20 @@ import Header from './components/Header/Header';
 import LoginComponent from './components/Login/LoginComponent';
 import Register from './components/Register/Register';
 import PlaceOrder from './components/PlaceOrder/PlaceOrder.jsx'
-
 import HomeScreen from './screens/Home/HomeScreen';
 import Consumer from './screens/Consumer/ConsumerScreen';
+
 import Thresher from './screens/Thresher/Thresher';
 import Sprayers from './screens/Sprayers/Sprayers';
+import Tractors  from './screens/Tractors/Tractors';
+import Balers from './screens/Balers/Balers';
+import Harvesters  from './screens/Harvesters/Harvesters';
+import Harrows from  "./screens/Harrows/Harrows";
+import Mowers from  "./screens/Mowers/Mowers" ;
+import Irrigations from  "./screens/Irrigations/Irrigations" ;
+import Plows from "./screens/Plows/Plows";
+import Seeders from "./screens/Seeders/Seeders";
+
 import Farmer from './screens/Farmer/FarmerScreen';
 import FaqScreen from './screens/Faq/FaqScreen';
 import Supplier from './screens/Supplier/SupplierScreen';
@@ -48,8 +57,20 @@ const Layout = () => {
                     <Route exact path="/farmer" component={Farmer} />
                     <Route exact path="/consumer" component={Consumer} />
                     <Route exact path="/faq" component={FaqScreen} />
+
                     <Route exact path="/thresher" component={Thresher} />
+                    <Route exact path="/tractors" component={Tractors} />
+                    <Route exact path="/balers" component={Balers} />
+                    <Route exact path="/harrows" component={Harrows} />
+                    <Route exact path="/harvesters" component={Harvesters} />
+                    <Route exact path="/mowers" component={Mowers} />
+                    <Route exact path="/plows" component={Plows} />
+                    <Route exact path="/seeders" component={Seeders} />
+                    <Route exact path="/irrigations" component={Irrigations} />
                     <Route exact path="/sprayers" component={Sprayers} />
+
+
+
                     <Route exact path="/supplier" component={Supplier} />
                     <Route exact path="/farmers/sellMeterial" component={LoginComponent} />
                     <Route exact path="/login" component={LoginComponent} />
