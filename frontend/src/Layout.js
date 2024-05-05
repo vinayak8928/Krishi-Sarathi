@@ -12,12 +12,13 @@ import Consumer from './screens/Consumer/ConsumerScreen';
 import Thresher from './screens/Thresher/Thresher';
 import Sprayers from './screens/Sprayers/Sprayers';
 import Tractors  from './screens/Tractors/Tractors';
-import Tillages  from './screens/Tillages/Tillages';
+import Balers from './screens/Balers/Balers';
 import Harvesters  from './screens/Harvesters/Harvesters';
 import Harrows from  "./screens/Harrows/Harrows";
 import Mowers from  "./screens/Mowers/Mowers" ;
 import Irrigations from  "./screens/Irrigations/Irrigations" ;
-
+import Plows from "./screens/Plows/Plows";
+import Seeders from "./screens/Seeders/Seeders";
 
 import Farmer from './screens/Farmer/FarmerScreen';
 import FaqScreen from './screens/Faq/FaqScreen';
@@ -59,10 +60,12 @@ const Layout = () => {
 
                     <Route exact path="/thresher" component={Thresher} />
                     <Route exact path="/tractors" component={Tractors} />
-                    <Route exact path="/tillages" component={Tillages} />
+                    <Route exact path="/balers" component={Balers} />
                     <Route exact path="/harrows" component={Harrows} />
                     <Route exact path="/harvesters" component={Harvesters} />
                     <Route exact path="/mowers" component={Mowers} />
+                    <Route exact path="/plows" component={Plows} />
+                    <Route exact path="/seeders" component={Seeders} />
                     <Route exact path="/irrigations" component={Irrigations} />
                     <Route exact path="/sprayers" component={Sprayers} />
 
