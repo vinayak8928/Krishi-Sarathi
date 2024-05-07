@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button,Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import CheckoutSteps from "./../../components/CheckoutSteps/CheckoutSteps";
 import FormContainer from "../../components/FormContainer/FormContainer";
@@ -8,6 +8,7 @@ import Meta from "../../components/Helmet/Meta";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { setAmt } from "./../../actions/cartActions";
+// import {AddressValidator} from "react-address-validator";
 
 let val_amt;
 let val_duration;
@@ -30,15 +31,27 @@ const ShippingScreen = ({}) => {
   const [city, setCity] = useState(shippingAddress.city);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.country);
-
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setAmt( val_amt));
   }, [dispatch,  val_amt]);
 
+  const isValidIndianPostalCode = (postalCode) => {
+    const indianPostalCodePattern = /^\d{6}$/;
+    return indianPostalCodePattern.test(postalCode);
+  };
   
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!isValidIndianPostalCode(postalCode)) {
+      // Set error message for invalid postal code
+      setError("Please enter a valid Indian postal code.");
+      return;
+    }
+    // Clear error message
+    setError("");
+    // Save shipping address and navigate to payment screen
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
     // history.push("/payment");
     history.push({
@@ -84,6 +97,7 @@ const ShippingScreen = ({}) => {
               required
               onChange={(e) => setCity(e.target.value)}></Form.Control>
           </Form.Group>
+
           <Form.Group controlId="postalCode">
             <Form.Label>
               Postal Code <span style={{ color: "red" }}>*</span>
@@ -94,7 +108,9 @@ const ShippingScreen = ({}) => {
               value={postalCode}
               required
               onChange={(e) => setPostalCode(e.target.value)}></Form.Control>
+               {error && <Alert variant="danger">{error}</Alert>}
           </Form.Group>
+
           <Form.Group controlId="country">
             <Form.Label>
               Country <span style={{ color: "red" }}>*</span>
@@ -114,3 +130,5 @@ const ShippingScreen = ({}) => {
 };
 
 export default ShippingScreen;
+
+
