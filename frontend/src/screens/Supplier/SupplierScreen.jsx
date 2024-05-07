@@ -217,7 +217,8 @@ const SeedListEdit = ({ match }) => {
             GO BACK
           </Link>
           <Button className="my-3 ml-2" onClick={createMachineProductHandler}>
-            <FontAwesomeIcon icon={faPlus} />ADD ITEM
+            <FontAwesomeIcon icon={faPlus} />
+            ADD ITEM
           </Button>
         </div>
 
@@ -283,22 +284,24 @@ const SeedListEdit = ({ match }) => {
               </Form.Group>
               <Form.Group controlId="category">
                 <Form.Label>Category</Form.Label>
-                  <Form.Control
-                    type="category"
-                    as='select'
-                    // placeholder="Enter Category"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}>
-                      <option value=''>Choose category...</option>
-                      <option value='1'>Threshers</option>
-                      <option value='2'>Tillages</option>
-                      <option value='3'>Tractors</option>
-                      <option value='4'>Harrows</option>
-                      <option value='5'>Harvesters</option>
-                      <option value='6'>Mowers</option>
-                      <option value='7'>Irrigation</option>
-                      <option value='8'>Sprayers</option>
-                  </Form.Control>
+                <Form.Control
+                  type="category"
+                  as="select"
+                  // placeholder="Enter Category"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}>
+                  <option value="">Choose category</option>
+                  <option value="Threshers">Threshers</option>
+                  <option value="Tractors">Tractors</option>
+                  <option value="Harrows">Harrows</option>
+                  <option value="Harvesters">Harvesters</option>
+                  <option value="Mowers">Mowers</option>
+                  <option value="Balers">Balers</option>
+                  <option value="Plows">Plows</option>
+                  <option value="Seeders">Seeders</option>
+                  <option value="Irrigation">Irrigation</option>
+                  <option value="Sprayers">Sprayers</option>
+                </Form.Control>
               </Form.Group>
               <Form.Group controlId="quantity">
                 <Form.Label>Quantity</Form.Label>

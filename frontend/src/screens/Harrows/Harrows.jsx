@@ -34,7 +34,7 @@ const Harrows_LendScreen = () => {
     }
 
     // Filter machines whose names contain the word "Threshers"
-    const filteredHarrows = productLendMachines.filter(machine => machine.category.toLowerCase().includes('harrows'));
+    const filteredHarrows  = productLendMachines.filter(machine => machine.category === 'Harrows');
     // const thresherss = productLendMachines.filter(machine => machine.category === 'Thresher');
     return (
 

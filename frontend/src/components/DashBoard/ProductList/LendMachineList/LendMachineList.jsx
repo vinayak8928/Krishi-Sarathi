@@ -54,6 +54,20 @@ const SeedList = () => {
         dispatch(createLendMachine())
     }
 
+    const categoryMap = {
+        1: "Threshers",
+        2: "Tractors",
+        3: "Harrows",
+        4: "Harvesters",
+        5: "Harvesters",
+        6: "Mowers",
+        7: "Balers",
+        8: "Plows",
+        9: "Seeders",
+        10: "Irrigation",
+        11: "Sprayers",
+      };
+
     return (
         <Container>
             <Row>
@@ -89,8 +103,7 @@ const SeedList = () => {
                                         <tr key={machine._id}>
                                             <td>{machine._id}</td>
                                             <td>{machine.name}</td>
-                                            <td>{machine.category}</td>
-                                            {/* <td>{machine.target_plant}</td> */}
+                                            <td>{categoryMap[machine.category]}</td>
                                             <td>{machine.machine_power}</td>
                                             
                                             <td>

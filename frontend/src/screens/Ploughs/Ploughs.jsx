@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Button, Alert } from 'react-bootstrap'
 import LendMachines from './../../components/LendMachines//LendMachines';
 
-import './PlowsStyles.css'
+import './PloughsStyles.css'
 import Message from './../../components/Message/Message';
 import Loader from './../../components/Loader/Loader';
 
 import { listLendMachineProducts } from './../../actions/productLendMachinesActions'
 import Meta from '../../components/Helmet/Meta';
 
-const Plows_LendScreen = () => {
+const Ploughs_LendScreen = () => {
     const dispatch = useDispatch()
 
     const productLendMachinesList = useSelector(state => state.productLendMachinesList)
@@ -34,16 +34,16 @@ const Plows_LendScreen = () => {
     }
 
     // Filter machines whose names contain the word "Threshers"
-    const filteredPlows = productLendMachines.filter(machine => machine.category.toLowerCase().includes('plows'));
-    // const thresherss = productLendMachines.filter(machine => machine.category === 'Thresher');
+    // const filteredPlows = productLendMachines.filter(machine => machine.category.toLowerCase().includes('plows'));
+     const filteredPloughs  = productLendMachines.filter(machine => machine.category === 'Ploughs');
     return (
 
         <div className="MachineLendScreen">
             <Meta
-                title="Plows"
+                title="Ploughs"
             />
             <Container>
-                <h1 className="p-3" style={{ textAlign: 'center' }}>PLOWS</h1>
+                <h1 className="p-3" style={{ textAlign: 'center' }}>Ploughs</h1>
                 {
                     loading
                         ? <Loader />
@@ -51,7 +51,7 @@ const Plows_LendScreen = () => {
                             : (
                                 <Row>
                                     {
-                                        filteredPlows
+                                        filteredPloughs
                                             .slice(0, numberOfItems)
                                             .map(machine => (
                                                 <LendMachines
@@ -77,4 +77,4 @@ const Plows_LendScreen = () => {
     )
 }
 
-export default Plows_LendScreen
+export default Ploughs_LendScreen

@@ -34,8 +34,8 @@ const Irrigations_LendScreen = () => {
     }
 
     // Filter machines whose names contain the word "Threshers"
-    const filteredIrrigations = productLendMachines.filter(machine => machine.category.toLowerCase().includes('irrigations'));
-    // const thresherss = productLendMachines.filter(machine => machine.category === 'Thresher');
+    // const filteredIrrigations = productLendMachines.filter(machine => machine.category.toLowerCase().includes('irrigations'));
+    const filteredIrrigations = productLendMachines.filter(machine => machine.category === 'Irrigations');
     return (
 
         <div className="MachineLendScreen">

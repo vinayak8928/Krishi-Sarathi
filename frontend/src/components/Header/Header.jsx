@@ -77,7 +77,7 @@ const Header = () => {
             }
             id="search-by-category"
             className="nav-dropdown">
-            <LinkContainer to="/thresher">
+            <LinkContainer to="/threshers">
               <NavDropdown.Item>THRESHERS</NavDropdown.Item>
             </LinkContainer>
             {/* <LinkContainer to="/tillages">
@@ -98,8 +98,8 @@ const Header = () => {
             <LinkContainer to="/balers">
               <NavDropdown.Item>BALERS</NavDropdown.Item>
             </LinkContainer>
-            <LinkContainer to="/plows">
-              <NavDropdown.Item>PLOWS</NavDropdown.Item>
+            <LinkContainer to="/ploughs">
+              <NavDropdown.Item>PLOUGHS</NavDropdown.Item>
             </LinkContainer>
             <LinkContainer to="/seeders">
               <NavDropdown.Item>SEEDERS</NavDropdown.Item>

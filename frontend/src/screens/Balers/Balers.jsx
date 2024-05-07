@@ -34,8 +34,8 @@ const Balers_LendScreen = () => {
     }
 
     // Filter machines whose names contain the word "Threshers"
-    const filteredBalers = productLendMachines.filter(machine => machine.category.toLowerCase().includes('balers'));
-    // const thresherss = productLendMachines.filter(machine => machine.category === 'Thresher');
+    // const filteredBalers = productLendMachines.filter(machine => machine.category.toLowerCase().includes('balers'));
+     const filteredBalers = productLendMachines.filter(machine => machine.category === 'Balers');
     return (
 
         <div className="MachineLendScreen">

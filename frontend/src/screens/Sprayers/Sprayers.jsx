@@ -33,7 +33,7 @@ const Sprayer_LendScreen = () => {
             setShowAlert(true);
         }
     }
-    const filteredSprayers = productLendMachines.filter(machine => machine.category.toLowerCase().includes('sprayers'));
+    const filteredSprayers = productLendMachines.filter(machine => machine.category === 'Sprayers');
     return (
 
         <div className="MachineLendScreen">
