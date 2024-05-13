@@ -23,19 +23,19 @@ const Harvesters_LendScreen = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch])
 
+
+    const harvestersList = productLendMachines.filter(machine => machine.category === 'Harvesters');
     const showMore = () => {
-        if (numberOfItems + 3 <= productLendMachines.length) {
+        if (numberOfItems + 3 <= harvestersList.length) {
             setNumberOfItems(numberOfItems + 3)
-            setShowAlert(false); 
         } else {
-            setNumberOfItems(productLendMachines.length)
-            setShowAlert(true); 
+            setNumberOfItems(harvestersList.length)
         }
     }
 
     // Filter machines whose names contain the word "Threshers"
     // const filteredHarvesters = productLendMachines.filter(machine => machine.category.toLowerCase().includes('harvesters'));
-    const filteredHarvesters = productLendMachines.filter(machine => machine.category === 'Harvesters');
+
     return (
 
         <div className="MachineLendScreen">
@@ -51,7 +51,7 @@ const Harvesters_LendScreen = () => {
                             : (
                                 <Row>
                                     {
-                                        filteredHarvesters
+                                        harvestersList
                                             .slice(0, numberOfItems)
                                             .map(machine => (
                                                 <LendMachines
@@ -64,11 +64,21 @@ const Harvesters_LendScreen = () => {
                                                 />
                                             ))
                                     }
-                                     {
-                                        showAlert && numberOfItems >= productLendMachines.length && // Display alert conditionally
-                                            <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
-                                    }
-                                    <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>Show more</Button>
+                                    {numberOfItems >= harvestersList.length ? (
+                                    <Alert
+                                        style={{ backgroundColor: "red" }}
+                                        className="col-md-12 text-center">
+                                        No more results!
+                                    </Alert>
+                                    ) : (
+
+                                    <Button
+                                    className="col-md-12 text-center"
+                                    variant="success outline-dark"
+                                    onClick={showMore}>
+                                    show more
+                                    </Button>
+                                    )}
                                 </Row>
                             )
                 }

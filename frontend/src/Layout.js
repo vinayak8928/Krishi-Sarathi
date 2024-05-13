@@ -19,6 +19,7 @@ import Mowers from  "./screens/Mowers/Mowers" ;
 import Irrigations from  "./screens/Irrigations/Irrigations" ;
 import Ploughs from "./screens/Ploughs/Ploughs";
 import Seeders from "./screens/Seeders/Seeders";
+import Others from "./screens/Others/Others";
 
 import Farmer from './screens/Farmer/FarmerScreen';
 import FaqScreen from './screens/Faq/FaqScreen';
@@ -68,6 +69,7 @@ const Layout = () => {
                     <Route exact path="/seeders" component={Seeders} />
                     <Route exact path="/irrigations" component={Irrigations} />
                     <Route exact path="/sprayers" component={Sprayers} />
+                    <Route exact path="/others" component={Others} />
 
 
 

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Button, Alert } from 'react-bootstrap'
-import LendMachines from './../../components/LendMachines//LendMachines';
+import LendMachines from '../../components/LendMachines/LendMachines';
 
-import './ThresherStyles.css'
-import Message from './../../components/Message/Message';
-import Loader from './../../components/Loader/Loader';
+import './OthersStyles.css'
+import Message from '../../components/Message/Message';
+import Loader from '../../components/Loader/Loader';
 
-import { listLendMachineProducts } from './../../actions/productLendMachinesActions'
+import { listLendMachineProducts } from '../../actions/productLendMachinesActions'
 import Meta from '../../components/Helmet/Meta';
 
-const Thresher_LendScreen = () => {
+const Others_LendScreen = () => {
     const dispatch = useDispatch()
 
     const productLendMachinesList = useSelector(state => state.productLendMachinesList)
@@ -22,19 +22,27 @@ const Thresher_LendScreen = () => {
         dispatch(listLendMachineProducts())
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch])
-
-    const threshersList = productLendMachines.filter(machine => machine.category === 'Threshers');
+    const  othersList = productLendMachines.filter(machine => machine.category === 'Others');
+    // const showMore = () => {
+    //     if (numberOfItems + 3 <= productLendMachines.length) {
+    //         setNumberOfItems(numberOfItems + 3)
+    //         setShowAlert(false); 
+    //     } else {
+    //         setNumberOfItems(productLendMachines.length)
+    //         setShowAlert(true); 
+    //     }
+    // }
     const showMore = () => {
-        if (numberOfItems + 3 <= threshersList.length) {
+        if (numberOfItems + 3 <= othersList.length) {
             setNumberOfItems(numberOfItems + 3)
         } else {
-            setNumberOfItems(threshersList.length)
+            setNumberOfItems(othersList.length)
         }
     }
 
     // Filter machines whose names contain the word "Threshers"
-    // const threshersList = productLendMachines.filter(machine => machine.category.toLowerCase().includes('thresher'));
 
+    // const thresherss = productLendMachines.filter(machine => machine.category === 'Thresher');
     return (
 
         <div className="MachineLendScreen">
@@ -42,7 +50,7 @@ const Thresher_LendScreen = () => {
                 title="Threshers"
             />
             <Container>
-                <h1 className="p-3" style={{ textAlign: 'center' }}>Threshers</h1>
+                <h1 className="p-3" style={{ textAlign: 'center' }}>OTHERS</h1>
                 {
                     loading
                         ? <Loader />
@@ -50,7 +58,7 @@ const Thresher_LendScreen = () => {
                             : (
                                 <Row>
                                     {
-                                        threshersList
+                                        othersList
                                             .slice(0, numberOfItems)
                                             .map(machine => (
                                                 <LendMachines
@@ -58,13 +66,12 @@ const Thresher_LendScreen = () => {
                                                     _id={machine._id}
                                                     name={machine.name}
                                                     image={machine.image}
-                                                    targetPlant={machine.target_plant}
                                                     price={machine.price}
                                                     quantity={machine.quantity}
                                                 />
                                             ))
                                     }
-                                     {numberOfItems >= threshersList.length ? (
+                                     {numberOfItems >= othersList.length ? (
                                     <Alert
                                         style={{ backgroundColor: "red" }}
                                         className="col-md-12 text-center">
@@ -87,4 +94,4 @@ const Thresher_LendScreen = () => {
     )
 }
 
-export default Thresher_LendScreen
+export default Others_LendScreen
