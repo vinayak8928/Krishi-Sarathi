@@ -41,7 +41,7 @@ const Mowers_LendScreen = () => {
                 title="Mowers"
             />
             <Container>
-                <h1 className="p-3" style={{ textAlign: 'center' }}>MOWERS</h1>
+                <h1 className="p-3" style={{ textAlign: 'center' }}>Mowers</h1>
                 {
                     loading
                         ? <Loader />

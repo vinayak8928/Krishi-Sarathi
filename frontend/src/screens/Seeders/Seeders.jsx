@@ -47,7 +47,7 @@ const Seeders_LendScreen = () => {
                 title="Seeders"
             />
             <Container>
-                <h1 className="p-3" style={{ textAlign: 'center' }}>SEEDERS</h1>
+                <h1 className="p-3" style={{ textAlign: 'center' }}>Seeders</h1>
                 {
                     loading
                         ? <Loader />

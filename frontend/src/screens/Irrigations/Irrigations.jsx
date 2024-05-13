@@ -42,7 +42,7 @@ const Irrigations_LendScreen = () => {
                 title="Irrigation"
             />
             <Container>
-                <h1 className="p-3" style={{ textAlign: 'center' }}>IRRIGATION EQUIPMENTS</h1>
+                <h1 className="p-3" style={{ textAlign: 'center' }}>Irrigation Equipments</h1>
                 {
                     loading
                         ? <Loader />

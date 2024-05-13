@@ -42,7 +42,7 @@ const Tractors_LendScreen = () => {
                 title="Threshers"
             />
             <Container>
-                <h1 className="p-3" style={{ textAlign: 'center' }}>TRACTORS</h1>
+                <h1 className="p-3" style={{ textAlign: 'center' }}>Tractors</h1>
                 {
                     loading
                         ? <Loader />
