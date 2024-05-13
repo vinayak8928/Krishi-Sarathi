@@ -204,6 +204,7 @@ const MachineListEdit = ({ match }) => {
                   <option value="Seeders">Seeders</option>
                   <option value="Irrigation">Irrigation</option>
                   <option value="Sprayers">Sprayers</option>
+                  <option value="Others">Others</option>
                 </Form.Control>
               </Form.Group>
               <Form.Group controlId="quantity">

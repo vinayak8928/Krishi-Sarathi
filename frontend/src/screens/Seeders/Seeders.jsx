@@ -18,24 +18,28 @@ const Seeders_LendScreen = () => {
 
     const [numberOfItems, setNumberOfItems] = useState(3);
     const [showAlert, setShowAlert] = useState(false);
+
+
     useEffect(() => {
         dispatch(listLendMachineProducts())
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch])
 
+    const seedersList = productLendMachines.filter(machine => machine.category === 'Seeders');
+
     const showMore = () => {
-        if (numberOfItems + 3 <= productLendMachines.length) {
+        if (numberOfItems + 3 <= seedersList.length) {
             setNumberOfItems(numberOfItems + 3)
-            setShowAlert(false); 
         } else {
-            setNumberOfItems(productLendMachines.length)
-            setShowAlert(true); 
+            setNumberOfItems(seedersList.length)
         }
     }
+    
+    
 
     // Filter machines whose names contain the word "Threshers"
-    // const filteredSeeders = productLendMachines.filter(machine => machine.category.toLowerCase().includes('seeders'));
-    const filteredSeeders = productLendMachines.filter(machine => machine.category === 'Seeders');
+    // const seedersList = productLendMachines.filter(machine => machine.category.toLowerCase().includes('seeders'));
+
     return (
 
         <div className="MachineLendScreen">
@@ -51,7 +55,7 @@ const Seeders_LendScreen = () => {
                             : (
                                 <Row>
                                     {
-                                        filteredSeeders
+                                        seedersList
                                             .slice(0, numberOfItems)
                                             .map(machine => (
                                                 <LendMachines
@@ -62,13 +66,22 @@ const Seeders_LendScreen = () => {
                                                     price={machine.price}
                                                     quantity={machine.quantity}
                                                 />
-                                            ))
-                                    }
-                                     {
-                                        showAlert && numberOfItems >= productLendMachines.length && // Display alert conditionally
-                                            <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
-                                    }
-                                    <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>Show more</Button>
+                                            ))}
+                                    {numberOfItems >= seedersList.length ? (
+                                    <Alert
+                                        style={{ backgroundColor: "red" }}
+                                        className="col-md-12 text-center">
+                                        No more results!
+                                    </Alert>
+                                    ) : (
+
+                                    <Button
+                                    className="col-md-12 text-center"
+                                    variant="success outline-dark"
+                                    onClick={showMore}>
+                                    show more
+                                    </Button>
+                                    )}
                                 </Row>
                             )
                 }

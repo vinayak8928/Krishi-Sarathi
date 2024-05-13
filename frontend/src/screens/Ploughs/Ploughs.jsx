@@ -22,20 +22,18 @@ const Ploughs_LendScreen = () => {
         dispatch(listLendMachineProducts())
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch])
-
+    const ploughsList  = productLendMachines.filter(machine => machine.category === 'Ploughs');
     const showMore = () => {
-        if (numberOfItems + 3 <= productLendMachines.length) {
+        if (numberOfItems + 3 <= ploughsList.length) {
             setNumberOfItems(numberOfItems + 3)
-            setShowAlert(false); 
         } else {
-            setNumberOfItems(productLendMachines.length)
-            setShowAlert(true); 
+            setNumberOfItems(ploughsList.length)
         }
     }
 
     // Filter machines whose names contain the word "Threshers"
     // const filteredPlows = productLendMachines.filter(machine => machine.category.toLowerCase().includes('plows'));
-     const filteredPloughs  = productLendMachines.filter(machine => machine.category === 'Ploughs');
+
     return (
 
         <div className="MachineLendScreen">
@@ -51,7 +49,7 @@ const Ploughs_LendScreen = () => {
                             : (
                                 <Row>
                                     {
-                                        filteredPloughs
+                                        ploughsList
                                             .slice(0, numberOfItems)
                                             .map(machine => (
                                                 <LendMachines
@@ -64,11 +62,21 @@ const Ploughs_LendScreen = () => {
                                                 />
                                             ))
                                     }
-                                     {
-                                        showAlert && numberOfItems >= productLendMachines.length && // Display alert conditionally
-                                            <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
-                                    }
-                                    <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>Show more</Button>
+                                    {numberOfItems >= ploughsList.length ? (
+                                    <Alert
+                                        style={{ backgroundColor: "red" }}
+                                        className="col-md-12 text-center">
+                                        No more results!
+                                    </Alert>
+                                    ) : (
+
+                                    <Button
+                                    className="col-md-12 text-center"
+                                    variant="success outline-dark"
+                                    onClick={showMore}>
+                                    show more
+                                    </Button>
+                                    )}
                                 </Row>
                             )
                 }

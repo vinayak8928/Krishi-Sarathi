@@ -203,6 +203,7 @@ const LendMachineProduct = ({ history, match }) => {
     9: "Seeders",
     10: "Irrigation",
     11: "Sprayers",
+    12: "Others",
   };
 
   const ReviewSlider = ({ reviews }) => {

@@ -23,18 +23,18 @@ const Harrows_LendScreen = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch])
 
+    const harrowsList  = productLendMachines.filter(machine => machine.category === 'Harrows');
+
     const showMore = () => {
-        if (numberOfItems + 3 <= productLendMachines.length) {
+        if (numberOfItems + 3 <= harrowsList.length) {
             setNumberOfItems(numberOfItems + 3)
-            setShowAlert(false); 
         } else {
-            setNumberOfItems(productLendMachines.length)
-            setShowAlert(true); 
+            setNumberOfItems(harrowsList.length)
         }
     }
 
     // Filter machines whose names contain the word "Threshers"
-    const filteredHarrows  = productLendMachines.filter(machine => machine.category === 'Harrows');
+
     // const thresherss = productLendMachines.filter(machine => machine.category === 'Thresher');
     return (
 
@@ -51,7 +51,7 @@ const Harrows_LendScreen = () => {
                             : (
                                 <Row>
                                     {
-                                        filteredHarrows 
+                                        harrowsList
                                             .slice(0, numberOfItems)
                                             .map(machine => (
                                                 <LendMachines
@@ -64,11 +64,21 @@ const Harrows_LendScreen = () => {
                                                 />
                                             ))
                                     }
-                                     {
-                                        showAlert && numberOfItems >= productLendMachines.length && // Display alert conditionally
-                                            <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
-                                    }
-                                    <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>Show more</Button>
+                                     {numberOfItems >= harrowsList.length ? (
+                                    <Alert
+                                        style={{ backgroundColor: "red" }}
+                                        className="col-md-12 text-center">
+                                        No more results!
+                                    </Alert>
+                                    ) : (
+
+                                    <Button
+                                    className="col-md-12 text-center"
+                                    variant="success outline-dark"
+                                    onClick={showMore}>
+                                    show more
+                                    </Button>
+                                    )}
                                 </Row>
                             )
                 }

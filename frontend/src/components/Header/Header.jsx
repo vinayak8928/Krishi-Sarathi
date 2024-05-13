@@ -7,6 +7,7 @@ import { Nav, Navbar, NavDropdown, Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import "./Header.css";
 import { logout } from "./../../actions/userActions";
+import { removeAllFromCart } from "../../actions/cartActions";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -35,9 +36,15 @@ const Header = () => {
     }
   };
 
+  // const logoutHandler = () => {
+  //   dispatch(logout());
+  // };
   const logoutHandler = () => {
-    dispatch(logout());
-  };
+    dispatch((dispatch, getState) => {
+        dispatch(logout());
+        dispatch(removeAllFromCart());
+    });
+};
 
   const handleSearchDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -109,6 +116,9 @@ const Header = () => {
             </LinkContainer>
             <LinkContainer to="/sprayers">
               <NavDropdown.Item>SPRAYERS</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/others">
+              <NavDropdown.Item>OTHERS</NavDropdown.Item>
             </LinkContainer>
           </NavDropdown>
         </Nav>

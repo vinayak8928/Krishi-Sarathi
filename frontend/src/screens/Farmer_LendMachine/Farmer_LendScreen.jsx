@@ -68,14 +68,14 @@ const Farmer_LendScreen = () => {
                 No more results!
               </Alert>
             ) : (
-              ""
-            )}
+
             <Button
               className="col-md-12 text-center"
               variant="success outline-dark"
               onClick={showMore}>
               show more
             </Button>
+            )}
           </Row>
         )}
       </Container>

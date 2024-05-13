@@ -23,19 +23,18 @@ const Balers_LendScreen = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch])
 
+    const balersList = productLendMachines.filter(machine => machine.category === 'Balers');
+
     const showMore = () => {
-        if (numberOfItems + 3 <= productLendMachines.length) {
+        if (numberOfItems + 3 <= balersList.length) {
             setNumberOfItems(numberOfItems + 3)
-            setShowAlert(false); 
         } else {
-            setNumberOfItems(productLendMachines.length)
-            setShowAlert(true); 
+            setNumberOfItems(balersList.length)
         }
     }
 
     // Filter machines whose names contain the word "Threshers"
-    // const filteredBalers = productLendMachines.filter(machine => machine.category.toLowerCase().includes('balers'));
-     const filteredBalers = productLendMachines.filter(machine => machine.category === 'Balers');
+    // const balersList = productLendMachines.filter(machine => machine.category.toLowerCase().includes('balers'));
     return (
 
         <div className="MachineLendScreen">
@@ -51,7 +50,7 @@ const Balers_LendScreen = () => {
                             : (
                                 <Row>
                                     {
-                                        filteredBalers
+                                        balersList
                                             .slice(0, numberOfItems)
                                             .map(machine => (
                                                 <LendMachines
@@ -64,11 +63,21 @@ const Balers_LendScreen = () => {
                                                 />
                                             ))
                                     }
-                                     {
-                                        showAlert && numberOfItems >= productLendMachines.length && // Display alert conditionally
-                                            <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
-                                    }
-                                    <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>Show more</Button>
+                                     {numberOfItems >= balersList.length ? (
+                                    <Alert
+                                        style={{ backgroundColor: "red" }}
+                                        className="col-md-12 text-center">
+                                        No more results!
+                                    </Alert>
+                                    ) : (
+
+                                    <Button
+                                    className="col-md-12 text-center"
+                                    variant="success outline-dark"
+                                    onClick={showMore}>
+                                    show more
+                                    </Button>
+                                    )}
                                 </Row>
                             )
                 }

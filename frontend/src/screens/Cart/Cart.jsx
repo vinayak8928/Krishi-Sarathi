@@ -511,23 +511,31 @@ const Cart = ({ match, location }) => {
           <Row>
             <h1>Shopping Cart</h1>
           </Row>
-          {!userInfo && (
-            <Row>
-              <div className="note-text">
-                <h6>NOTE:</h6>
-                <p>
-                  Hey, Guest User! Please log in to proceed after adding items
-                  to your cart.
-                </p>
-              </div>
-            </Row>
-          )}
+          {userInfo ? (
+  <Row>
+    <div className="note-text">
+    <h6>IMPORTANT:</h6>
+      <p>Hey, User! Please be aware that your cart will be emptied upon logout.</p>
+    </div>
+  </Row>
+) : (
+  <Row>
+    <div className="note-text">
+      <h6>NOTE:</h6>
+      <p>
+        Hey, Guest User! Please log in to proceed after adding items
+        to your cart.
+      </p>
+    </div>
+  </Row>
+)}
 
           {cartItems.length === 0 ? (
             <Message variant="danger">
               Your cart is empty <Link to="/">GO BACK</Link>
             </Message>
           ) : (
+            
             <ListGroup variant="flush">
               {cartItems.map((item) => (
                 <ListGroup.Item key={item.seed} style={{ marginTop: "10px" }}>

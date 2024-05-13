@@ -22,20 +22,18 @@ const Mowers_LendScreen = () => {
         dispatch(listLendMachineProducts())
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch])
-
+    const mowersList = productLendMachines.filter(machine => machine.category === 'Mowers');
     const showMore = () => {
-        if (numberOfItems + 3 <= productLendMachines.length) {
+        if (numberOfItems + 3 <= mowersList.length) {
             setNumberOfItems(numberOfItems + 3)
-            setShowAlert(false); 
         } else {
-            setNumberOfItems(productLendMachines.length)
-            setShowAlert(true); 
+            setNumberOfItems(mowersList.length)
         }
     }
 
     // Filter machines whose names contain the word "Threshers"
-    // const filteredMowers = productLendMachines.filter(machine => machine.category.toLowerCase().includes('mowers'));
-     const filteredMowers = productLendMachines.filter(machine => machine.category === 'Mowers');
+    // const mowersList = productLendMachines.filter(machine => machine.category.toLowerCase().includes('mowers'));
+
     return (
 
         <div className="MachineLendScreen">
@@ -51,7 +49,7 @@ const Mowers_LendScreen = () => {
                             : (
                                 <Row>
                                     {
-                                        filteredMowers
+                                        mowersList
                                             .slice(0, numberOfItems)
                                             .map(machine => (
                                                 <LendMachines
@@ -64,11 +62,21 @@ const Mowers_LendScreen = () => {
                                                 />
                                             ))
                                     }
-                                     {
-                                        showAlert && numberOfItems >= productLendMachines.length && // Display alert conditionally
-                                            <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
-                                    }
-                                    <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>Show more</Button>
+                                     {numberOfItems >= mowersList.length ? (
+                                    <Alert
+                                        style={{ backgroundColor: "red" }}
+                                        className="col-md-12 text-center">
+                                        No more results!
+                                    </Alert>
+                                    ) : (
+
+                                    <Button
+                                    className="col-md-12 text-center"
+                                    variant="success outline-dark"
+                                    onClick={showMore}>
+                                    show more
+                                    </Button>
+                                    )}
                                 </Row>
                             )
                 }

@@ -23,18 +23,16 @@ const Tillages_LendScreen = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch])
 
+    const tillagesList = productLendMachines.filter(machine => machine.category.toLowerCase().includes('tillages'));
     const showMore = () => {
-        if (numberOfItems + 3 <= productLendMachines.length) {
+        if (numberOfItems + 3 <= tillagesList.length) {
             setNumberOfItems(numberOfItems + 3)
-            setShowAlert(false); 
         } else {
-            setNumberOfItems(productLendMachines.length)
-            setShowAlert(true); 
+            setNumberOfItems(tillagesList.length)
         }
     }
 
     // Filter machines whose names contain the word "Threshers"
-    const filteredTillages = productLendMachines.filter(machine => machine.category.toLowerCase().includes('tillages'));
     // const thresherss = productLendMachines.filter(machine => machine.category === 'Thresher');
     return (
 
@@ -51,7 +49,7 @@ const Tillages_LendScreen = () => {
                             : (
                                 <Row>
                                     {
-                                        filteredTillages
+                                        tillagesList
                                             .slice(0, numberOfItems)
                                             .map(machine => (
                                                 <LendMachines
@@ -64,11 +62,21 @@ const Tillages_LendScreen = () => {
                                                 />
                                             ))
                                     }
-                                     {
-                                        showAlert && numberOfItems >= productLendMachines.length && // Display alert conditionally
-                                            <Alert style={{ backgroundColor: 'red' }} className="col-md-12 text-center">No more results!</Alert>
-                                    }
-                                    <Button className="col-md-12 text-center" variant="success outline-dark" onClick={showMore}>Show more</Button>
+                                    {numberOfItems >= tillagesList.length ? (
+                                    <Alert
+                                        style={{ backgroundColor: "red" }}
+                                        className="col-md-12 text-center">
+                                        No more results!
+                                    </Alert>
+                                    ) : (
+
+                                    <Button
+                                    className="col-md-12 text-center"
+                                    variant="success outline-dark"
+                                    onClick={showMore}>
+                                    show more
+                                    </Button>
+                                    )}
                                 </Row>
                             )
                 }
