@@ -104,12 +104,37 @@ const PlaceOrder = ({}) => {
           <Col md={8}>
             <ListGroup variant="flush" className="mb-3">
               <ListGroup.Item>
-                <h1>Shipping</h1>
+                <h2>Shipping</h2>
                 <p>
                   <strong>Address : </strong>
                   {cart.shippingAddress.address}, {cart.shippingAddress.city}{" "}
                   {cart.shippingAddress.postalCode},{" "}
                   {cart.shippingAddress.country}
+                </p>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <h2>Slot Booked</h2>
+                <p>
+                  <strong>Start Date & Time : </strong>
+                  {new Date(cart.shippingAddress.slotBooking.startDateTime).toLocaleString('en-GB', {
+                      day: '2-digit',
+                      month: 'short',
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: true
+                    })}
+                </p>
+                <p>
+                  <strong>End Date & Time : </strong>
+                  {new Date(cart.shippingAddress.slotBooking.endDateTime).toLocaleString('en-GB', {
+                      day: '2-digit',
+                      month: 'short',
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: true
+                    })}
                 </p>
               </ListGroup.Item>
 

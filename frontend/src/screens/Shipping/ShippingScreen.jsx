@@ -8,6 +8,11 @@ import Meta from "../../components/Helmet/Meta";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { setAmt } from "./../../actions/cartActions";
+import { DateRange } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 // import {AddressValidator} from "react-address-validator";
 
 let val_amt;
@@ -32,6 +37,13 @@ const ShippingScreen = ({}) => {
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
   const [country, setCountry] = useState(shippingAddress.country);
   const [error, setError] = useState("");
+  const [dateRange, setDateRange] = useState({
+    startDate: null,
+    endDate: null,
+});
+const [startDate, setStartDate] = useState(new Date());
+const [endDate, setEndDate] = useState(new Date());
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setAmt( val_amt));
@@ -52,7 +64,10 @@ const ShippingScreen = ({}) => {
     // Clear error message
     setError("");
     // Save shipping address and navigate to payment screen
-    dispatch(saveShippingAddress({ address, city, postalCode, country }));
+    dispatch(saveShippingAddress({ address, city, postalCode, country, slotBooking: {
+      startDateTime: startDate,
+      endDateTime: endDate,
+  },}));
     // history.push("/payment");
     history.push({
         pathname: '/payment',
@@ -110,8 +125,7 @@ const ShippingScreen = ({}) => {
               onChange={(e) => setPostalCode(e.target.value)}></Form.Control>
                {error && <Alert variant="danger">{error}</Alert>}
           </Form.Group>
-
-          <Form.Group controlId="country">
+          <Form.Group controlId="Slot Booking">
             <Form.Label>
               Country <span style={{ color: "red" }}>*</span>
             </Form.Label>
@@ -122,6 +136,25 @@ const ShippingScreen = ({}) => {
               required
               onChange={(e) => setCountry(e.target.value)}></Form.Control>
           </Form.Group>
+          
+          <Form.Group controlId="Slot Booking">
+            <Form.Label>
+              Slot Booking <span style={{ color: "red" }}>*</span>
+            </Form.Label>
+            <div>
+                        <label>Start Date and Time  :   </label>
+                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} showTimeSelect dateFormat="Pp" />
+                    </div>
+                    <div>
+                        <label>End Date and Time  :   </label>
+                        <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} showTimeSelect dateFormat="Pp" />
+                    </div>
+                    <br />
+          </Form.Group>
+          {/* <p>seed id : {cart.orderItems }</p>
+          <p>Selected Start Date & Time :{cart.shippingAddress.slotBooking.startDateTime.toLocaleString()}</p>
+          <p>Selected End Date & Time :{cart.shippingAddress.slotBooking.startDateTime.toLocaleString()}</p> */}
+          
           <Button type="submit">Continue</Button>
         </Form>
       </FormContainer>
