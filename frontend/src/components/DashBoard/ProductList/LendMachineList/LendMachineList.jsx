@@ -103,9 +103,8 @@ const SeedList = () => {
                                         <tr key={machine._id}>
                                             <td>{machine._id}</td>
                                             <td>{machine.name}</td>
-                                            <td>{categoryMap[machine.category]}</td>
+                                            <td>{machine.category}</td> 
                                             <td>{machine.machine_power}</td>
-                                            
                                             <td>
                                                 <LinkContainer to={`/admin/productlist/machine/${machine._id}/edit`}>
                                                     <Button variant="light" className="btn btn-sm">

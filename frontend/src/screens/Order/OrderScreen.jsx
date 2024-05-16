@@ -24,7 +24,12 @@ import {
   ORDER_DELIVER_RESET,
 } from "./../../constants/orderConstant";
 import Meta from "../../components/Helmet/Meta";
+import { useLocation } from "react-router-dom";
 
+
+let val;
+let val_duration;
+let val_inp;
 const OrderScreen = ({ match }) => {
   const orderId = match.params.id;
 
