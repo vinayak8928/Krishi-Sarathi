@@ -7,6 +7,7 @@ import {
   ListGroup,
   Image,
   Card,
+  Form,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import CheckoutSteps from "./../../components/CheckoutSteps/CheckoutSteps";
@@ -16,7 +17,8 @@ import Meta from "../Helmet/Meta";
 import { setAmt } from "./../../actions/cartActions";
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 let val;
 let val_duration;
 let val_inp;
@@ -35,21 +37,22 @@ const PlaceOrder = ({}) => {
   }, [dispatch, val]);
 
   const cart = useSelector((state) => state.cartSeed);
-  // const { cartItems, shippingAddress, paymentMethod } = cart;
-  // const {
-  //   cartItems,
-  //   shippingAddress,
-  //   paymentMethod,
-  //   durationOptions,
-  //   durationInputs,
-  // } = cart;
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
-  // const orderItems = cartItems.map((item) => ({
-  //   ...item,
-  //   duration: "hours", // Set default duration or fetch it from somewhere
-  // }));
-  // const subtotal = calculateSubtotal(cartItems, durationOptions, durationInputs);
-
+  const handleSelectDate = () => {
+    // Navigate to the Duration page with selected date and item details
+    history.push({
+      pathname: "/duration",
+      state: {
+        selectedDate: selectedDate,
+        cartItems: cart.cartItems,
+        val_inp: val_inp,
+        val_duration: val_duration,
+      },
+    });
+  };
   // Calculate Price
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2);
@@ -89,7 +92,55 @@ const PlaceOrder = ({}) => {
       })
     );
   };
+  // Function to validate the selected date and time based on user input
+  const validateSelectedDate = (item, index) => {
+    let durationInMillis = 0;
+    if (val_duration[item.seed] === "hours") {
+      durationInMillis = val_inp[item.seed] * 60 * 60 * 1000;
+    } else if (val_duration[item.seed] === "days") {
+      durationInMillis = val_inp[item.seed] * 24 * 60 * 60 * 1000;
+    } else if (val_duration[item.seed] === "weeks") {
+      durationInMillis = val_inp[item.seed] * 7 * 24 * 60 * 60 * 1000;
+    }
 
+    const selectedDuration =
+      dates[index].endDate.getTime() - dates[index].startDate.getTime();
+    const durationDifference = Math.abs(selectedDuration - durationInMillis);
+    const tolerance = 1000; // Adjust tolerance as needed
+    // console.log("dif is",dates[index].startDate.getTime());
+    return durationDifference <= tolerance;
+  };
+  const handleDateChange = (date, index, type) => {
+    const newDates = [...dates];
+    const newDate =
+      type === "start"
+        ? { ...newDates[index], startDate: date }
+        : { ...newDates[index], endDate: date };
+    newDates[index] = newDate;
+    setDates(newDates);
+
+    // Validate date and time when changing
+    const isValid = validateSelectedDate(cart.cartItems[index], index);
+    const newDateErrors = [...dateErrors];
+    newDateErrors[index] = !isValid;
+    setDateErrors(newDateErrors);
+  };
+  // useEffect(() => {
+  //   // Initialize dates array
+  //   const initialDates = cart.cartItems.map(() => ({
+  //     startDate: new Date(),
+  //     endDate: new Date()
+  //   }));
+  //   setDates(initialDates);
+  // }, [cart.cartItems]);
+  const initialDates = cart.cartItems.map(() => ({
+    startDate: new Date(),
+    endDate: new Date(),
+  }));
+  const [dates, setDates] = useState(initialDates);
+  const [dateErrors, setDateErrors] = useState(
+    Array(cart.cartItems.length).fill(false)
+  );
   return (
     <div style={{ marginTop: "100px" }}>
       <Container>
@@ -112,7 +163,7 @@ const PlaceOrder = ({}) => {
                   {cart.shippingAddress.country}
                 </p>
               </ListGroup.Item>
-              <ListGroup.Item>
+              {/* <ListGroup.Item>
                 <h2>Slot Booked</h2>
                 <p>
                   <strong>Start Date & Time : </strong>
@@ -136,8 +187,11 @@ const PlaceOrder = ({}) => {
                       hour12: true
                     })}
                 </p>
+              </ListGroup.Item> */}
+              <ListGroup.Item>
+                {/* Button to select date and time */}
+                <Button onClick={handleSelectDate}>Select Date and Time</Button>
               </ListGroup.Item>
-
               <ListGroup.Item>
                 <h2>Payment Method</h2>
                 <p>
@@ -187,7 +241,9 @@ const PlaceOrder = ({}) => {
                           <Col>{item.name}</Col>
                           <Col md={2}>{item.qty}</Col>
                           <Col md={2}>RS. {item.price}</Col>
-                          <Col md={2}>{val_inp[item.seed]} {val_duration[item.seed]}</Col>
+                          <Col md={2}>
+                            {val_inp[item.seed]} {val_duration[item.seed]}
+                          </Col>
                           <Col md={3}>
                             {val_duration[item.seed] === "hours"
                               ? `RS. ${
@@ -208,6 +264,41 @@ const PlaceOrder = ({}) => {
                                   10
                                 }`
                               : ""}
+                          </Col>
+                          
+                          <Col md={6}>
+                            <Form.Group controlId={`slotBooking_${index}`}>
+                              <Form.Label><strong>Slot Booking</strong></Form.Label>
+                              <div>
+                                <label>Start Date and Time: </label>
+                                <DatePicker
+                                  selected={dates[index].startDate}
+                                  onChange={(date) =>
+                                    handleDateChange(date, index, "start")
+                                  }
+                                  showTimeSelect
+                                  dateFormat="Pp"
+                                />
+                              </div>
+                              <div>
+                                <label>End Date and Time: </label>
+                                <DatePicker
+                                  selected={dates[index].endDate}
+                                  onChange={(date) =>
+                                    handleDateChange(date, index, "end")
+                                  }
+                                  showTimeSelect
+                                  dateFormat="Pp"
+                                />
+                              </div>
+                              {/* Display validation message */}
+                              {dateErrors[index] && (
+                                <span style={{ color: "red" }}>
+                                  Please select the correct duration
+                                </span>
+                              )}
+                              <br />
+                            </Form.Group>
                           </Col>
                         </Row>
                       </ListGroup.Item>

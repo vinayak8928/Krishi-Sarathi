@@ -137,7 +137,7 @@ const [endDate, setEndDate] = useState(new Date());
               onChange={(e) => setCountry(e.target.value)}></Form.Control>
           </Form.Group>
           
-          <Form.Group controlId="Slot Booking">
+          {/* <Form.Group controlId="Slot Booking">
             <Form.Label>
               Slot Booking <span style={{ color: "red" }}>*</span>
             </Form.Label>
@@ -150,7 +150,7 @@ const [endDate, setEndDate] = useState(new Date());
                         <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} showTimeSelect dateFormat="Pp" />
                     </div>
                     <br />
-          </Form.Group>
+          </Form.Group> */}
           {/* <p>seed id : {cart.orderItems }</p>
           <p>Selected Start Date & Time :{cart.shippingAddress.slotBooking.startDateTime.toLocaleString()}</p>
           <p>Selected End Date & Time :{cart.shippingAddress.slotBooking.startDateTime.toLocaleString()}</p> */}
