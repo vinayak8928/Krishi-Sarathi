@@ -24,6 +24,10 @@ const orderSeedSchema = mongoose.Schema({
         city: { type: String, required: true },
         postalCode: { type: String, required: true },
         country: { type: String, required: true },
+        slotBooking:{
+            startDateTime: { type: Date,required: true },
+            endDateTime: { type: Date,required: true },
+        },
     },
     paymentMethod: {
         type: String,
@@ -65,7 +69,15 @@ const orderSeedSchema = mongoose.Schema({
     },
     deliveredAt: {
         type: Date,
-    }
+    },
+    isReturned: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    returnedAt: {
+        type: Date,
+    },
 }, {
     timestamps: true
 })

@@ -18,10 +18,12 @@ import {
   getOrderDetails,
   payOrder,
   deliverOrder,
+  returnOrder,
 } from "./../../actions/orderAction";
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
+  ORDER_RETURN_RESET,
 } from "./../../constants/orderConstant";
 import Meta from "../../components/Helmet/Meta";
 import { useLocation } from "react-router-dom";
@@ -50,6 +52,9 @@ const OrderScreen = ({ match }) => {
   const orderDeliver = useSelector((state) => state.orderDeliver);
   const { success: successDeliver, loading: loadingDeliver } = orderDeliver;
 
+  const orderReturn = useSelector((state) => state.orderReturn);
+  const { success: successReturn, loading: loadingReturn } = orderReturn;
+
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
@@ -68,9 +73,10 @@ const OrderScreen = ({ match }) => {
       document.body.appendChild(script);
     };
 
-    if (!order || successPay || successDeliver) {
+    if (!order || successPay || successDeliver || successReturn) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
+      dispatch({ type: ORDER_RETURN_RESET });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -79,7 +85,7 @@ const OrderScreen = ({ match }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, orderId, successPay, order, successDeliver, history, userInfo]);
+  }, [dispatch, orderId, successPay, order, successDeliver, successReturn, history, userInfo]);
 
   const onSuccessPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
@@ -87,6 +93,10 @@ const OrderScreen = ({ match }) => {
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
+  };
+
+  const returnHandler = () => {
+    dispatch(returnOrder(order));
   };
   // const itemsPrice = order.totalPrice - (order.taxPrice + order.shippingPrice)
 
@@ -122,6 +132,29 @@ const OrderScreen = ({ match }) => {
                     {order.shippingAddress.postalCode},{" "}
                     {order.shippingAddress.country}
                   </p>
+                  <p>
+                    <strong>Slot Booking Start Date & Time : </strong>
+                    {new Date(order.shippingAddress.slotBooking.startDateTime).toLocaleString('en-GB', {
+                      day: '2-digit',
+                      month: 'short',
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: true
+                    })}
+                  </p>
+                  <p>
+                    <strong>Slot Booking Start Date & Time : </strong>
+                    {new Date(order.shippingAddress.slotBooking.endDateTime).toLocaleString('en-GB', {
+                      day: '2-digit',
+                      month: 'short',
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: true
+                    })}
+                  </p>
+                  
                   {order.isDelivered ? (
                     <Message variant="success">
                       Delivered on {order.deliveredAt}
@@ -129,12 +162,20 @@ const OrderScreen = ({ match }) => {
                   ) : (
                     <Message variant="danger">Not Delivered</Message>
                   )}
+                  {order.isReturned ? (
+                    <Message variant="success">
+                      Returned on {order.returnedAt}
+                    </Message>
+                  ) : (
+                    <Message variant="danger">Not Returned</Message>
+                  )}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <h2>Payment Method</h2>
                   <p>
                     <strong>Method : </strong>
                     {order.paymentMethod}
+                    
                   </p>
                   {order.isPaid ? (
                     <Message variant="success">Paid on {order.paidAt}</Message>
@@ -237,6 +278,21 @@ const OrderScreen = ({ match }) => {
                           onClick={deliverHandler}>
                           {" "}
                           Mark as delivered{" "}
+                        </Button>
+                      </ListGroup.Item>
+                    )}
+                  {loadingReturn && <Loader />}
+                  {userInfo && userInfo.isAdmin &&
+                    order.isPaid &&
+                    order.isDelivered &&
+                    !order.isReturned && (
+                      <ListGroup.Item>
+                        <Button
+                          type="button"
+                          className="btn btn-block"
+                          onClick={returnHandler}>
+                          {" "}
+                          Mark as Returned{" "}
                         </Button>
                       </ListGroup.Item>
                     )}

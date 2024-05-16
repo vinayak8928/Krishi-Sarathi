@@ -14,7 +14,8 @@ const addOrderItems = asyncHandler(async (req, res) => {
         itemsPrice,
         taxPrice,
         shippingPrice,
-        totalPrice,
+        totalPrice,startDateTime,
+        endDateTime,
     } = req.body
 
     if (orderItems && orderItems.length === 0) {
@@ -30,6 +31,8 @@ const addOrderItems = asyncHandler(async (req, res) => {
             taxPrice,
             shippingPrice,
             totalPrice,
+            startDateTime,
+            endDateTime,
         })
 
         const createdOrder = await order.save()
@@ -96,6 +99,25 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
     }
 })
 
+// @desc    Update order to returned
+// @rout    PUT /api/orders/:id/return
+// @access  private/Admin
+const updateOrderToReturned = asyncHandler(async (req, res) => {
+    const order = await orderSeed.findById(req.params.id)
+
+    if (order) {
+        order.isReturned = true
+        order.returnedAt = Date.now()
+
+        const updatedOrder = await order.save()
+
+        res.json(updatedOrder)
+    } else {
+        res.status(404)
+        throw new Error('Order not Found')
+    }
+})
+
 // @desc    Get logged in user orders
 // @route   GET /api/orders/myorders
 // @access  Private
@@ -118,5 +140,6 @@ export {
     updateOrderToPaid,
     getMyOrders,
     getOrders,
-    updateOrderToDelivered
+    updateOrderToDelivered,
+    updateOrderToReturned
 }

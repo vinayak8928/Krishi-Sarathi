@@ -173,6 +173,9 @@ import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
 import Meta from "../../components/Helmet/Meta";
 import Rating from "../../components/Rating/Rating";
+import Datetime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
+
 // import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 // import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 // import { IoChevronBackSharp, IoChevronForwardSharp } from 'react-icons/io5';
@@ -189,6 +192,7 @@ const LendMachineProduct = ({ history, match }) => {
   const [uploading, setUploading] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+
 
   const productId = match.params.id;
   const categoryMapping = {
@@ -408,6 +412,7 @@ const LendMachineProduct = ({ history, match }) => {
                     <br /> {productLendMachines.description}
                   </p>
                 </ListGroup.Item>
+
               </ListGroup>
             </Col>
             <Col md={3} className="side">
@@ -453,7 +458,7 @@ const LendMachineProduct = ({ history, match }) => {
                         </Col>
                       </Row>
                     </ListGroup.Item>
-                  )}
+                  )}              
                   {/* <ListGroup.Item>
                     <Row>
                       <Col>Duration:</Col>
@@ -499,7 +504,7 @@ const LendMachineProduct = ({ history, match }) => {
                       </Col>
                     </Row>
                   </ListGroup.Item> */}
-
+                  {userInfo && userInfo._id !== productLendMachines.user && (
                   <ListGroup.Item>
                     <Button
                       type="button"
@@ -508,6 +513,7 @@ const LendMachineProduct = ({ history, match }) => {
                       Add To Cart
                     </Button>
                   </ListGroup.Item>
+                  )}
 
                   {/* <ListGroup.Item>
                       {userInfo && userInfo._id === productLendMachines.user && (
