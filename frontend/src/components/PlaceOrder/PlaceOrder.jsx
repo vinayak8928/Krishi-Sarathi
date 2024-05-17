@@ -509,7 +509,7 @@ const PlaceOrder = () => {
                   {cart.shippingAddress.country}
                 </p>
               </ListGroup.Item>
-              {bookingData.map((item, index) => (
+              {/* {bookingData.map((item, index) => (
   <ListGroup.Item key={index}>
     <h2>Slot Booked</h2>
     
@@ -540,7 +540,7 @@ const PlaceOrder = () => {
     </>
   )}
   </ListGroup.Item>
-))}
+))} */}
 
               <ListGroup.Item>
                 <h2>Payment Method</h2>
@@ -582,35 +582,35 @@ const PlaceOrder = () => {
                           </Col>
                           <br />
                           <ListGroup.Item variant="flush" style={{ border: "none" }}>
-  <div style={{ marginBottom: "1rem" }}>
-    <strong>Slot Booking <span style={{ color: "red" }}>*</span></strong>
-  </div>
-  <div style={{ marginBottom: "0.5rem" }}>
-    <label style={{ marginRight: "0.5rem" }}>Start Date and Time: </label>
-    <DatePicker
-      selected={bookingData[index].startDate}
-      onChange={(date) => handleDateChange(index, 'startDate', date)}
-      showTimeSelect
-      dateFormat="Pp"
-      className="custom-date-picker"
-    />
-  </div>
-  <div style={{ marginBottom: "0.5rem" }}>
-    <label style={{ marginRight: "0.5rem" }}>End Date and Time: </label>
-    <DatePicker
-      selected={bookingData[index].endDate}
-      onChange={(date) => handleDateChange(index, 'endDate', date)}
-      showTimeSelect
-      dateFormat="Pp"
-      onBlur={() => validateSlot(index)}
-      className="custom-date-picker"
-    />
-  </div>
-  {bookingData[index].durationError && (
-    <Alert variant="danger">
-      {bookingData[index].durationError}
-    </Alert>
-  )}
+                            <div style={{ marginBottom: "1rem" }}>
+                              <strong>Slot Booking <span style={{ color: "red" }}>*</span></strong>
+                            </div>
+                            <div style={{ marginBottom: "0.5rem" }}>
+                              <label style={{ marginRight: "0.5rem" }}>Start Date and Time: </label>
+                              <DatePicker
+                                selected={bookingData[index].startDate}
+                                onChange={(date) => handleDateChange(index, 'startDate', date)}
+                                showTimeSelect
+                                dateFormat="Pp"
+                                className="custom-date-picker"
+                              />
+                            </div>
+                            <div style={{ marginBottom: "0.5rem" }}>
+                              <label style={{ marginRight: "0.5rem" }}>End Date and Time: </label>
+                              <DatePicker
+                                selected={bookingData[index].endDate}
+                                onChange={(date) => handleDateChange(index, 'endDate', date)}
+                                showTimeSelect
+                                dateFormat="Pp"
+                                onBlur={() => validateSlot(index)}
+                                className="custom-date-picker"
+                              />
+                            </div>
+                            {bookingData[index].durationError && (
+                              <Alert variant="danger">
+                                {bookingData[index].durationError}
+                              </Alert>
+                            )}
                             {/* <Button
                               type="button"
                               className="btn-block mt-3"
