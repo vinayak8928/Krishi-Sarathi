@@ -411,7 +411,20 @@ const Cart = ({ match, location }) => {
     const enteredDurations = {};
     for (const itemSeed in durationOptions) {
       enteredDurations[itemSeed] = durationInput[itemSeed] || "1";
+      const duration=enteredDurations[itemSeed];
     }
+
+    cartItems.forEach((item) => {
+      console.log("Duration:",enteredDurations[item.seed])
+      console.log("durationInput:",durationInput[item.seed])
+      console.log("durationOptions:",durationOptions[item.seed])
+      dispatch(addToCart(item.seed, item.qty, {
+        amount: durationInput[item.seed] || 1,
+        unit: durationOptions[item.seed] || "hours",
+        })
+      );
+    });
+
 
     history.push({
       pathname: "/shipping",

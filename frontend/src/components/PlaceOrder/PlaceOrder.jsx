@@ -374,24 +374,20 @@ import CheckoutSteps from "./../../components/CheckoutSteps/CheckoutSteps";
 import Message from "../../components/Message/Message";
 import { createOrder } from "./../../actions/orderAction";
 import Meta from "../Helmet/Meta";
-import { setAmt } from "./../../actions/cartActions";
+import { saveShippingAddress, setAmt } from "./../../actions/cartActions";
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import './PlaceOrder.css'
 
-let val;
-let val_duration;
-const PlaceOrder = ({}) => {
+const PlaceOrder = () => {
   const history = useHistory();
   const location = useLocation();
   const data = location.state;
   const [errors, setErrors] = useState("");
 
-  val = data && data.amt ? data.amt : 0; //item amt
-  val_duration = data && data.selectedDurations ? data.selectedDurations : 0;
-  const val_inpKey = data && data.enteredDurations ? Object.keys(data.enteredDurations)[0] : null;
-  const val_inp = val_inpKey ? data.enteredDurations[val_inpKey] : 0;
+  const val = data && data.amt ? data.amt : 0; // item amt
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -399,6 +395,7 @@ const PlaceOrder = ({}) => {
   }, [dispatch, val]);
 
   const cart = useSelector((state) => state.cartSeed);
+  const { cartItems } = cart;
 
   cart.itemsPrice = cart.cartItems
     .reduce((acc, item) => acc + item.qty * item.price, 0)
@@ -441,6 +438,10 @@ const PlaceOrder = ({}) => {
   const validateDuration = (startDate, endDate, duration, durationUnit) => {
     const diffInMs = endDate - startDate;
     const diffInHours = diffInMs / (1000 * 60 * 60);
+    //     console.log("inp time :",duration);
+    // console.log("diffInms:",diffInMs);
+    // console.log("diffInHours :",diffInHours);
+    // console.log("val_duration :",durationUnit);
 
     if (durationUnit === "hours" && diffInHours !== parseInt(duration)) {
       return `Please select an end date and time that is exactly ${duration} hour(s) from the start date and time.`;
@@ -455,7 +456,12 @@ const PlaceOrder = ({}) => {
   const validateSlot = (index) => {
     const item = cart.cartItems[index];
     const { startDate, endDate } = bookingData[index];
-    const durationError = validateDuration(startDate, endDate, val_inp, val_duration);
+    const durationError = validateDuration(
+      startDate,
+      endDate,
+      item.duration.amount,
+      item.duration.unit
+    );
 
     const updatedBookingData = [...bookingData];
     updatedBookingData[index].durationError = durationError;
@@ -503,31 +509,38 @@ const PlaceOrder = ({}) => {
                   {cart.shippingAddress.country}
                 </p>
               </ListGroup.Item>
-              <ListGroup.Item>
-                <h2>Slot Booked</h2>
-                <p>
-                  <strong>Start Date & Time : </strong>
-                  {new Date(cart.shippingAddress.slotBooking.startDateTime).toLocaleString('en-GB', {
-                      day: '2-digit',
-                      month: 'short',
-                      year: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      hour12: true
-                    })}
-                </p>
-                <p>
-                  <strong>End Date & Time : </strong>
-                  {new Date(cart.shippingAddress.slotBooking.endDateTime).toLocaleString('en-GB', {
-                      day: '2-digit',
-                      month: 'short',
-                      year: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      hour12: true
-                    })}
-                </p>
-              </ListGroup.Item>
+              {bookingData.map((item, index) => (
+  <ListGroup.Item key={index}>
+    <h2>Slot Booked</h2>
+    
+    {bookingData[index] && bookingData[index].startDate && bookingData[index].endDate && (
+    <>
+      <p>
+        <strong>Start Date & Time : </strong>
+        {bookingData[index].startDate.toLocaleString('en-GB', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
+        })}
+      </p>
+      <p>
+        <strong>End Date & Time : </strong>
+        {bookingData[index].endDate.toLocaleString('en-GB', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
+        })}
+      </p>
+    </>
+  )}
+  </ListGroup.Item>
+))}
 
               <ListGroup.Item>
                 <h2>Payment Method</h2>
@@ -546,26 +559,6 @@ const PlaceOrder = ({}) => {
                     {cart.cartItems.map((item, index) => (
                       <ListGroup.Item key={index}>
                         <Row>
-                          {/* Row headings */}
-                          <Col md={2}>
-                            <strong>Item Image</strong>
-                          </Col>
-                          <Col md={3}>
-                            <strong>Item Name</strong>
-                          </Col>
-                          <Col md={1}>
-                            <strong>Item Qty</strong>
-                          </Col>
-                          <Col md={2}>
-                            <strong>Price</strong>
-                          </Col>
-                          <Col md={2}>
-                            <strong>Duration</strong>
-                          </Col>
-                          <Col md={2}>
-                            <strong>Amount</strong>
-                          </Col>
-                          {/* Item details */}
                           <Col md={2}>
                             <Image
                               src={item.image}
@@ -574,62 +567,86 @@ const PlaceOrder = ({}) => {
                               rounded
                             />
                           </Col>
-
                           <Col md={3}>{item.name}</Col>
                           <Col md={1}>{item.qty}</Col>
                           <Col md={2}>RS. {item.price}</Col>
-                          <Col md={2}>{val_inp} {val_duration}</Col>
-                          {/* <Col md={2}>{bookingData[index].inputDuration} {bookingData[index].duration}</Col> */}
+                          <Col md={2}>{item.duration.amount} {item.duration.unit}</Col>
                           <Col md={2}>
-                            {val_duration === "hours"
-                              ? `RS. ${
-                                  item.qty * val_inp * item.price
-                                }`
-                              : val_duration === "weeks"
-                              ? `RS. ${
-                                  item.qty *
-                                  val_inp *
-                                  item.price *
-                                  60
-                                }`
-                              : val_duration === "days"
-                              ? `RS. ${
-                                  item.qty *
-                                  val_inp *
-                                  item.price *
-                                  10
-                                }`
+                            {item.duration.unit === "hours"
+                              ? `RS. ${item.qty * item.duration.amount * item.price}`
+                              : item.duration.unit === "weeks"
+                              ? `RS. ${item.qty * item.duration.amount * item.price * 60}`
+                              : item.duration.unit === "days"
+                              ? `RS. ${item.qty * item.duration.amount * item.price * 10}`
                               : ""}
                           </Col>
                           <br />
-                          <ListGroup.Item variant="flush">
-                          <Col>
-                              <strong>Slot Booking <span style={{ color: "red" }}>*</span></strong>
-                            </Col>
-                            <div>
-                              <label>Start Date and Time: </label>
-                              <DatePicker
-                                selected={bookingData[index].startDate}
-                                onChange={(date) => handleDateChange(index, 'startDate', date)}
-                                showTimeSelect
-                                dateFormat="Pp"
-                              />
-                            </div>
-                            <div>
-                              <label>End Date and Time: </label>
-                              <DatePicker
-                                selected={bookingData[index].endDate}
-                                onChange={(date) => handleDateChange(index, 'endDate', date)}
-                                showTimeSelect
-                                dateFormat="Pp"
-                                onBlur={() => validateSlot(index)}
-                              />
-                            </div>
-                            {bookingData[index].durationError && (
-                              <Alert variant="danger">
-                                {bookingData[index].durationError}
-                              </Alert>
-                            )}
+                          <ListGroup.Item variant="flush" style={{ border: "none" }}>
+  <div style={{ marginBottom: "1rem" }}>
+    <strong>Slot Booking <span style={{ color: "red" }}>*</span></strong>
+  </div>
+  <div style={{ marginBottom: "0.5rem" }}>
+    <label style={{ marginRight: "0.5rem" }}>Start Date and Time: </label>
+    <DatePicker
+      selected={bookingData[index].startDate}
+      onChange={(date) => handleDateChange(index, 'startDate', date)}
+      showTimeSelect
+      dateFormat="Pp"
+      className="custom-date-picker"
+    />
+  </div>
+  <div style={{ marginBottom: "0.5rem" }}>
+    <label style={{ marginRight: "0.5rem" }}>End Date and Time: </label>
+    <DatePicker
+      selected={bookingData[index].endDate}
+      onChange={(date) => handleDateChange(index, 'endDate', date)}
+      showTimeSelect
+      dateFormat="Pp"
+      onBlur={() => validateSlot(index)}
+      className="custom-date-picker"
+    />
+  </div>
+  {bookingData[index].durationError && (
+    <Alert variant="danger">
+      {bookingData[index].durationError}
+    </Alert>
+  )}
+                            {/* <Button
+                              type="button"
+                              className="btn-block mt-3"
+                              disabled={!bookingData[index].startDate || !bookingData[index].endDate || bookingData[index].durationError}
+                              onClick={() => {
+                                const updatedCartItems = cart.cartItems.map((item, index) => {
+                                  if (bookingData[index].startDate && bookingData[index].endDate) {
+                                    return {
+                                      ...item,
+                                      slotBooking: {
+                                        startDateTime: bookingData[index].startDate,
+                                        endDateTime: bookingData[index].endDate,
+                                      },
+                                    };
+                                  }
+                                  return item;
+                                });
+                            
+                                dispatch(
+                                  saveShippingAddress({
+                                    ...cart.shippingAddress,
+                                    slotBooking: updatedCartItems,
+                                  })
+                                );
+                            
+                                setBookingData(
+                                  cart.cartItems.map(() => ({
+                                    startDate: null,
+                                    endDate: null,
+                                    durationError: "",
+                                  }))
+                                );
+                              }}
+                            >
+                              Book Slot
+                            </Button> */}
                           </ListGroup.Item>
                         </Row>
                       </ListGroup.Item>
@@ -676,7 +693,7 @@ const PlaceOrder = ({}) => {
                   <Button
                     type="button"
                     className="btn-block"
-                    disabled={cart.cartItems === 0}
+                    disabled={cart.cartItems === 0 || errors}
                     onClick={placeOrder}
                   >
                     Place Order
