@@ -23,7 +23,7 @@ const PaymentScreen = ({}) => {
   val_duration = data && data.selectedDurations ? data.selectedDurations : 0;
   val_inp = data && data.enteredDurations ? data.enteredDurations : 0;
 
-  console.log("inp is", val_inp);
+  // console.log("inp is", val_inp);
   const cart = useSelector((state) => state.cartSeed);
   const { shippingAddress } = cart;
 

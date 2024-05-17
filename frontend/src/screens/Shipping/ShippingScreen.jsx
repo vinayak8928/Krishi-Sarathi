@@ -212,10 +212,10 @@ const ShippingScreen = () => {
   const validateDuration = () => {
     const diffInMs = endDate - startDate;
     const diffInHours = diffInMs / (1000 * 60 * 60);
-    console.log("inp time :",val_inp);
-    console.log("diffInms:",diffInMs);
-    console.log("diffInHours :",diffInHours);
-    console.log("val_duration :",val_duration);
+    // console.log("inp time :",val_inp);
+    // console.log("diffInms:",diffInMs);
+    // console.log("diffInHours :",diffInHours);
+    // console.log("val_duration :",val_duration);
 
     if (val_duration === "hours" && diffInHours !== parseInt(val_inp)) {
       return `Please select an end date and time that is exactly ${val_inp} hour(s) from the start date and time.`;
@@ -234,11 +234,11 @@ const ShippingScreen = () => {
       return;
     }
 
-    const durationError = validateDuration();
-    if (durationError) {
-      setError(durationError);
-      return;
-    }
+    // const durationError = validateDuration();
+    // if (durationError) {
+    //   setError(durationError);
+    //   return;
+    // }
 
     setError("");
     dispatch(
@@ -322,7 +322,7 @@ const ShippingScreen = () => {
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="slotBooking">
+          {/* <Form.Group controlId="slotBooking">
             <Form.Label>
               Slot Booking <span style={{ color: "red" }}>*</span>
             </Form.Label>
@@ -345,7 +345,7 @@ const ShippingScreen = () => {
               />
             </div>
             {error && <Alert variant="danger">{error}</Alert>}
-          </Form.Group>
+          </Form.Group> */}
 
           <Button type="submit">Continue</Button>
         </Form>
