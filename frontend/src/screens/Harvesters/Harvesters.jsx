@@ -43,7 +43,7 @@ const Harvesters_LendScreen = () => {
                 title="Harvesters"
             />
             <Container>
-                <h1 className="p-3" style={{ textAlign: 'center' }}>HARVESTERS</h1>
+                <h1 className="p-3" style={{ textAlign: 'center' }}>Harvesters</h1>
                 {
                     loading
                         ? <Loader />

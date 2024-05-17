@@ -33,9 +33,8 @@ const Harrows_LendScreen = () => {
         }
     }
 
-    // Filter machines whose names contain the word "Threshers"
 
-    // const thresherss = productLendMachines.filter(machine => machine.category === 'Thresher');
+ 
     return (
 
         <div className="MachineLendScreen">
@@ -43,7 +42,7 @@ const Harrows_LendScreen = () => {
                 title="Harrows"
             />
             <Container>
-                <h1 className="p-3" style={{ textAlign: 'center' }}>HARROWS</h1>
+                <h1 className="p-3" style={{ textAlign: 'center' }}>Harrows</h1>
                 {
                     loading
                         ? <Loader />
