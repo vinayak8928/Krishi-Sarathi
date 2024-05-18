@@ -215,7 +215,7 @@ import {
     SET_AMT
 } from './../constants/cartConstants'
 
-export const addToCart = (id, qty) => async (dispatch, getState) => {
+export const addToCart = (id, qty, duration) => async (dispatch, getState) => {
     try {
         const { data } = await axios.get(`/api/seeds/${id}`)
         dispatch({
@@ -227,6 +227,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
                 price: data.price,
                 countInStock: data.countInStock,
                 qty,
+                duration,
             }
         })
     } catch (error) {
@@ -241,6 +242,10 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
                     price: data.price,
                     countInStock: data.quantity,
                     qty,
+                    duration: {
+                        amount: duration.amount,
+                        unit: duration.unit
+                      },
                 }
             })
         } catch (error) { 
@@ -254,6 +259,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
                     price: data.price,
                     countInStock: data.quantity,
                     qty,
+                    duration,
                 }
             })
         }

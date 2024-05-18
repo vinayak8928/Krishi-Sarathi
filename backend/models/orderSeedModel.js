@@ -17,6 +17,10 @@ const orderSeedSchema = mongoose.Schema({
                 required: true,
                 ref: 'farmer_product_seeds',
              },
+            duration: {
+                amount: { type: Number, required: true },
+                unit: { type: String, enum: ['hours', 'days', 'weeks'], required: true },
+              }
         }
     ],
     shippingAddress: {
