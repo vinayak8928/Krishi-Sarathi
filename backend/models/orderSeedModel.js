@@ -20,7 +20,11 @@ const orderSeedSchema = mongoose.Schema({
             duration: {
                 amount: { type: Number, required: true },
                 unit: { type: String, enum: ['hours', 'days', 'weeks'], required: true },
-              }
+              },
+            slotBooking:{
+                startDateTime: { type: Date,required: true },
+                endDateTime: { type: Date,required: true },
+            },
         }
     ],
     shippingAddress: {
@@ -28,10 +32,10 @@ const orderSeedSchema = mongoose.Schema({
         city: { type: String, required: true },
         postalCode: { type: String, required: true },
         country: { type: String, required: true },
-        slotBooking:{
-            startDateTime: { type: Date,required: true },
-            endDateTime: { type: Date,required: true },
-        },
+        // slotBooking:{
+        //     startDateTime: { type: Date,required: true },
+        //     endDateTime: { type: Date,required: true },
+        // },
     },
     paymentMethod: {
         type: String,

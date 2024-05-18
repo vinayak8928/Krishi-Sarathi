@@ -31,8 +31,6 @@ const addOrderItems = asyncHandler(async (req, res) => {
             taxPrice,
             shippingPrice,
             totalPrice,
-            startDateTime,
-            endDateTime,
         })
 
         const createdOrder = await order.save()

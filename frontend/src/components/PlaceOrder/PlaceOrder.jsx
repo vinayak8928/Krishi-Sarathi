@@ -376,7 +376,7 @@ import { createOrder } from "./../../actions/orderAction";
 import Meta from "../Helmet/Meta";
 import { saveShippingAddress, setAmt } from "./../../actions/cartActions";
 import { useLocation } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import './PlaceOrder.css'
@@ -418,6 +418,8 @@ const PlaceOrder = () => {
     }
   }, [history, success]);
 
+  
+
   const [bookingData, setBookingData] = useState(
     cart.cartItems.map(() => ({
       startDate: new Date(),
@@ -434,6 +436,17 @@ const PlaceOrder = () => {
       validateSlot(index);
     }
   };
+
+    // Custom error message for slot booking validation errors
+    const customErrorMessage = "Please select correct duration for slot booking";
+  
+    // Check if the error contains specific validation messages related to slot booking
+    const isSlotBookingError = error && (
+      error.includes('orderItems.0.slotBooking.endDateTime') ||
+      error.includes('orderItems.0.slotBooking.startDateTime') ||
+      error.includes('orderItems.1.slotBooking.endDateTime') ||
+      error.includes('orderItems.1.slotBooking.startDateTime')
+    );
 
   const validateDuration = (startDate, endDate, duration, durationUnit) => {
     const diffInMs = endDate - startDate;
@@ -475,9 +488,25 @@ const PlaceOrder = () => {
   };
 
   const placeOrder = () => {
+    const orderItemsWithSlotBooking = cart.cartItems.map((item, index) => {
+      const booking = bookingData[index];
+      if (!booking) {
+        console.error(`No booking data found for index ${index}`);
+        return item;
+      }
+  
+      return {
+        ...item,
+        slotBooking: {
+          startDateTime: booking.startDate,
+          endDateTime: booking.endDate,
+        },
+      };
+    });
+
     dispatch(
       createOrder({
-        orderItems: cart.cartItems,
+        orderItems: orderItemsWithSlotBooking,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
         itemsPrice: val,
@@ -559,6 +588,25 @@ const PlaceOrder = () => {
                     {cart.cartItems.map((item, index) => (
                       <ListGroup.Item key={index}>
                         <Row>
+                           {/* Row headings */}
+                           <Col md={2}>
+                             <strong></strong>
+                           </Col>
+                           <Col md={3}>
+                             <strong> </strong>
+                           </Col>
+                           <Col md={1}>
+                             <strong>Qty</strong>
+                           </Col>
+                           <Col md={2}>
+                             <strong>Price</strong>
+                           </Col>
+                           <Col md={2}>
+                             <strong>Duration</strong>
+                           </Col>
+                           <Col md={2}>
+                            <strong>Amount</strong>
+                           </Col>
                           <Col md={2}>
                             <Image
                               src={item.image}
@@ -567,7 +615,11 @@ const PlaceOrder = () => {
                               rounded
                             />
                           </Col>
-                          <Col md={3}>{item.name}</Col>
+                          <Col md={3}>
+                            <Link to={`/farmers/lendMachines/${item.seed}`}>
+                                {item.name}
+                            </Link>
+                          </Col>
                           <Col md={1}>{item.qty}</Col>
                           <Col md={2}>RS. {item.price}</Col>
                           <Col md={2}>{item.duration.amount} {item.duration.unit}</Col>
@@ -687,13 +739,14 @@ const PlaceOrder = () => {
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  {error && <Message variant="danger">{error}</Message>}
+                {error && <Message variant="danger">{error}</Message>}
+                {errors && <Message variant="danger">{errors}</Message>}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Button
                     type="button"
                     className="btn-block"
-                    disabled={cart.cartItems === 0 || errors}
+                    disabled={cart.cartItems === 0 || error}
                     onClick={placeOrder}
                   >
                     Place Order
