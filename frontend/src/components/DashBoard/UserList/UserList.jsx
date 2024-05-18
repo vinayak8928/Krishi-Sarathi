@@ -51,8 +51,8 @@ const UserList = ({ history }) => {
                                     <tr>
                                         <td>ID</td>
                                         <td>NAME</td>
-                                        <td>CROP SELECTION</td>
-                                        <td>EMAIL / NIC</td>
+                                        <td>Mobile Number</td>
+                                        <td>EMAIL</td>
                                         <td>ADMIN</td>
                                         <td>EDIT / DELETE</td>
                                     </tr>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Alert} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../Message/Message";
 import Loader from "../Loader/Loader";
@@ -15,6 +15,7 @@ const Register = ({ location, history }) => {
   const [cropSelection, setCropSelection] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
+  const [mobileError, setMobileError] = useState("");
 
   const dispatch = useDispatch();
 
@@ -34,6 +35,8 @@ const Register = ({ location, history }) => {
       setMessage("Passwords do not match");
     } else if (!validateEmail(email)) {
       setMessage("Please enter a valid email address");
+    } else if (!validateMobile(cropSelection)) {
+      setMobileError("Please enter a valid Indian mobile number.");
     } else if (!validatePassword(password)) {
       setMessage(
         "Password must contain at least 8 characters, one capital letter, one number, and one special character"
@@ -53,6 +56,19 @@ const Register = ({ location, history }) => {
     const passwordPattern =
       /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/;
     return passwordPattern.test(password);
+  };
+  const validateMobile = (cropSelection) => {
+    const mobileRegex = /^[6-9]\d{9}$/;
+    return mobileRegex.test(cropSelection);
+  };
+  const handleMobileChange = (e) => {
+    const value = e.target.value;
+    if (validateMobile(value)) {
+      setMobileError("");
+    } else {
+      setMobileError("Please enter a valid Indian mobile number.");
+    }
+    setCropSelection(value);
   };
 
   return (
@@ -90,15 +106,18 @@ const Register = ({ location, history }) => {
             </Form.Group>
 
             <Form.Group controlId="cropSelection">
-              <Form.Label>Crop Selection (optional)</Form.Label>
+              <Form.Label>
+                Mobile Number <span style={{ color: "red" }}>*</span>
+              </Form.Label>
               <Form.Control
                 type="cropSelection"
-                placeholder="Enter crop               "
+                placeholder="Enter Mobile Number              "
                 value={cropSelection}
-                onChange={(e) =>
-                  setCropSelection(e.target.value)
-                }></Form.Control>
-            </Form.Group>
+                onChange={handleMobileChange}
+        />
+        {mobileError && <Alert variant="danger">{mobileError}</Alert>}
+      </Form.Group>
+
           </Col>
           <Col md={6}>
             <Form.Group controlId="password">
@@ -142,7 +161,6 @@ const Register = ({ location, history }) => {
         </Col>
       </Row>
 
-
       <Row className="py-3">
         <span style={{ color: "red", fontFamily: "sans-serif" }}>
           Password must contain at least 8 characters,one capital letter,one
@@ -152,6 +170,5 @@ const Register = ({ location, history }) => {
     </FormContainer>
   );
 };
-
 
 export default Register;
