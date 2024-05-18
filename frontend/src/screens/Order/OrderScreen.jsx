@@ -17,9 +17,11 @@ import Message from "../../components/Message/Message";
 import {
   getOrderDetails,
   payOrder,
+  payOrderCOD,
   deliverOrder,
   returnOrder,
 } from "./../../actions/orderAction";
+import './OrderScreen.css'
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
@@ -87,7 +89,17 @@ const OrderScreen = ({ match }) => {
     }
   }, [dispatch, orderId, successPay, order, successDeliver, successReturn, history, userInfo]);
 
-  const onSuccessPaymentHandler = (paymentResult) => {
+  const onSuccessPaymentHandler = (paymentResult) => {  
+    if(order.paymentMethod==="Cash On Delivery"){
+      const paymentResult = {
+        id: 'N/A', // Assuming 'COD' as the ID for Cash On Delivery
+        status: 'COMPLETED', // Assuming 'COD' as the status for Cash On Delivery
+        update_time: new Date().toISOString(), // Set the update time to current time
+        email_address: 'N/A' // Set email address to 'N/A' for Cash On Delivery
+      };
+      dispatch(payOrderCOD(orderId));
+    }
+    console.log("paymentResult",order.paymentMethod);
     dispatch(payOrder(orderId, paymentResult));
   };
 
@@ -108,7 +120,7 @@ const OrderScreen = ({ match }) => {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Container style={{ marginTop: "120px" }}>
+        <Container style={{ marginTop: "120px" }} className="custom-container">
           <h2>Order Id : {order._id}</h2>
           <Row>
             <Col md={8}>
@@ -289,7 +301,7 @@ const OrderScreen = ({ match }) => {
                       <Col>{`RS. ${order.totalPrice}`}</Col>
                     </Row>
                   </ListGroup.Item>
-                  {!order.isPaid && (
+                  {/* {!order.isPaid && (
                     <ListGroup.Item>
                       {loadingPay && <Loader />}
                       {!sdkReady ? (
@@ -301,12 +313,16 @@ const OrderScreen = ({ match }) => {
                         />
                       )}
                     </ListGroup.Item>
-                  )}
-                  {loadingDeliver && <Loader />}
-                  {userInfo &&
-                    order.isPaid &&
-                    !order.isDelivered && (
-                      <ListGroup.Item>
+                  )} */}
+                  {!order.isPaid && !order.isDelivered && (
+                    <ListGroup.Item>
+                      {loadingPay && <Loader />}
+                      {order.paymentMethod === "PayPal" && sdkReady ? (
+                        <PayPalButton
+                          amount={order.totalPrice}
+                          onSuccess={onSuccessPaymentHandler}
+                        />
+                      ) : (
                         <Button
                           type="button"
                           className="btn btn-block"
@@ -314,8 +330,34 @@ const OrderScreen = ({ match }) => {
                           {" "}
                           Mark as delivered{" "}
                         </Button>
-                      </ListGroup.Item>
-                    )}
+                      )}
+                    </ListGroup.Item>
+                  )}
+                  {!order.isReturned && (
+                  <ListGroup.Item>
+                  {loadingDeliver && <Loader />}
+                  {order.paymentMethod==="Cash On Delivery" && userInfo && order.isDelivered && !order.isPaid? (
+                    <Button
+                    type="button"
+                    className="btn btn-block"
+                    onClick={onSuccessPaymentHandler}>
+                    {" "}
+                    Mark as Paid{" "}
+                  </Button>
+                  ) : (
+                  userInfo &&
+                    order.isPaid &&
+                    !order.isDelivered && (
+                        <Button
+                          type="button"
+                          className="btn btn-block"
+                          onClick={deliverHandler}>
+                          {" "}
+                          Mark as delivered{" "}
+                        </Button>
+                    ))}
+                  </ListGroup.Item>
+                )}
                   {loadingReturn && <Loader />}
                   {userInfo && userInfo.isAdmin &&
                     order.isPaid &&

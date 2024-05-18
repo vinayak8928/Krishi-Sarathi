@@ -518,11 +518,11 @@ const PlaceOrder = () => {
   };
 
   return (
-    <div style={{ marginTop: "100px" }}>
-      <Container>
+    <div style={{ marginTop: "100px"  }}>
+      <Container className="custom-container">
         <Meta title="Krishi Sarathi | Order" />
         <Row className="justify-content-md-center">
-          <Col xs={12} md={6}>
+          <Col xs={20} md={6}>
             <CheckoutSteps step1 step2 step3 step4 />
           </Col>
         </Row>
@@ -589,14 +589,14 @@ const PlaceOrder = () => {
                       <ListGroup.Item key={index}>
                         <Row>
                            {/* Row headings */}
-                           <Col md={2}>
+                           <Col md={3}>
                              <strong></strong>
                            </Col>
-                           <Col md={3}>
+                           <Col md={2}>
                              <strong> </strong>
                            </Col>
-                           <Col md={1}>
-                             <strong>Qty</strong>
+                           <Col md={1.5}>                             
+                              <strong>Quantity</strong>
                            </Col>
                            <Col md={2}>
                              <strong>Price</strong>
@@ -605,9 +605,9 @@ const PlaceOrder = () => {
                              <strong>Duration</strong>
                            </Col>
                            <Col md={2}>
-                            <strong>Amount</strong>
+                            <strong>T.Amount</strong>
                            </Col>
-                          <Col md={2}>
+                          <Col md={3}>
                             <Image
                               src={item.image}
                               alt={item.name}
@@ -615,7 +615,7 @@ const PlaceOrder = () => {
                               rounded
                             />
                           </Col>
-                          <Col md={3}>
+                          <Col md={2}>
                             <Link to={`/farmers/lendMachines/${item.seed}`}>
                                 {item.name}
                             </Link>
@@ -663,42 +663,6 @@ const PlaceOrder = () => {
                                 {bookingData[index].durationError}
                               </Alert>
                             )}
-                            {/* <Button
-                              type="button"
-                              className="btn-block mt-3"
-                              disabled={!bookingData[index].startDate || !bookingData[index].endDate || bookingData[index].durationError}
-                              onClick={() => {
-                                const updatedCartItems = cart.cartItems.map((item, index) => {
-                                  if (bookingData[index].startDate && bookingData[index].endDate) {
-                                    return {
-                                      ...item,
-                                      slotBooking: {
-                                        startDateTime: bookingData[index].startDate,
-                                        endDateTime: bookingData[index].endDate,
-                                      },
-                                    };
-                                  }
-                                  return item;
-                                });
-                            
-                                dispatch(
-                                  saveShippingAddress({
-                                    ...cart.shippingAddress,
-                                    slotBooking: updatedCartItems,
-                                  })
-                                );
-                            
-                                setBookingData(
-                                  cart.cartItems.map(() => ({
-                                    startDate: null,
-                                    endDate: null,
-                                    durationError: "",
-                                  }))
-                                );
-                              }}
-                            >
-                              Book Slot
-                            </Button> */}
                           </ListGroup.Item>
                         </Row>
                       </ListGroup.Item>

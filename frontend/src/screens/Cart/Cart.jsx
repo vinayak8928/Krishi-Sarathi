@@ -502,7 +502,7 @@ const Cart = ({ match, location }) => {
   };
 
   return (
-    <Container style={{ marginTop: "100px", marginBottom: "50px" }}>
+    <Container style={{ marginTop: "100px", marginBottom: "50px" }} className="custom-container">
       <Meta title="Krishi Sarathi | Cart" />
       <Row>
         <Col md={8}>
@@ -553,7 +553,7 @@ const Cart = ({ match, location }) => {
               {cartItems.map((item) => (
                 <ListGroup.Item key={item.seed} style={{ marginTop: "10px" }}>
                   <Row>
-                    <Col md={2}>
+                    <Col md={3}>
                       <Image src={item.image} alt={item.name} fluid rounded />
                     </Col>
                     <Col md={3}>
@@ -578,7 +578,7 @@ const Cart = ({ match, location }) => {
                       </Form.Control>
                     </Col>
 
-                    <Col md={3}>
+                    <Col md={2}>
                       <Form.Group>
                         <Form.Label>
                           <span style={{ color: "red" }}>*</span>Duration

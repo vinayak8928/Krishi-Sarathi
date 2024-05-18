@@ -6,3 +6,8 @@
     margin-bottom: 20px;
     font-size: 15px;
 }
+
+.custom-container {
+    max-width: 90%; /* Adjust the percentage as needed */
+    margin: 10 auto;
+  }

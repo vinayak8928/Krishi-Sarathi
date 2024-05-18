@@ -258,8 +258,6 @@ const ShippingScreen = () => {
       pathname: "/payment",
       state: {
         amt: val_amt,
-        selectedDurations: val_duration,
-        enteredDurations: data.enteredDurations,
       },
     });
   };
