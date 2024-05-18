@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Col } from "react-bootstrap";
+import { Form, Button, Col,  ListGroup,Row,Image,Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import CheckoutSteps from "./../../components/CheckoutSteps/CheckoutSteps";
 import FormContainer from "../../components/FormContainer/FormContainer";
 import { savePaymentMethod } from "./../../actions/cartActions.js";
+import Loader from "./../../components/Loader/Loader";
+import Message from "../../components/Message/Message";
 import Meta from "../../components/Helmet/Meta";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { setAmt } from "./../../actions/cartActions";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 let val_amt;
 let val_duration;
@@ -18,13 +22,15 @@ const PaymentScreen = ({}) => {
   const location = useLocation();
   const data = location.state;
 
-  
+  const [errors, setErrors] = useState("");
+  const cart = useSelector((state) => state.cartSeed);
+  const { cartItems } = cart;
   val_amt = data && data.amt ? data.amt : 0;
   val_duration = data && data.selectedDurations ? data.selectedDurations : 0;
   val_inp = data && data.enteredDurations ? data.enteredDurations : 0;
 
   // console.log("inp is", val_inp);
-  const cart = useSelector((state) => state.cartSeed);
+  // const cart = useSelector((state) => state.cartSeed);
   const { shippingAddress } = cart;
 
   if (!shippingAddress) {
@@ -46,8 +52,9 @@ const PaymentScreen = ({}) => {
     history.push({
       pathname: "/placeorder",
      state: { amt: val_amt,
-          selectedDurations:val_duration,
-          enteredDurations:val_inp,
+      paymentMethod:paymentMethod,
+          // selectedDurations:val_duration,
+          // enteredDurations:val_inp,
 
         },
     });
@@ -72,15 +79,15 @@ const PaymentScreen = ({}) => {
                 id="paypal"
                 name="paymentMethod"
                 value="PayPal"
-                checked
+                checked={paymentMethod === "PayPal"}
                 onChange={(e) => setPaymentMethod(e.target.value)}></Form.Check>
               <Form.Check
                 type="radio"
-                label="Stripe"
-                id="Stripe"
+                label="Cash On Delivery(COD)"
+                id="CashOnDelivery"
                 name="paymentMethod"
-                value="Stripe"
-                checked
+                value="Cash On Delivery"
+                checked={paymentMethod === "Cash On Delivery"}
                 onChange={(e) => setPaymentMethod(e.target.value)}></Form.Check>
             </Col>
           </Form.Group>

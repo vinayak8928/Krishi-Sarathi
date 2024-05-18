@@ -221,6 +221,48 @@ export const payOrder = (orderId, paymentResult) => async (dispatch, getState) =
     }
 }
 
+export const payOrderCOD = (orderId) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: ORDER_PAY_REQUEST,
+        })
+
+        const { userLogin: { userInfo } } = getState()
+        console.log('User Info Token:', userInfo.token); // Debugging line
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            },
+        }
+
+        const { data } = await axios.put(
+            `/api/orders/${orderId}/paycod`,
+            {},
+            config
+        )
+
+        dispatch({
+            type: ORDER_PAY_SAVE,
+            payload: data
+        })
+
+    } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        if (message === 'Not authorized, token failed') {
+            dispatch(logout())
+        }
+        dispatch({
+            type: ORDER_PAY_FAIL,
+            payload: message,
+        })
+    }
+}
+
 export const listMyOrders = () => async (dispatch, getState) => {
     try {
         dispatch({

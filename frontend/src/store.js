@@ -74,8 +74,6 @@ const reducer = combineReducers({
     consumerProductDelete: consumerProductDeleteReducer,
     consumerCreate: consumerCreateReducer,
     consumerUpdate: consumerUpdateReducer,
-    orderDeliver: orderDeliverReducer,
-    orderReturn: orderReturnReducer,
 
     productCreate: productCreateReducer,
     supplierProdictListMy: supplierProdictListMyReducer,
@@ -90,6 +88,8 @@ const reducer = combineReducers({
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
+    orderDeliver: orderDeliverReducer,
+    orderReturn: orderReturnReducer,
     orderListMy: orderListMyReducer,
     orderList: orderListReducer,
 
