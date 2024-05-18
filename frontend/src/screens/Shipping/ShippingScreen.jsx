@@ -247,10 +247,10 @@ const ShippingScreen = () => {
         city,
         postalCode,
         country,
-        slotBooking: {
-          startDateTime: startDate,
-          endDateTime: endDate,
-        },
+        // slotBooking: {
+        //   startDateTime: startDate,
+        //   endDateTime: endDate,
+        // },
       })
     );
 

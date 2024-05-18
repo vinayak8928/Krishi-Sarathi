@@ -215,7 +215,7 @@ import {
     SET_AMT
 } from './../constants/cartConstants'
 
-export const addToCart = (id, qty, duration) => async (dispatch, getState) => {
+export const addToCart = (id, qty, duration= { amount: 1, unit: 'hours' }) => async (dispatch, getState) => {
     try {
         const { data } = await axios.get(`/api/seeds/${id}`)
         dispatch({

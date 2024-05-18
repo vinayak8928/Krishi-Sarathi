@@ -114,7 +114,7 @@ const OrderScreen = ({ match }) => {
             <Col md={8}>
               <ListGroup variant="flush" className="mb-3">
                 <ListGroup.Item>
-                  <h1>Shipping Details</h1>
+                  <h2>Shipping Details</h2>
                   <p>
                     <strong>Name: </strong>
                     {order.user.name}
@@ -132,28 +132,37 @@ const OrderScreen = ({ match }) => {
                     {order.shippingAddress.postalCode},{" "}
                     {order.shippingAddress.country}
                   </p>
-                  <p>
-                    <strong>Slot Booking Start Date & Time : </strong>
-                    {new Date(order.shippingAddress.slotBooking.startDateTime).toLocaleString('en-GB', {
-                      day: '2-digit',
-                      month: 'short',
-                      year: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      hour12: true
-                    })}
-                  </p>
-                  <p>
-                    <strong>Slot Booking Start Date & Time : </strong>
-                    {new Date(order.shippingAddress.slotBooking.endDateTime).toLocaleString('en-GB', {
-                      day: '2-digit',
-                      month: 'short',
-                      year: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      hour12: true
-                    })}
-                  </p>
+                  {/* {order.orderItems.map((item, index) => (
+  <ListGroup.Item key={index}>
+    <h2>Slot Booked</h2>
+    {item.slotBooking && item.slotBooking.startDateTime && item.slotBooking.endDateTime && (
+      <>
+        <p>
+          <strong>Start Date & Time : </strong>
+          {new Date(item.slotBooking.startDateTime).toLocaleString('en-GB', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+          })}
+        </p>
+        <p>
+          <strong>End Date & Time : </strong>
+          {new Date(item.slotBooking.endDateTime).toLocaleString('en-GB', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+          })}
+        </p>
+      </>
+    )}
+  </ListGroup.Item>
+))} */}
                   
                   {order.isDelivered ? (
                     <Message variant="success">
@@ -192,7 +201,7 @@ const OrderScreen = ({ match }) => {
                       {order.orderItems.map((item, index) => (
                         <ListGroup.Item key={index}>
                           <Row>
-                            <Col md={6}>
+                            <Col md={4}>
                               <Image
                                 src={item.image}
                                 alt={item.name}
@@ -200,17 +209,43 @@ const OrderScreen = ({ match }) => {
                                 rounded
                               />
                             </Col>
-                            <Col><Link to={`/farmers/lendMachines/${item.seed}`}>
+                            
+                            <Col md={3}><Link to={`/farmers/lendMachines/${item.seed}`}>
                                     {item.name}
                                   </Link>
                             </Col>
-                            <Col md={4}>
+                            <Col md={2}>{item.duration.amount} {item.duration.unit}</Col>
+                            <Col md={2}>
                               {`${item.qty} x RS. ${item.price} = RS. ${
                                 item.qty * item.price
                               }`}
                             </Col>
                           </Row>
+                          <h4>Slot Booked</h4>
+                          <p>
+                            <strong>Start Date & Time : </strong>
+                            {new Date(item.slotBooking.startDateTime).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}
+                          </p>
+                          <p>
+                            <strong>End Date & Time : </strong>
+                            {new Date(item.slotBooking.endDateTime).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}
+                          </p>
                         </ListGroup.Item>
+                        
                       ))}
                     </ListGroup>
                   )}

@@ -545,7 +545,7 @@ const Cart = ({ match, location }) => {
 
           {cartItems.length === 0 ? (
             <Message variant="danger">
-              Your cart is empty <Link to="/">GO BACK</Link>
+              Your cart is empty <Link to="/farmers/lendMachines">GO BACK</Link>
             </Message>
           ) : (
             
