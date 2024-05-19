@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from './../../components/Message/Message'
 import Loader from './../../components/Loader/Loader'
 import { getUserDetails, updateUserProfile } from '../../actions/userActions'
-import { listMyOrders } from './../../actions/orderAction'
+import { listMyOrders, listOrders } from './../../actions/orderAction'
 import { listMyProducts } from './../../actions/supplierProduct'
 import Meta from '../../components/Helmet/Meta';
 
@@ -115,7 +115,7 @@ const ProfileScreen = ({ history }) => {
                             ></Form.Control>
                         </Form.Group>
                         <Form.Group controlId='cropSelection'>
-                            <Form.Label>Crop Selection (optional)</Form.Label>
+                            <Form.Label>Mobile Number</Form.Label>
                             <Form.Control
                                 type="cropSelection"
                                 placeholder="Enter cropSelection"
@@ -155,11 +155,12 @@ const ProfileScreen = ({ history }) => {
                                             <Table striped bordered hover responsive className="table-sm">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID</th>
+                                                        <th>ORDER ID</th>
                                                         <th>DATE</th>
-                                                        <th>TOTAL</th>
+                                                        <th>AMOUNT</th>
                                                         <th>PAID</th>
                                                         <th>DELIVERED</th>
+                                                        <th>RETURNED</th>
                                                         <th>MORE</th>
                                                     </tr>
                                                 </thead>
@@ -173,6 +174,9 @@ const ProfileScreen = ({ history }) => {
                                                                 <i className="fas fa-times" styles={{ color: "red" }}></i>
                                                             }</td>
                                                             <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) :
+                                                                <i className="fas fa-times" styles={{ color: 'red' }}></i>
+                                                            }</td>
+                                                            <td>{order.isReturned ? order.returnedAt.substring(0, 10) :
                                                                 <i className="fas fa-times" styles={{ color: 'red' }}></i>
                                                             }</td>
                                                             <td>

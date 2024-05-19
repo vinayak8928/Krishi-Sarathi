@@ -114,7 +114,7 @@ export const orderReturnReducer = (state = {}, action) => {
       default:
         return state
     }
-  }
+}
 
 export const orderPayReducer = (state = {}, action) => {
     switch (action.type) {

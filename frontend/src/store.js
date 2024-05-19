@@ -42,6 +42,7 @@ import {
     orderListMyReducer,
     orderListReducer,
     orderDeliverReducer,
+    orderReturnRequestReducer,
     orderReturnReducer
 } from './reducers/orderReducers'
 

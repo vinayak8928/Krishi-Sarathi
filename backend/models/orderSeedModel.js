@@ -78,6 +78,14 @@ const orderSeedSchema = mongoose.Schema({
     deliveredAt: {
         type: Date,
     },
+    isReturnRequested: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    returnRequestedAt: {
+        type: Date,
+    },
     isReturned: {
         type: Boolean,
         required: true,

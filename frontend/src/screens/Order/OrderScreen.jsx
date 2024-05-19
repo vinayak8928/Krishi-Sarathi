@@ -20,12 +20,14 @@ import {
   payOrderCOD,
   deliverOrder,
   returnOrder,
+  returnRequestOrder
 } from "./../../actions/orderAction";
 import './OrderScreen.css'
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
   ORDER_RETURN_RESET,
+  ORDER_RETURN_REQUEST,
 } from "./../../constants/orderConstant";
 import Meta from "../../components/Helmet/Meta";
 import { useLocation } from "react-router-dom";
@@ -57,6 +59,9 @@ const OrderScreen = ({ match }) => {
   const orderReturn = useSelector((state) => state.orderReturn);
   const { success: successReturn, loading: loadingReturn } = orderReturn;
 
+  // const orderReturnRequest = useSelector((state) => state.orderReturnRequest);
+  // const { success: successReturnRequest, loading: loadingReturnRequest } = orderReturnRequest;
+
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
@@ -79,6 +84,7 @@ const OrderScreen = ({ match }) => {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch({ type: ORDER_RETURN_RESET });
+      dispatch({ type: ORDER_RETURN_REQUEST });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -109,6 +115,10 @@ const OrderScreen = ({ match }) => {
 
   const returnHandler = () => {
     dispatch(returnOrder(order));
+  };
+
+  const returnRequestHandler = () => {
+    dispatch(returnRequestOrder(order));
   };
   // const itemsPrice = order.totalPrice - (order.taxPrice + order.shippingPrice)
 
@@ -178,14 +188,39 @@ const OrderScreen = ({ match }) => {
                   
                   {order.isDelivered ? (
                     <Message variant="success">
-                      Delivered on {order.deliveredAt}
+                      Delivered on : {new Date(order.deliveredAt).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}
                     </Message>
                   ) : (
                     <Message variant="danger">Not Delivered</Message>
                   )}
                   {order.isReturned ? (
                     <Message variant="success">
-                      Returned on {order.returnedAt}
+                      Returned on : {new Date(order.returnedAt).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}
+                    </Message>
+                  ) : order.isReturnRequested ? (
+                    <Message variant="warning">
+                      Return Requested on : {new Date(order.returnRequestedAt).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}
                     </Message>
                   ) : (
                     <Message variant="danger">Not Returned</Message>
@@ -199,7 +234,14 @@ const OrderScreen = ({ match }) => {
                     
                   </p>
                   {order.isPaid ? (
-                    <Message variant="success">Paid on {order.paidAt}</Message>
+                    <Message variant="success">Paid on : {new Date(order.paidAt).toLocaleString('en-GB', {
+                      day: '2-digit',
+                      month: 'short',
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      hour12: true
+                    })}</Message>
                   ) : (
                     <Message variant="danger">Not Paid</Message>
                   )}
@@ -316,6 +358,7 @@ const OrderScreen = ({ match }) => {
                   )} */}
                   {!order.isPaid && !order.isDelivered && (
                     <ListGroup.Item>
+                      
                       {loadingPay && <Loader />}
                       {order.paymentMethod === "PayPal" && sdkReady ? (
                         <PayPalButton
@@ -333,10 +376,10 @@ const OrderScreen = ({ match }) => {
                       )}
                     </ListGroup.Item>
                   )}
-                  {!order.isReturned && (
+                  {!order.isReturned && !order.isReturnRequested && (
                   <ListGroup.Item>
                   {loadingDeliver && <Loader />}
-                  {order.paymentMethod==="Cash On Delivery" && userInfo && order.isDelivered && !order.isPaid? (
+                  {order.paymentMethod==="Cash On Delivery" && userInfo && order.isDelivered && !order.isPaid ? (
                     <Button
                     type="button"
                     className="btn btn-block"
@@ -344,10 +387,10 @@ const OrderScreen = ({ match }) => {
                     {" "}
                     Mark as Paid{" "}
                   </Button>
-                  ) : (
+                  ) : 
                   userInfo &&
                     order.isPaid &&
-                    !order.isDelivered && (
+                    !order.isDelivered ? (
                         <Button
                           type="button"
                           className="btn btn-block"
@@ -355,11 +398,34 @@ const OrderScreen = ({ match }) => {
                           {" "}
                           Mark as delivered{" "}
                         </Button>
-                    ))}
+                    ) : null}
                   </ListGroup.Item>
                 )}
-                  {loadingReturn && <Loader />}
-                  {userInfo && userInfo.isAdmin &&
+                  
+                  {userInfo && order.isPaid && order.isDelivered && !order.isReturned && (
+                  <ListGroup.Item>
+                    
+                    {loadingReturn }
+                    {userInfo.isAdmin && order.isReturnRequested ? (
+                      <Button
+                        type="button"
+                        className="btn btn-block"
+                        onClick={returnHandler}
+                      >
+                        Mark as Returned
+                      </Button>
+                    ) : !order.isReturnRequested ? (
+                      <Button
+                        type="button"
+                        className="btn btn-block"
+                        onClick={returnRequestHandler}
+                      >
+                        Submit Return Request
+                      </Button>
+                    ) : null}
+                  </ListGroup.Item>
+                  )}
+                  {/* {userInfo && userInfo.isAdmin &&
                     order.isPaid &&
                     order.isDelivered &&
                     !order.isReturned && (
@@ -372,7 +438,7 @@ const OrderScreen = ({ match }) => {
                           Mark as Returned{" "}
                         </Button>
                       </ListGroup.Item>
-                    )}
+                    )} */}
                 </ListGroup>
               </Card>
             </Col>
