@@ -25,6 +25,7 @@ const StatisticsList = () => {
                     {/* <Col md={6}>
                         <LineChart />
                     </Col> */}
+                    
                     <Col md={4}>
                         <DoughnutComponent />
                     </Col>

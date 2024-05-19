@@ -5,6 +5,7 @@ import {
     Row,
     Col,
     Container,
+    Alert,
 } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from './../../../components/Message/Message'
@@ -20,7 +21,7 @@ const EditProfile = ({ history }) => {
     const [cropSelection, setCropSelection] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState(null)
-
+    const [mobileError, setMobileError] = useState("");
     const dispatch = useDispatch()
 
     const userDetails = useSelector(state => state.userDetails)
@@ -55,7 +56,19 @@ const EditProfile = ({ history }) => {
             dispatch(updateUserProfile({ id: user._id, name, email, password, cropSelection }))
         }
     }
-
+    const validateMobile = (cropSelection) => {
+        const mobileRegex = /^[6-9]\d{9}$/;
+        return mobileRegex.test(cropSelection);
+      };
+    const handleMobileChange = (e) => {
+        const value = e.target.value;
+        if (validateMobile(value)) {
+          setMobileError("");
+        } else {
+          setMobileError("Please enter a valid Indian mobile number.");
+        }
+        setCropSelection(value);
+      };
     return (
         <Container style={{ marginBottom: '50px', marginTop: '20px' }}>
             {message && <Message variant='danger'>{message}</Message>}
@@ -76,23 +89,25 @@ const EditProfile = ({ history }) => {
                             ></Form.Control>
                         </Form.Group>
                         <Form.Group controlId='email'>
-                            <Form.Label>Email Address / NIC <span style={{ color: 'red' }}>*</span></Form.Label>
+                            <Form.Label>Email Address<span style={{ color: 'red' }}>*</span></Form.Label>
                             <Form.Control
                                 type="email"
-                                placeholder="Enter email or NIC"
+                                placeholder="Enter email"
                                 value={email}
                                 required
                                 onChange={(e) => setEmail(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
                         <Form.Group controlId='cropSelection'>
-                            <Form.Label>Crop Selection (optional)</Form.Label>
+                            <Form.Label>Mobile Number <span style={{ color: "red" }}>*</span></Form.Label>
                             <Form.Control
                                 type="cropSelection"
-                                placeholder="Enter cropSelection"
+                                placeholder="Enter Mobile Number"
                                 value={cropSelection}
-                                onChange={(e) => setCropSelection(e.target.value)}
+                                // onChange={(e) => setCropSelection(e.target.value)}
+                                onChange={handleMobileChange}
                             ></Form.Control>
+                            {mobileError && <Alert variant="danger">{mobileError}</Alert>}
                         </Form.Group>
                     </Col>
                     <Col md={5}>
