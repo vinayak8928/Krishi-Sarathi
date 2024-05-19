@@ -1,16 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from "react";
 import {
-    Form,
-    Button,
-    Row,
-    Col,
-    Container,
-    Table,
-    Image,
-    Overlay,
-    Popover
-} from 'react-bootstrap'
+  Form,
+  Button,
+  Row,
+  Col,
+  Container,
+  Table,
+  Image,
+  Overlay,
+  Popover,
+  Alert,
+} from "react-bootstrap";
 import { Scrollbar } from "react-scrollbars-custom";
+
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from './../../components/Message/Message'
@@ -20,66 +22,139 @@ import { listMyOrders, listOrders } from './../../actions/orderAction'
 import { listMyProducts } from './../../actions/supplierProduct'
 import Meta from '../../components/Helmet/Meta';
 
+
 const ProfileScreen = ({ history }) => {
+  const [show, setShow] = useState(false);
+  const [target, setTarget] = useState(null);
+  const ref = useRef(null);
 
-    const [show, setShow] = useState(false);
-    const [target, setTarget] = useState(null);
-    const ref = useRef(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cropSelection, setCropSelection] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState(null);
+  const [mobileError, setMobileError] = useState("");
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [cropSelection, setCropSelection] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [message, setMessage] = useState(null)
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, user, error } = userDetails;
 
-    const userDetails = useSelector(state => state.userDetails)
-    const { loading, user, error } = userDetails
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
-    const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
 
-    const userUpdateProfile = useSelector(state => state.userUpdateProfile)
-    const { success } = userUpdateProfile
+  const orderListMy = useSelector((state) => state.orderListMy);
+  const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
 
-    const orderListMy = useSelector(state => state.orderListMy)
-    const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
+  const supplierProdictListMy = useSelector(
+    (state) => state.supplierProdictListMy
+  );
+  const {
+    loading: loadingProducts,
+    error: errorProducts,
+    products,
+  } = supplierProdictListMy;
 
-    const supplierProdictListMy = useSelector(state => state.supplierProdictListMy)
-    const { loading: loadingProducts, error: errorProducts, products } = supplierProdictListMy
-
-    useEffect(() => {
-        if (!userInfo) {
-            history.push('/login')
-        } else {
-            if (!user.name) {
-                dispatch(getUserDetails('profile'))
-                dispatch(listMyOrders())
-                dispatch(listMyProducts())
-            } else {
-                setName(user.name)
-                setEmail(user.email)
-                setCropSelection(user.cropSelection)
-            }
-        }
-    }, [userInfo, history, user, dispatch])
-
-    const submitHandler = (e) => {
-        e.preventDefault()
-        if (password !== confirmPassword) {
-            setMessage('Passwords do not match')
-        } else {
-            dispatch(updateUserProfile({ id: user._id, name, email, password, cropSelection }))
-        }
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/login");
+    } else {
+      if (!user.name) {
+        dispatch(getUserDetails("profile"));
+        dispatch(listMyOrders());
+        dispatch(listMyProducts());
+      } else {
+        setName(user.name);
+        setEmail(user.email);
+        setCropSelection(user.cropSelection);
+      }
     }
+  }, [userInfo, history, user, dispatch]);
 
-    const handleClick = (event) => {
-        setShow(!show);
-        setTarget(event.target);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match");
+    } else {
+      dispatch(
+        updateUserProfile({
+          id: user._id,
+          name,
+          email,
+          password,
+          cropSelection,
+        })
+      );
+    }
+  };
 
-    };
+  const handleClick = (event) => {
+    setShow(!show);
+    setTarget(event.target);
+  };
+  const validateMobile = (cropSelection) => {
+    const mobileRegex = /^[6-9]\d{9}$/;
+    return mobileRegex.test(cropSelection);
+  };
+  const handleMobileChange = (e) => {
+    const value = e.target.value;
+    if (validateMobile(value)) {
+      setMobileError("");
+    } else {
+      setMobileError("Please enter a valid Indian mobile number.");
+    }
+    setCropSelection(value);
+  };
+
+  return (
+    <Container fluid style={{ marginBottom: "50px" }}>
+      <Meta title="Krishi Sarathi | Profile" />
+      <Row>
+        <Col md={3}>
+          <h2 style={{ marginTop: "110px" }}>User Profile</h2>
+          {message && <Message variant="danger">{message}</Message>}
+          {error && <Message variant="danger">{error}</Message>}
+          {success && <Message variant="success">Profile Updated!</Message>}
+          {loading && <Loader />}
+          <Form onSubmit={submitHandler}>
+            <Form.Group controlId="name">
+              <Form.Label>
+                Name <span style={{ color: "red" }}>*</span>
+              </Form.Label>
+              <Form.Control
+                type="name"
+                placeholder="Enter name"
+                value={name}
+                required
+                onChange={(e) => setName(e.target.value)}></Form.Control>
+            </Form.Group>
+            <Form.Group controlId="email">
+              <Form.Label>
+                Email Address<span style={{ color: "red" }}>*</span>
+              </Form.Label>
+              <Form.Control
+                type="nic"
+                placeholder="Enter email or NIC"
+                value={email}
+                required
+                onChange={(e) => setEmail(e.target.value)}></Form.Control>
+            </Form.Group>
+            <Form.Group controlId="cropSelection">
+              <Form.Label>
+                Mobile Number <span style={{ color: "red" }}>*</span>
+              </Form.Label>
+              <Form.Control
+                type="cropSelection"
+                placeholder="Enter Mobile Number              "
+                value={cropSelection}
+                onChange={handleMobileChange}
+              />
+              {mobileError && <Alert variant="danger">{mobileError}</Alert>}
+            </Form.Group>
 
     return (
         <Container fluid style={{ marginBottom: '50px' }}>
@@ -190,8 +265,7 @@ const ProfileScreen = ({ history }) => {
                                             </Table>
                                         )
                                 }
-                            </Row>
-                            {/* <Row>
+                            /* </Row>
                                 <h2 style={{ marginTop: '110px' }}>My Products</h2>
                                 {loadingProducts ? <Loader />
                                     : errorProducts ? <Message variant="danger">{errorProducts}</Message>
@@ -262,12 +336,12 @@ const ProfileScreen = ({ history }) => {
                                         )
                                 }
                             </Row> */}
-                        </Container>
-                    </Scrollbar>
-                </Col>
-            </Row>
-        </Container>
-    )
-}
+            </Container>
+          </Scrollbar>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
-export default ProfileScreen 
+export default ProfileScreen;

@@ -159,6 +159,7 @@ import {
   Card,
   Button,
   Form,
+  Modal,
 } from "react-bootstrap";
 import "./LendMachineScreen.css";
 
@@ -167,6 +168,7 @@ import {
   updateLendMachine,
   createProductReview,
 } from "./../../actions/productLendMachinesActions";
+import { listUsers } from "./../../actions/userActions";  // Import the action to list users
 import { MACHINE_UPDATE_RESET } from "../../constants/productConstants";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../../constants/productConstants";
 import Loader from "../../components/Loader/Loader";
@@ -192,7 +194,7 @@ const LendMachineProduct = ({ history, match }) => {
   const [uploading, setUploading] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-
+  const [showModal, setShowModal] = useState(false);  // State for modal visibility
 
   const productId = match.params.id;
   const categoryMapping = {
@@ -291,7 +293,16 @@ const LendMachineProduct = ({ history, match }) => {
     (state) => state.productLendMachinesDetails
   );
   const { loading, error, productLendMachines } = productLendMachinesDetails;
-  // console.log("Product seller:", productLendMachines.seller);
+  // console.log("Product seller:", productLendMachinesDetails);
+
+  const userList = useSelector((state) => state.userList);
+  const { users } = userList;  // Get users list from Redux state
+ 
+  useEffect(() => {
+    dispatch(listLendMachineProductsDetails(match.params.id));
+    dispatch(listUsers());  // Fetch users list
+  }, [dispatch, match]);
+
 
   useEffect(() => {
     dispatch(listLendMachineProductsDetails(match.params.id));
@@ -362,6 +373,10 @@ const LendMachineProduct = ({ history, match }) => {
     return userInfo && userInfo.name === productLendMachines.seller;
   };
   
+   // Find the seller's email, seller's mobile number
+   const sellerEmail = users?.find(user => user.name === productLendMachines.seller)?.email;
+   const sellerNumber= users?.find(user => user.name === productLendMachines.seller)?.cropSelection;
+   console.log("user is",sellerNumber);
   const category_back = productLendMachines.category ? productLendMachines.category.toLowerCase() : '';
   
   return (
@@ -399,9 +414,9 @@ const LendMachineProduct = ({ history, match }) => {
                   </p>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <p>
+                <p>
                     <span style={{ fontWeight: "bold" }}>Seller Email:</span>
-                    <br /> {userInfo.email}
+                    <br /> {sellerEmail}
                   </p>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -459,51 +474,7 @@ const LendMachineProduct = ({ history, match }) => {
                       </Row>
                     </ListGroup.Item>
                   )}              
-                  {/* <ListGroup.Item>
-                    <Row>
-                      <Col>Duration:</Col>
-                      <Col>
-                        <Form.Check
-                          type="radio"
-                          name="duration"
-                          value="hours"
-                          checked={duration === "hours"}
-                          onChange={() => setDuration("hours")}
-                          label="Hours"
-                        />
-                        <Form.Check
-                          type="radio"
-                          name="duration"
-                          value="days"
-                          checked={duration === "days"}
-                          onChange={() => setDuration("days")}
-                          label="Days"
-                        />
-                        <Form.Check
-                          type="radio"
-                          name="duration"
-                          value="weeks"
-                          checked={duration === "weeks"}
-                          onChange={() => setDuration("weeks")}
-                          label="Weeks"
-                        />
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Enter Duration:</Col>
-                      <Col>
-                        <Form.Control
-                        type="text"
-                        placeholder="Enter"
-                        value={durationValue}
-                        onChange={(e) => setDurationValue(e.target.value)}
-                      />
-                      </Col>
-                    </Row>
-                  </ListGroup.Item> */}
+                 
                   {userInfo && userInfo._id !== productLendMachines.user && (
                   <ListGroup.Item>
                     <Button
@@ -514,17 +485,6 @@ const LendMachineProduct = ({ history, match }) => {
                     </Button>
                   </ListGroup.Item>
                   )}
-
-                  {/* <ListGroup.Item>
-                      {userInfo && userInfo._id === productLendMachines.user && (
-                      <Button
-                        type="button"
-                        className="btn btn-block"
-                        onClick={EditHandler}>
-                        Edit Item
-                      </Button>
-                    )}
-                  </ListGroup.Item> */}
                 </ListGroup>
               </Card>
               {userInfo && userInfo._id === productLendMachines.user && (
@@ -535,6 +495,12 @@ const LendMachineProduct = ({ history, match }) => {
                   Edit Item
                 </Button>
               )}
+              <Button
+                type="button"
+                className="btn btn-block mt-3 btn-info"
+                onClick={() => setShowModal(true)}>  {/* Show modal on click */}
+                Contact Seller
+              </Button>
             </Col>
             {/* <Col md={6}>
             <div>
@@ -627,6 +593,20 @@ const LendMachineProduct = ({ history, match }) => {
           </Col>
         </Row>
       </Container>
+      {/* Modal to show seller's mobile number */}
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Contact Seller</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Seller's Mobile Number: {sellerNumber}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
