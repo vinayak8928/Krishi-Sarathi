@@ -487,7 +487,23 @@ const PlaceOrder = () => {
     }
   };
 
+  const validateAllSlots = () => {
+    let hasErrors = false;
+    cart.cartItems.forEach((item, index) => {
+      validateSlot(index);
+      if (bookingData[index].durationError) {
+        hasErrors = true;
+      }
+    });
+    return hasErrors;
+  };
+
   const placeOrder = () => {
+    const hasErrors = validateAllSlots();
+    if (hasErrors) {
+      setErrors(customErrorMessage);
+      return;
+    }
     const orderItemsWithSlotBooking = cart.cartItems.map((item, index) => {
       const booking = bookingData[index];
       if (!booking) {
@@ -702,10 +718,14 @@ const PlaceOrder = () => {
                     <Col>RS. {cart.totalPrice}</Col>
                   </Row>
                 </ListGroup.Item>
-                <ListGroup.Item>
+                {/* <ListGroup.Item>
                 {error && <Message variant="danger">{error}</Message>}
                 {errors && <Message variant="danger">{errors}</Message>}
-                </ListGroup.Item>
+                </ListGroup.Item> */}
+                {error &&
+                <ListGroup.Item>
+                    <Alert variant="danger">{error}</Alert>
+                </ListGroup.Item>}
                 <ListGroup.Item>
                   <Button
                     type="button"
@@ -715,6 +735,9 @@ const PlaceOrder = () => {
                   >
                     Place Order
                   </Button>
+                  {isSlotBookingError && (
+                    <Alert variant="danger">{customErrorMessage}</Alert>
+                  )}
                 </ListGroup.Item>
               </ListGroup>
             </Card>

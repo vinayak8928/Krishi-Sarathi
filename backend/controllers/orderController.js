@@ -116,6 +116,25 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
 // @desc    Update order to returned
 // @rout    PUT /api/orders/:id/return
 // @access  private/Admin
+const updateOrderToReturnRequested = asyncHandler(async (req, res) => {
+    const order = await orderSeed.findById(req.params.id)
+
+    if (order) {
+        order.isReturnRequested = true
+        order.returnRequestedAt = Date.now()
+
+        const updatedOrder = await order.save()
+
+        res.json(updatedOrder)
+    } else {
+        res.status(404)
+        throw new Error('Order not Found')
+    }
+})
+
+// @desc    Update order to returned
+// @rout    PUT /api/orders/:id/return
+// @access  private/Admin
 const updateOrderToReturned = asyncHandler(async (req, res) => {
     const order = await orderSeed.findById(req.params.id)
 
@@ -156,5 +175,6 @@ export {
     getMyOrders,
     getOrders,
     updateOrderToDelivered,
+    updateOrderToReturnRequested,
     updateOrderToReturned
 }

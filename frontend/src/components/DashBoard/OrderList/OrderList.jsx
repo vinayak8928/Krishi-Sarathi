@@ -139,37 +139,24 @@ const OrderListScreen = ({ history }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {
-                                        orders.map(order => (
-                                            <tr key={order._id}>
-                                                <td>{order._id}</td>
-                                                {/* <td>{order.user && order.user.name}</td>
-                                                <td>{order.createdAt.substring(0, 10)}</td> */}
-                                                
-                                                <td>{order.user ? order.user.name : 'Unknown'}</td>
-                                                <td>{order.createdAt ? order.createdAt.substring(0, 10) : 'Unknown'}</td>
-                                                <td>{order.totalPrice}</td>
-                                                <td>
-                                                    {order.isPaid ? (
-                                                        order.paidAt.substring(0, 10)
-                                                    ) : (
-                                                            <i className='fas fa-times' style={{ color: 'red' }}></i>
-                                                        )
-                                                    }
-                                                </td>
-                                                <td>
-                                                {order.isDelivered ? (
-                                                        order.deliveredAt ? order.deliveredAt.substring(0, 10) : 'Unknown'
-                                                    ) : (
-                                                        <i className='fas fa-times' style={{ color: 'red' }}></i>
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    <LinkContainer to={`/order/${order._id}/edit`}>
-                                                        <Button varinat='light' className='btn-sm'>
-                                                            Details
-                                                        </Button>
-                                                    </LinkContainer>
+                                                    {orders.map(order => (
+                                                        <tr key={order._id}>
+                                                            <td>{order._id}</td>
+                                                            <td>{order.createdAt.substring(0, 10)}</td>
+                                                            <td>{order.totalPrice}</td>
+                                                            <td>{order.isPaid ? order.paidAt.substring(0, 10) :
+                                                                <i className="fas fa-times" styles={{ color: "red" }}></i>
+                                                            }</td>
+                                                            <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) :
+                                                                <i className="fas fa-times" styles={{ color: 'red' }}></i>
+                                                            }</td>
+                                                            <td>{order.isReturned ? order.returnedAt.substring(0, 10) :
+                                                                <i className="fas fa-times" styles={{ color: 'red' }}></i>
+                                                            }</td>
+                                                            <td>
+                                                                <LinkContainer to={`/order/${order._id}`}>
+                                                                    <Button className="btn-sm" variant="success">Details</Button>
+                                                                </LinkContainer>
                                                 </td>
                                             </tr>
                                         ))

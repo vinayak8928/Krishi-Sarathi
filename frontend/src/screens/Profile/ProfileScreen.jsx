@@ -12,14 +12,16 @@ import {
   Alert,
 } from "react-bootstrap";
 import { Scrollbar } from "react-scrollbars-custom";
-import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import Message from "./../../components/Message/Message";
-import Loader from "./../../components/Loader/Loader";
-import { getUserDetails, updateUserProfile } from "../../actions/userActions";
-import { listMyOrders } from "./../../actions/orderAction";
-import { listMyProducts } from "./../../actions/supplierProduct";
-import Meta from "../../components/Helmet/Meta";
+
+import { LinkContainer } from 'react-router-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from './../../components/Message/Message'
+import Loader from './../../components/Loader/Loader'
+import { getUserDetails, updateUserProfile } from '../../actions/userActions'
+import { listMyOrders, listOrders } from './../../actions/orderAction'
+import { listMyProducts } from './../../actions/supplierProduct'
+import Meta from '../../components/Helmet/Meta';
+
 
 const ProfileScreen = ({ history }) => {
   const [show, setShow] = useState(false);
@@ -154,88 +156,116 @@ const ProfileScreen = ({ history }) => {
               {mobileError && <Alert variant="danger">{mobileError}</Alert>}
             </Form.Group>
 
-            <Form.Group controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="confirmPassword">
-              <Form.Label>Confirm password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Confirm password"
-                value={confirmPassword}
-                onChange={(e) =>
-                  setConfirmPassword(e.target.value)
-                }></Form.Control>
-            </Form.Group>
-            <Button type="submit" variant="primary">
-              Update
-            </Button>
-          </Form>
-        </Col>
-        <Col md={9}>
-          <Scrollbar style={{ width: "100%", height: 630 }}>
-            <Container fluid>
-              <Row>
-                <h2 style={{ marginTop: "110px" }}>My Orders</h2>
-                {loadingOrders ? (
-                  <Loader />
-                ) : errorOrders ? (
-                  <Message variant="danger">{errorOrders}</Message>
-                ) : (
-                  <Table striped bordered hover responsive className="table-sm">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>DATE</th>
-                        <th>TOTAL</th>
-                        <th>PAID</th>
-                        <th>DELIVERED</th>
-                        <th>MORE</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {orders.map((order) => (
-                        <tr key={order._id}>
-                          <td>{order._id}</td>
-                          <td>{order.createdAt.substring(0, 10)}</td>
-                          <td>{order.totalPrice}</td>
-                          <td>
-                            {order.isPaid ? (
-                              order.paidAt.substring(0, 10)
-                            ) : (
-                              <i
-                                className="fas fa-times"
-                                styles={{ color: "red" }}></i>
-                            )}
-                          </td>
-                          <td>
-                            {order.isDelivered ? (
-                              order.deliveredAt.substring(0, 10)
-                            ) : (
-                              <i
-                                className="fas fa-times"
-                                styles={{ color: "red" }}></i>
-                            )}
-                          </td>
-                          <td>
-                            <LinkContainer to={`/order/${order._id}`}>
-                              <Button className="btn-sm" variant="success">
-                                Details
-                              </Button>
-                            </LinkContainer>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                )}
-              </Row>
-              {/* <Row>
+    return (
+        <Container fluid style={{ marginBottom: '50px' }}>
+            <Meta
+                title="Krishi Sarathi | Profile"
+            />
+            <Row>
+                <Col md={3}>
+                    <h2 style={{ marginTop: '110px' }}>User Profile</h2>
+                    {message && <Message variant='danger'>{message}</Message>}
+                    {error && <Message variant='danger'>{error}</Message>}
+                    {success && <Message variant='success'>Profile Updated!</Message>}
+                    {loading && <Loader />}
+                    <Form onSubmit={submitHandler}>
+                        <Form.Group controlId='name'>
+                            <Form.Label>Name <span style={{ color: 'red' }}>*</span></Form.Label>
+                            <Form.Control
+                                type="name"
+                                placeholder="Enter name"
+                                value={name}
+                                required
+                                onChange={(e) => setName(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='email'>
+                            <Form.Label>Email Address / NIC <span style={{ color: 'red' }}>*</span></Form.Label>
+                            <Form.Control
+                                type="nic"
+                                placeholder="Enter email or NIC"
+                                value={email}
+                                required
+                                onChange={(e) => setEmail(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='cropSelection'>
+                            <Form.Label>Mobile Number</Form.Label>
+                            <Form.Control
+                                type="cropSelection"
+                                placeholder="Enter cropSelection"
+                                value={cropSelection}
+                                onChange={(e) => setCropSelection(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='password'>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="Enter password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId='confirmPassword'>
+                            <Form.Label>Confirm password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="Confirm password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                            ></Form.Control>
+                        </Form.Group>
+                        <Button type="submit" variant="primary">Update</Button>
+                    </Form>
+                </Col>
+                <Col md={9}>
+                    <Scrollbar style={{ width: '100%', height: 630 }}>
+                        <Container fluid>
+                            <Row>
+                                <h2 style={{ marginTop: '110px' }}>My Orders</h2>
+                                {loadingOrders ? <Loader />
+                                    : errorOrders ? <Message variant="danger">{errorOrders}</Message>
+                                        : (
+                                            <Table striped bordered hover responsive className="table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ORDER ID</th>
+                                                        <th>DATE</th>
+                                                        <th>AMOUNT</th>
+                                                        <th>PAID</th>
+                                                        <th>DELIVERED</th>
+                                                        <th>RETURNED</th>
+                                                        <th>MORE</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {orders.map(order => (
+                                                        <tr key={order._id}>
+                                                            <td>{order._id}</td>
+                                                            <td>{order.createdAt.substring(0, 10)}</td>
+                                                            <td>{order.totalPrice}</td>
+                                                            <td>{order.isPaid ? order.paidAt.substring(0, 10) :
+                                                                <i className="fas fa-times" styles={{ color: "red" }}></i>
+                                                            }</td>
+                                                            <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) :
+                                                                <i className="fas fa-times" styles={{ color: 'red' }}></i>
+                                                            }</td>
+                                                            <td>{order.isReturned ? order.returnedAt.substring(0, 10) :
+                                                                <i className="fas fa-times" styles={{ color: 'red' }}></i>
+                                                            }</td>
+                                                            <td>
+                                                                <LinkContainer to={`/order/${order._id}`}>
+                                                                    <Button className="btn-sm" variant="success">Details</Button>
+                                                                </LinkContainer>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </Table>
+                                        )
+                                }
+                            /* </Row>
                                 <h2 style={{ marginTop: '110px' }}>My Products</h2>
                                 {loadingProducts ? <Loader />
                                     : errorProducts ? <Message variant="danger">{errorProducts}</Message>
