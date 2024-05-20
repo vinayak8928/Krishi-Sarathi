@@ -26,6 +26,8 @@ const MachineListEdit = ({ match }) => {
 
   const productId = match.params.id;
 
+  const descriptionLines = description.split('\n');
+
   const dispatch = useDispatch();
   let history = useHistory();
 
