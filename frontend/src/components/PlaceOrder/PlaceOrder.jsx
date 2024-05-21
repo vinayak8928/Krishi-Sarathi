@@ -546,7 +546,7 @@ const PlaceOrder = () => {
           <Col md={8}>
             <ListGroup variant="flush" className="mb-3">
               <ListGroup.Item>
-                <h2>Shipping</h2>
+                <h2>Delivery</h2>
                 <p>
                   <strong>Address : </strong>
                   {cart.shippingAddress.address}, {cart.shippingAddress.city}{" "}
@@ -605,25 +605,27 @@ const PlaceOrder = () => {
                       <ListGroup.Item key={index}>
                         <Row>
                            {/* Row headings */}
-                           <Col md={3}>
-                             <strong></strong>
+                           <Col md={2} >
+                             <strong>Image</strong>
                            </Col>
-                           <Col md={2}>
-                             <strong> </strong>
+                           <Col md={2} >
+                             <strong> Item Name</strong>
                            </Col>
-                           <Col md={1.5}>                             
+                           <Col md={1.5} >                             
                               <strong>Quantity</strong>
                            </Col>
-                           <Col md={2}>
-                             <strong>Price</strong>
+                           <Col md={2} >
+                             <strong>Price/hour</strong>
                            </Col>
                            <Col md={2}>
                              <strong>Duration</strong>
                            </Col>
                            <Col md={2}>
-                            <strong>T.Amount</strong>
+                            <strong>Amount</strong>
                            </Col>
-                          <Col md={3}>
+                           </Row>
+                           <Row>
+                          <Col md={2}>
                             <Image
                               src={item.image}
                               alt={item.name}
@@ -702,7 +704,7 @@ const PlaceOrder = () => {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Shipping</Col>
+                    <Col>Delivery Charges</Col>
                     <Col>RS. {cart.shippingPrice}</Col>
                   </Row>
                 </ListGroup.Item>
