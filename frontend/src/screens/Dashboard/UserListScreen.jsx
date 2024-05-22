@@ -13,7 +13,7 @@ const UserListScreen = () => {
             <Container fluid className='all'>
                 <Row>
                     <Col md={3}>
-                        <h3 style={{fontFamily: "Poppins, sans-serif"}}>Krishi Sarathi Users</h3>
+                        <h3 style={{fontFamily: "Poppins, sans-serif"}}>Users</h3>
                     </Col>
                     <Col md={9}>
                         <h2 style={{ marginLeft: "30px",marginTop: '15px', fontFamily: "Poppins, sans-serif" }}>User List</h2>

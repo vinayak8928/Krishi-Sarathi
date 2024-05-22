@@ -13,7 +13,7 @@ const OrderListScreen = () => {
             <Container fluid className='all'>
                 <Row>
                     <Col md={3}>
-                        <h3 style={{fontFamily: "Poppins, sans-serif"}}>Krishi Sarathi Orders</h3>
+                        <h3 style={{fontFamily: "Poppins, sans-serif"}}>Orders</h3>
                     </Col>
                     <Col md={9}>
                         <h2 style={{ marginLeft: "30px", fontFamily: "Poppins, sans-serif", marginTop: '15px'} }>All Orders</h2>
