@@ -98,7 +98,7 @@ const ProfileScreen = ({ history }) => {
       };
 
     return (
-        <Container fluid style={{ marginBottom: '50px' }}>
+        <Container fluid style={{ marginBottom: '50px' }} className='all'>
             <Meta
                 title="Krishi Sarathi | Profile"
             />
@@ -178,6 +178,7 @@ const ProfileScreen = ({ history }) => {
                                                         <th>TOTAL</th>
                                                         <th>PAID</th>
                                                         <th>DELIVERED</th>
+                                                        <th>RETURNED</th>
                                                         <th>MORE</th>
                                                     </tr>
                                                 </thead>
@@ -191,6 +192,9 @@ const ProfileScreen = ({ history }) => {
                                                                 <i className="fas fa-times" styles={{ color: "red" }}></i>
                                                             }</td>
                                                             <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) :
+                                                                <i className="fas fa-times" styles={{ color: 'red' }}></i>
+                                                            }</td>
+                                                            <td>{order.isReturned ? order.returnedAt.substring(0, 10) :
                                                                 <i className="fas fa-times" styles={{ color: 'red' }}></i>
                                                             }</td>
                                                             <td>

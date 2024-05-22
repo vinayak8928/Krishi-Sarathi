@@ -10,13 +10,13 @@ const DashboardScreen = () => {
             <Meta
                 title="Krishi Sarathi | Admin Dashboard"
             />
-            <Container fluid>
+            <Container fluid className='all'>
                 <Row>
                     <Col md={3}>
-                        <h4>Dashboard</h4>
+                        <h3 style={{fontFamily: "Poppins, sans-serif"}}>Dashboard</h3>
                     </Col>
                     <Col md={9}>
-                        <h4 style={{ marginLeft: "30px" }}>Overall Statistics</h4>
+                        <h2 style={{ marginLeft: "30px" ,marginTop: '15px'}}>Overall Statistics</h2>
                     </Col>
                 </Row>
                 <Row>

@@ -40,7 +40,7 @@ const Harvesters_LendScreen = () => {
 
         <div className="MachineLendScreen">
             <Meta
-                title="Harvesters"
+                title="Krishi Sarathi | Harvesters"
             />
             <Container>
                 <h1 className="p-3" style={{ textAlign: 'center' }}>Harvesters</h1>

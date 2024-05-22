@@ -31,6 +31,8 @@ import {
 } from "./../../constants/orderConstant";
 import Meta from "../../components/Helmet/Meta";
 import { useLocation } from "react-router-dom";
+import TrackingBar from "../TrackingBar/TrackingBar";
+import '../TrackingBar/TrackingBar.css'
 
 
 let val;
@@ -121,6 +123,22 @@ const OrderScreen = ({ match }) => {
     dispatch(returnRequestOrder(order));
   };
   // const itemsPrice = order.totalPrice - (order.taxPrice + order.shippingPrice)
+  const getStatusClass = (status) => {
+    return status ? 'active' : '';
+  };
+
+  // const steps = [
+  //   { label: 'Paid', isActive: order.isPaid, timing: formatDate(order.paidAt) },
+  //   { label: 'Delivered', isActive: order.isDelivered, timing: formatDate(order.deliveredAt) },
+  //   { label: 'Return Requested', isActive: order.isReturnRequested, timing: formatDate(order.returnRequestedAt) },
+  //   { label: 'Returned', isActive: order.isReturned, timing: formatDate(order.returnedAt) },
+  // ];
+
+  function formatDate(date) {
+    if (!date) return 'N/A';
+    const options = { hour: '2-digit', minute: '2-digit' };
+    return new Date(date).toLocaleTimeString([], options);
+  }
 
   return (
     <div>
@@ -185,8 +203,146 @@ const OrderScreen = ({ match }) => {
     )}
   </ListGroup.Item>
 ))} */}
-                  
-                  {order.isDelivered ? (
+                    {order.paymentMethod==="Cash On Delivery" ? (
+                    <div className="progress-container">
+                    <div className="progress-bar"></div>
+                    <div className="progress-step">
+                      <div className={`circle ${getStatusClass(order.isDelivered)}`} />
+                      <span className="step-label">Delivered</span>
+                      {order.isDelivered ? (
+                      <span className="step-label">{new Date(order.deliveredAt).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}</span>
+                          ) : (
+                            <span className="step-label">N/A</span>
+                          )}
+                    </div>
+                    <div className="progress-step">
+                      <div className={`circle ${getStatusClass(order.isPaid)}`} />
+                      <span className="step-label">Paid</span>
+                      {order.isPaid ? (
+                      <span className="step-label">{new Date(order.paidAt).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}</span>
+                          ) : (
+                            <span className="step-label">N/A</span>
+                          )}
+                    </div>
+                    <div className="progress-step">
+                      <div className={`circle ${getStatusClass(order.isReturnRequested)}`} />
+                      <span className="step-label">Return Requested</span>
+                      {order.isReturnRequested ? (
+                      <span className="step-label">{new Date(order.returnRequestedAt).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}</span>
+                          ) : (
+                            <span className="step-label">N/A</span>
+                          )}
+                    </div>
+                    <div className="progress-step">
+                      <div className={`circle ${getStatusClass(order.isReturned)}`} />
+                      <span className="step-label">Returned</span>
+                      {order.isReturned ? (
+                      <span className="step-label">{new Date(order.returnedAt).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}</span>
+                          ) : (
+                            <span className="step-label">N/A</span>
+                          )}
+                    </div>
+                  </div>
+                    ) : (
+                    <div className="progress-container">
+                    <div className="progress-bar"></div>
+                    <div className="progress-step">
+                      <div className={`circle ${getStatusClass(order.isPaid)}`} />
+                      <span className="step-label">Paid</span>
+                      {order.isPaid ? (
+                      <span className="step-label">{new Date(order.paidAt).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}</span>
+                          ) : (
+                            <span className="step-label">N/A</span>
+                          )}
+                    </div>
+                    <div className="progress-step">
+                      <div className={`circle ${getStatusClass(order.isDelivered)}`} />
+                      <span className="step-label">Delivered</span>
+                      {order.isDelivered ? (
+                      <span className="step-label">{new Date(order.deliveredAt).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}</span>
+                          ) : (
+                            <span className="step-label">N/A</span>
+                          )}
+                    </div>
+                    <div className="progress-step">
+                      <div className={`circle ${getStatusClass(order.isReturnRequested)}`} />
+                      <span className="step-label">Return Requested</span>
+                      {order.isReturnRequested ? (
+                      <span className="step-label">{new Date(order.returnRequestedAt).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}</span>
+                          ) : (
+                            <span className="step-label">N/A</span>
+                          )}
+                    </div>
+                    <div className="progress-step">
+                      <div className={`circle ${getStatusClass(order.isReturned)}`} />
+                      <span className="step-label">Returned</span>
+                      {order.isReturned ? (
+                      <span className="step-label">{new Date(order.returnedAt).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}</span>
+                          ) : (
+                            <span className="step-label">N/A</span>
+                          )}
+                    </div>
+                  </div>)
+                }
+{/* 
+                  <TrackingBar steps={steps} />      */}
+                  {/* {order.isDelivered ? (
                     <Message variant="success">
                       Delivered on : {new Date(order.deliveredAt).toLocaleString('en-GB', {
                               day: '2-digit',
@@ -224,7 +380,7 @@ const OrderScreen = ({ match }) => {
                     </Message>
                   ) : (
                     <Message variant="danger">Not Returned</Message>
-                  )}
+                  )} */}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <h2>Payment Method</h2>
@@ -233,7 +389,7 @@ const OrderScreen = ({ match }) => {
                     {order.paymentMethod}
                     
                   </p>
-                  {order.isPaid ? (
+                  {/* {order.isPaid ? (
                     <Message variant="success">Paid on : {new Date(order.paidAt).toLocaleString('en-GB', {
                       day: '2-digit',
                       month: 'short',
@@ -244,7 +400,7 @@ const OrderScreen = ({ match }) => {
                     })}</Message>
                   ) : (
                     <Message variant="danger">Not Paid</Message>
-                  )}
+                  )} */}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <h2>Order Items</h2>

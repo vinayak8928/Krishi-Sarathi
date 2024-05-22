@@ -39,7 +39,7 @@ const Thresher_LendScreen = () => {
 
         <div className="MachineLendScreen">
             <Meta
-                title="Threshers"
+                title="Krishi Sarathi | Threshers"
             />
             <Container>
                 <h1 className="p-3" style={{ textAlign: 'center' }}>Threshers</h1>

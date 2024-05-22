@@ -1,4 +1,65 @@
 .custom-container {
-    max-width: 90%; /* Adjust the percentage as needed */
-    margin: 10 auto;
-  }
+  max-width: 90%; /* Adjust the percentage as needed */
+  margin: 10 auto;
+  margin-top: 120px;
+}
+
+.card-custom {
+  margin-bottom: 20px;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+  padding: 10px 0;
+  position: relative;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 30%;
+  left: 20;
+  width: 95%; /* Decrease the width of the line bar */
+  height: 5px;
+  background-color: #cee1d2;
+  z-index: 1;
+  transform: translateX(3%); /* Center the line bar */
+}
+
+.progress-step {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin-bottom: -20px; Decrease the space between circles */
+}
+
+.circle {
+  width: 50px; /* Increase the size of the circles */
+  height: 50px; /* Increase the size of the circles */
+  border-radius: 50%;
+  border: 8px solid #e0e0e0; /* Add thin outline */
+  background-color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  margin: 0 3px; /* Decrease the space between circles */
+  position: relative;
+}
+
+.circle.active {
+  background-color: green;
+  border-color: rgb(222, 235, 222); /* Change outline color for active circle */
+}
+
+
+.step-label {
+  margin-top: 5px; /* Adjust the margin to fit the new circle size */
+  font-size: 14px; /* Increase the font size */
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}

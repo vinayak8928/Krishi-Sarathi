@@ -39,7 +39,7 @@ const Irrigations_LendScreen = () => {
 
         <div className="MachineLendScreen">
             <Meta
-                title="Irrigation"
+                title="Krishi Sarathi | Irrigation"
             />
             <Container>
                 <h1 className="p-3" style={{ textAlign: 'center' }}>Irrigation Equipments</h1>

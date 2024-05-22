@@ -6,7 +6,7 @@ import './SideBar.css'
 
 const SideBarComponents = () => {
     return (
-        <div className="sidebar" style={{ marginTop: "10px", marginBottom: "60px" }}>
+        <div className="sidebar" style={{ marginTop: "10px", marginBottom: "60px" , fontFamily: "Poppins, sans-serif"}}>
             <ListGroup className="list-group-sidebar">
                 <LinkContainer className='link-contain' to='/admin/dashboard'>
                     <ListGroup.Item className="border-0 item">

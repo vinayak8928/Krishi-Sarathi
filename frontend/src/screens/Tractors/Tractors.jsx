@@ -39,7 +39,7 @@ const Tractors_LendScreen = () => {
 
         <div className="MachineLendScreen">
             <Meta
-                title="Threshers"
+                title="Krishi Sarathi | Tractors"
             />
             <Container>
                 <h1 className="p-3" style={{ textAlign: 'center' }}>Tractors</h1>

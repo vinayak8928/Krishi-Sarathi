@@ -39,7 +39,7 @@ const Balers_LendScreen = () => {
 
         <div className="MachineLendScreen">
             <Meta
-                title="Balers"
+                title="Krishi Sarathi | Balers"
             />
             <Container>
                 <h1 className="p-3" style={{ textAlign: 'center' }}>BALERS</h1>
