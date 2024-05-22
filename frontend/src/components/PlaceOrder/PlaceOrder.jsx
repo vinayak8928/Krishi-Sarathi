@@ -974,7 +974,7 @@ const PlaceOrder = () => {
                                 {item.duration.amount} {item.duration.unit}
                             </div>
                             <div className="item-duration">
-                              <strong>Item Price : </strong>
+                              <strong>Item Price : RS. </strong>
                                {item.price}
                                </div>
                               <div className="item-quantity-price">
