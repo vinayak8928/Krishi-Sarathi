@@ -38,7 +38,7 @@ const Mowers_LendScreen = () => {
 
         <div className="MachineLendScreen">
             <Meta
-                title="Mowers"
+                title="Krishi Sarathi | Mowers"
             />
             <Container>
                 <h1 className="p-3" style={{ textAlign: 'center' }}>Mowers</h1>

@@ -13,10 +13,10 @@ const ProfileScreen = () => {
             <Container fluid>
                 <Row>
                     <Col md={3}>
-                        <h4>Admin Profile</h4>
+                        <h3 style={{fontFamily: "Poppins, sans-serif"}}>Admin Profile</h3>
                     </Col>
                     <Col md={9}>
-                        <h4 style={{ marginLeft: "30px" }}>Edit Profile</h4>
+                        <h2 style={{ marginLeft: "30px" ,marginTop: '15px'}}>Edit Profile</h2>
                     </Col>
                 </Row>
                 <Row>

@@ -1,0 +1,54 @@
+.tracking-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+  }
+  
+  .tracking-step {
+    text-align: center;
+    position: relative;
+    flex: 1;
+  }
+  
+  .tracking-circle {
+    width: 30px; /* Increase the size of the circles */
+    height: 30px; /* Increase the size of the circles */
+    background-color: #ddd;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .tracking-circle.active {
+    background-color: #4caf50;
+  }
+  
+  .tracking-bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100% - 30px); /* Decrease the width of the line bar */
+    height: 4px; /* Adjust the thickness of the line bar */
+    background-color: #ddd;
+    z-index: 0;
+    transform: translateX(-50%);
+  }
+  
+  .tracking-step.active .tracking-bar {
+    background-color: #4caf50;
+  }
+  
+  .tracking-label {
+    font-size: 12px; /* Increase the font size */
+    margin-top: 8px;
+  }
+  
+  .tracking-timing {
+    font-size: 10px; /* Adjust timing font size if needed */
+    margin-top: 4px;
+  }
+  

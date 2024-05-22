@@ -10,13 +10,13 @@ const UserListScreen = () => {
             <Meta
                 title="Krishi Sarathi | Admin Users"
             />
-            <Container fluid>
+            <Container fluid className='all'>
                 <Row>
                     <Col md={3}>
-                        <h4>Krishi Sarathi Users</h4>
+                        <h3 style={{fontFamily: "Poppins, sans-serif"}}>Users</h3>
                     </Col>
                     <Col md={9}>
-                        <h4 style={{ marginLeft: "30px" }}>User List</h4>
+                        <h2 style={{ marginLeft: "30px",marginTop: '15px', fontFamily: "Poppins, sans-serif" }}>User List</h2>
                     </Col>
                 </Row>
                 <Row>

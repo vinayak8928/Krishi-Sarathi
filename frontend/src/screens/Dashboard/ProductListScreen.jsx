@@ -10,13 +10,10 @@ const ProductListScreen = () => {
             <Meta
                 title="Krishi Sarathi | Admin Products"
             />
-            <Container fluid>
+            <Container fluid className='all'>
                 <Row>
                     <Col md={3}>
-                        <h4>Krishi Sarathi Products</h4>
-                    </Col>
-                    <Col md={9}>
-                        <h4 style={{ marginLeft: "30px" }}>Product List</h4>
+                        <h3 style={{fontFamily: "Poppins, sans-serif"}}>Products</h3>
                     </Col>
                 </Row>
                 <Row>

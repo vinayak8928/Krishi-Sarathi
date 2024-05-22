@@ -270,7 +270,7 @@ const LendMachineProduct = ({ history, match }) => {
                   Date: {review.createdAt.substring(0, 10)}
                 </p>
                 <p style={{ marginBottom: "-5px" }}>
-                  Comment : {review.comment}
+                  {review.comment}
                 </p>
                 <Rating value={review.rating} />
               </Card>
@@ -288,6 +288,7 @@ const LendMachineProduct = ({ history, match }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
 
   const productLendMachinesDetails = useSelector(
     (state) => state.productLendMachinesDetails
@@ -374,10 +375,15 @@ const LendMachineProduct = ({ history, match }) => {
   };
   
    // Find the seller's email, seller's mobile number
-   const sellerEmail = users?.find(user => user.name === productLendMachines.seller)?.email;
-   const sellerNumber= users?.find(user => user.name === productLendMachines.seller)?.cropSelection;
+   const sellerEmail = users?.find(userInfo => userInfo.name === productLendMachines.seller)?.email;
+   const sellerNumber= users?.find(userInfo => userInfo.name === productLendMachines.seller)?.cropSelection;
+   console.log("user is",userInfo.name);
    console.log("user is",sellerNumber);
   const category_back = productLendMachines.category ? productLendMachines.category.toLowerCase() : '';
+
+  // const descriptionLines = productLendMachines.description.split('\n');
+  const descriptionLines = productLendMachines.description ? productLendMachines.description.split('\n') : [];
+
   
   return (
     <div className="productScreen">
@@ -420,11 +426,22 @@ const LendMachineProduct = ({ history, match }) => {
                   </p>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <p>
+                  {/* <p>
                     <span style={{ fontWeight: "bold" }}>
                       Product Description:
                     </span>
                     <br /> {productLendMachines.description}
+                  </p> */}
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>
+                      Product Description:
+                    </span>
+                    <br />
+                    <ul>
+                      {descriptionLines.map((line, index) => (
+                        <li key={index}>{line}</li>
+                      ))}
+                    </ul>
                   </p>
                 </ListGroup.Item>
 
@@ -495,12 +512,14 @@ const LendMachineProduct = ({ history, match }) => {
                   Edit Item
                 </Button>
               )}
+              {userInfo && userInfo._id !== productLendMachines.user && (
               <Button
                 type="button"
                 className="btn btn-block mt-3 btn-info"
                 onClick={() => setShowModal(true)}>  {/* Show modal on click */}
                 Contact Seller
               </Button>
+            )}
             </Col>
             {/* <Col md={6}>
             <div>

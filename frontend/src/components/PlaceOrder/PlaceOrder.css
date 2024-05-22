@@ -1,5 +1,5 @@
 .custom-date-picker {
-    font-family: Arial, sans-serif; /* Change the font family */
+    font-family: "Poppins", sans-serif; /* Change the font family */
     border-radius: 15px; /* Adjust the border radius */
     border: 0.5px solid #ccc; /* Add a border */
     padding: 0.5rem; /* Add padding */
@@ -9,4 +9,51 @@
   .custom-container {
     max-width: 90%; /* Adjust the percentage as needed */
     margin: 10 auto;
+  }
+
+  .order-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .order-item-details-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* padding-left: 20px; */
+    border-left: 2px solid #ddd;
+    margin-left: 100px;
+    /* padding: 15px; */
+    /* border: % solid #bdb0b0; */
+    border-radius: 10px;
+    background-color: #f4faf47d;
+  }
+  
+  .item-name,
+  .item-duration,
+  .item-quantity-price {
+    margin-bottom: 5px;
+  }
+  
+  .item-name a {
+    text-decoration: none;
+    color: #353635c4;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .item-name a:hover{
+    color: #488448c4;
+  }
+  
+  .font,
+  .item-duration,
+  .item-quantity-price {
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
   }
