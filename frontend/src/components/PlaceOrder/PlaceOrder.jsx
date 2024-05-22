@@ -545,7 +545,128 @@ const PlaceOrder = () => {
         <Row>
           <Col md={8}>
             <ListGroup variant="flush" className="mb-3">
-              <ListGroup.Item>
+
+            <ListGroup.Item>
+                {/* <h2>Order Items</h2> */}
+                {cart.cartItems.length === 0 ? (
+                  <Message>Your cart is empty</Message>
+                ) : (
+                  <ListGroup variant="flush">
+                    {cart.cartItems.map((item, index) => (
+                      <ListGroup.Item key={index}>
+                        <Row>
+                           {/* 
+                           <Col md={3}>
+                             <strong></strong>
+                           </Col>
+                           <Col md={2}>
+                             <strong> </strong>
+                           </Col>
+                           <Col md={1.5}>                             
+                              <strong>Quantity</strong>
+                           </Col>
+                           <Col md={2}>
+                             <strong>Price</strong>
+                           </Col>
+                           <Col md={2}>
+                             <strong>Duration</strong>
+                           </Col>
+                           <Col md={2}>
+                            <strong>T.Amount</strong>
+                           </Col> */}
+                          <Col md={5}>
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              fluid
+                              rounded
+                            />
+                          </Col>
+                          {/* <Col md={2}>
+                            <Link to={`/farmers/lendMachines/${item.seed}`}>
+                                {item.name}
+                            </Link>
+                          </Col>
+                          <Col md={1}>{item.qty}</Col>
+                          <Col md={2}>RS. {item.price}</Col>
+                          <Col md={2}>{item.duration.amount} {item.duration.unit}</Col>
+                          <Col md={2}>
+                            {item.duration.unit === "hours"
+                              ? `RS. ${item.qty * item.duration.amount * item.price}`
+                              : item.duration.unit === "weeks"
+                              ? `RS. ${item.qty * item.duration.amount * item.price * 60}`
+                              : item.duration.unit === "days"
+                              ? `RS. ${item.qty * item.duration.amount * item.price * 10}`
+                              : ""}
+                          </Col> */}
+                          <Col md={5} className="order-item-details-box">
+                            <div className="item-name">
+                            <Link to={`/farmers/lendMachines/${item.seed}`}>
+                                {item.name}
+                            </Link>
+                            </div>
+                            <div className="item-duration">
+                              <strong>Quantity : </strong>
+                              {item.qty}
+                            </div>
+                            <div className="item-duration">
+                              <strong>Duration : </strong>
+                                {item.duration.amount} {item.duration.unit}
+                            </div>
+                            <div className="item-duration">
+                              <strong>Item Price : </strong>
+                               {item.price}
+                               </div>
+                              <div className="item-quantity-price">
+                              <strong>Total Price : </strong>
+                              {item.duration.unit === "hours"
+                              ? `RS. ${item.qty * item.duration.amount * item.price}`
+                              : item.duration.unit === "weeks"
+                              ? `RS. ${item.qty * item.duration.amount * item.price * 60}`
+                              : item.duration.unit === "days"
+                              ? `RS. ${item.qty * item.duration.amount * item.price * 10}`
+                              : ""}
+                                        </div>
+                          </Col>
+                          <br />
+                          <ListGroup.Item variant="flush" style={{ border: "none", fontFamily: "Poppins, sans-serif" }}>
+                            <div style={{ marginBottom: "1rem" }}>
+                              <strong>Slot Booking <span style={{ color: "red" }}>*</span></strong>
+                            </div>
+                            <div style={{ marginBottom: "0.5rem" }}>
+                              <label style={{ marginRight: "0.5rem" }}>Start Date and Time: </label>
+                              <DatePicker
+                                selected={bookingData[index].startDate}
+                                onChange={(date) => handleDateChange(index, 'startDate', date)}
+                                showTimeSelect
+                                dateFormat="Pp"
+                                className="custom-date-picker"
+                              />
+                            </div>
+                            <div style={{ marginBottom: "0.5rem" }}>
+                              <label style={{ marginRight: "0.5rem" }}>End Date and Time: </label>
+                              <DatePicker
+                                selected={bookingData[index].endDate}
+                                onChange={(date) => handleDateChange(index, 'endDate', date)}
+                                showTimeSelect
+                                dateFormat="Pp"
+                                onBlur={() => validateSlot(index)}
+                                className="custom-date-picker"
+                              />
+                            </div>
+                            {bookingData[index].durationError && (
+                              <Alert variant="danger">
+                                {bookingData[index].durationError}
+                              </Alert>
+                            )}
+                          </ListGroup.Item>
+                        </Row>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                )}
+              </ListGroup.Item>
+              <ListGroup.Item style={{fontFamily: "Poppins, sans-serif"}}>
                 <h2>Shipping</h2>
                 <p>
                   <strong>Address : </strong>
@@ -595,102 +716,12 @@ const PlaceOrder = () => {
                 </p>
               </ListGroup.Item>
 
-              <ListGroup.Item>
-                <h2>Order Items</h2>
-                {cart.cartItems.length === 0 ? (
-                  <Message>Your cart is empty</Message>
-                ) : (
-                  <ListGroup variant="flush">
-                    {cart.cartItems.map((item, index) => (
-                      <ListGroup.Item key={index}>
-                        <Row>
-                           {/* Row headings */}
-                           <Col md={3}>
-                             <strong></strong>
-                           </Col>
-                           <Col md={2}>
-                             <strong> </strong>
-                           </Col>
-                           <Col md={1.5}>                             
-                              <strong>Quantity</strong>
-                           </Col>
-                           <Col md={2}>
-                             <strong>Price</strong>
-                           </Col>
-                           <Col md={2}>
-                             <strong>Duration</strong>
-                           </Col>
-                           <Col md={2}>
-                            <strong>T.Amount</strong>
-                           </Col>
-                          <Col md={3}>
-                            <Image
-                              src={item.image}
-                              alt={item.name}
-                              fluid
-                              rounded
-                            />
-                          </Col>
-                          <Col md={2}>
-                            <Link to={`/farmers/lendMachines/${item.seed}`}>
-                                {item.name}
-                            </Link>
-                          </Col>
-                          <Col md={1}>{item.qty}</Col>
-                          <Col md={2}>RS. {item.price}</Col>
-                          <Col md={2}>{item.duration.amount} {item.duration.unit}</Col>
-                          <Col md={2}>
-                            {item.duration.unit === "hours"
-                              ? `RS. ${item.qty * item.duration.amount * item.price}`
-                              : item.duration.unit === "weeks"
-                              ? `RS. ${item.qty * item.duration.amount * item.price * 60}`
-                              : item.duration.unit === "days"
-                              ? `RS. ${item.qty * item.duration.amount * item.price * 10}`
-                              : ""}
-                          </Col>
-                          <br />
-                          <ListGroup.Item variant="flush" style={{ border: "none" }}>
-                            <div style={{ marginBottom: "1rem" }}>
-                              <strong>Slot Booking <span style={{ color: "red" }}>*</span></strong>
-                            </div>
-                            <div style={{ marginBottom: "0.5rem" }}>
-                              <label style={{ marginRight: "0.5rem" }}>Start Date and Time: </label>
-                              <DatePicker
-                                selected={bookingData[index].startDate}
-                                onChange={(date) => handleDateChange(index, 'startDate', date)}
-                                showTimeSelect
-                                dateFormat="Pp"
-                                className="custom-date-picker"
-                              />
-                            </div>
-                            <div style={{ marginBottom: "0.5rem" }}>
-                              <label style={{ marginRight: "0.5rem" }}>End Date and Time: </label>
-                              <DatePicker
-                                selected={bookingData[index].endDate}
-                                onChange={(date) => handleDateChange(index, 'endDate', date)}
-                                showTimeSelect
-                                dateFormat="Pp"
-                                onBlur={() => validateSlot(index)}
-                                className="custom-date-picker"
-                              />
-                            </div>
-                            {bookingData[index].durationError && (
-                              <Alert variant="danger">
-                                {bookingData[index].durationError}
-                              </Alert>
-                            )}
-                          </ListGroup.Item>
-                        </Row>
-                      </ListGroup.Item>
-                    ))}
-                  </ListGroup>
-                )}
-              </ListGroup.Item>
+
             </ListGroup>
           </Col>
           <Col md={4}>
             <Card>
-              <ListGroup variant="flush">
+              <ListGroup variant="flush" style={{fontFamily: "Poppins, sans-serif"}}>
                 <ListGroup.Item>
                   <h2>Order Summary</h2>
                 </ListGroup.Item>

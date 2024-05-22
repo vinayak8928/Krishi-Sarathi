@@ -153,6 +153,90 @@ const OrderScreen = ({ match }) => {
           <Row>
             <Col md={8}>
               <ListGroup variant="flush" className="mb-3">
+              <ListGroup.Item>
+                  {/* <h2>Order Items</h2> */}
+                  {order.length === 0 ? (
+                    <Message>Order is empty</Message>
+                  ) : (
+                    <ListGroup variant="flush">
+                      {order.orderItems.map((item, index) => (
+                        <ListGroup.Item key={index}>
+                          <Row>
+                            <Col md={4}>
+                              <Image
+                                src={item.image}
+                                alt={item.name}
+                                fluid
+                                rounded
+                              />
+                            </Col>
+                            
+                            {/* <Col md={3}><Link to={`/farmers/lendMachines/${item.seed}`}>
+                                    {item.name}
+                                  </Link>
+                            </Col>
+                            <Col md={2}>{item.duration.amount} {item.duration.unit}</Col>
+                            <Col md={2}>
+                              {`${item.qty} x RS. ${item.price} = RS. ${
+                                item.qty * item.price
+                              }`}
+                            </Col> */}
+
+                          <Col md={6} className="order-item-details-box">
+                                        <div className="item-name">
+                                          
+                                          <Link to={`/farmers/lendMachines/${item.seed}`}>
+                                            {item.name}
+                                          </Link>
+                                        </div>
+                                        <div className="item-duration">
+                                        <strong>Quantity : </strong>
+                                        {item.qty}
+                                        </div>
+                                        <div className="item-duration">
+                                        <strong>Duration : </strong>
+                                          {item.duration.amount} {item.duration.unit}
+                                        </div>                                 
+                                        <div className="item-duration">
+                                        <strong>Item Price : </strong>
+                                        {item.price}
+                                        </div>
+                                        <div className="item-quantity-price">
+                                        <strong>Total Price : </strong>
+                                          {`${item.qty} x RS. ${item.price} = RS. ${item.qty * item.price}`}
+                                        </div>
+                                        {/* <h4>Slot Booked</h4> */}
+                                        <div className="item-duration">
+                            <strong>Start Date & Time : </strong>
+                            {new Date(item.slotBooking.startDateTime).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}
+                          </div>
+                          <p>
+                            <strong>End Date & Time : </strong>
+                            {new Date(item.slotBooking.endDateTime).toLocaleString('en-GB', {
+                              day: '2-digit',
+                              month: 'short',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              hour12: true
+                            })}
+                          </p>
+                                      </Col>
+                          </Row>
+                          
+                        </ListGroup.Item>
+                        
+                      ))}
+                    </ListGroup>
+                  )}
+                </ListGroup.Item>
                 <ListGroup.Item>
                   <h2>Shipping Details</h2>
                   <p>
@@ -402,74 +486,17 @@ const OrderScreen = ({ match }) => {
                     <Message variant="danger">Not Paid</Message>
                   )} */}
                 </ListGroup.Item>
-                <ListGroup.Item>
-                  <h2>Order Items</h2>
-                  {order.length === 0 ? (
-                    <Message>Order is empty</Message>
-                  ) : (
-                    <ListGroup variant="flush">
-                      {order.orderItems.map((item, index) => (
-                        <ListGroup.Item key={index}>
-                          <Row>
-                            <Col md={4}>
-                              <Image
-                                src={item.image}
-                                alt={item.name}
-                                fluid
-                                rounded
-                              />
-                            </Col>
-                            
-                            <Col md={3}><Link to={`/farmers/lendMachines/${item.seed}`}>
-                                    {item.name}
-                                  </Link>
-                            </Col>
-                            <Col md={2}>{item.duration.amount} {item.duration.unit}</Col>
-                            <Col md={2}>
-                              {`${item.qty} x RS. ${item.price} = RS. ${
-                                item.qty * item.price
-                              }`}
-                            </Col>
-                          </Row>
-                          <h4>Slot Booked</h4>
-                          <p>
-                            <strong>Start Date & Time : </strong>
-                            {new Date(item.slotBooking.startDateTime).toLocaleString('en-GB', {
-                              day: '2-digit',
-                              month: 'short',
-                              year: 'numeric',
-                              hour: '2-digit',
-                              minute: '2-digit',
-                              hour12: true
-                            })}
-                          </p>
-                          <p>
-                            <strong>End Date & Time : </strong>
-                            {new Date(item.slotBooking.endDateTime).toLocaleString('en-GB', {
-                              day: '2-digit',
-                              month: 'short',
-                              year: 'numeric',
-                              hour: '2-digit',
-                              minute: '2-digit',
-                              hour12: true
-                            })}
-                          </p>
-                        </ListGroup.Item>
-                        
-                      ))}
-                    </ListGroup>
-                  )}
-                </ListGroup.Item>
+
               </ListGroup>
             </Col>
 
             <Col md={4}>
               <Card>
-                <ListGroup variant="flush">
-                  <ListGroup.Item>
+                <ListGroup variant="flush" className="font">
+                  <ListGroup.Item >
                     <h2>Order Summary</h2>
                   </ListGroup.Item>
-                  <ListGroup.Item>
+                  <ListGroup.Item >
                     <Row>
                       <Col>Total Price</Col>
                       <Col>{`RS. ${

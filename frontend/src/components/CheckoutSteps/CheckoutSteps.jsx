@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
     return (
-        <Nav className="jusitfy-content-center mb-4">
+        <Nav className="jusitfy-content-center mb-4" style={{fontFamily: "Poppins, sans-serif"}}>
             <Nav.Item>
                 {
                     step1 

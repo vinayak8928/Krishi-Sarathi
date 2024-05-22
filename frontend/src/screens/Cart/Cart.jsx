@@ -502,7 +502,7 @@ const Cart = ({ match, location }) => {
   };
 
   return (
-    <Container style={{ marginTop: "100px", marginBottom: "50px" }} className="custom-container">
+    <Container style={{ marginTop: "100px", marginBottom: "50px", fontFamily: "Poppins, sans-serif"}} className="custom-container">
       <Meta title="Krishi Sarathi | Cart" />
       <Row>
         <Col md={8}>
