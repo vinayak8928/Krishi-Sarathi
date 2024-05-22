@@ -500,6 +500,13 @@ const Cart = ({ match, location }) => {
     val = subtotalValue.toFixed(2);
     return subtotalValue.toFixed(2);
   };
+  const getTotalPrice = () => {
+    if (cartItems.length === 1) {
+      return cartItems.reduce((acc, item) => acc + parseFloat(calculateSubtotal(item)), 0).toFixed(2);
+    } else {
+      return cartItems.reduce((acc, item) => acc + parseFloat(calculateSubtotal(item) / 2), 0).toFixed(2);
+    }
+  };
 
   return (
     <Container style={{ marginTop: "100px", marginBottom: "50px", fontFamily: "Poppins, sans-serif"}} className="custom-container">
@@ -660,20 +667,10 @@ const Cart = ({ match, location }) => {
               <ListGroup.Item>
                 <h2>
                   Subtotal (
-                  {cartItems.reduce(
-                    (acc, item) => acc + parseFloat(item.qty),
-                    0
-                  )}
+                  {cartItems.reduce((acc, item) => acc + parseFloat(item.qty), 0)}
                   ) items
                 </h2>
-                RS.
-                {cartItems
-                  .reduce(
-                    (acc, item) =>
-                      acc + parseFloat(calculateSubtotal(item) / 2),
-                    0
-                  )
-                  .toFixed(2)}
+                RS. {getTotalPrice()}
               </ListGroup.Item>
 
               <ListGroup.Item>

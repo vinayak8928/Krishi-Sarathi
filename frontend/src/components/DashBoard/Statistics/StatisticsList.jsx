@@ -22,9 +22,10 @@ const StatisticsList = () => {
                     <Bar />
                 </Row> */}
                 <Row style={{ marginBottom: "20px"}}>
-                    {/* <Col md={6}>
+                    <Col md={6}>
                         <LineChart />
-                    </Col> */}
+                    </Col>
+                    
                     <Col md={4}>
                         <DoughnutComponent />
                     </Col>
