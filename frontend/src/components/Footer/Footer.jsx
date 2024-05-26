@@ -108,22 +108,22 @@ const Footer = () => {
                 style={{ width: "60px" }}
               />
               <p>
-                <Link to="/faq" className="dark-grey-text">
+                <Link to='/faq' className="dark-grey-text">
                   FAQs
                 </Link>
               </p>
               <p>
-                <Link to="/consumer" className="dark-grey-text">
+                <Link to='/farmer' className="dark-grey-text">
                   Consumer{" "}
                 </Link>
               </p>
               <p>
-                <Link to="/supplier" className="dark-grey-text">
+                <Link to='/supplier' className="dark-grey-text">
                   Supplier
                 </Link>
               </p>
               <p>
-                <Link to="/cart" className="dark-grey-text">
+                <Link to='/cart' className="dark-grey-text">
                   Cart
                 </Link>
               </p>
