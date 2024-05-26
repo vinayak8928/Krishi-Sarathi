@@ -96,7 +96,18 @@ const OrderScreen = ({ match }) => {
       }
     }
   }, [dispatch, orderId, successPay, order, successDeliver, successReturn, history, userInfo]);
+  if (loading) {
+    return <Loader />;
+  }
 
+  if (error) {
+    return <Message variant="danger">{error}</Message>;
+  }
+
+  // Check if order object is undefined
+  if (!order) {
+    return <Message variant="danger">Order not found</Message>;
+  }
   const onSuccessPaymentHandler = (paymentResult) => {  
     if(order.paymentMethod==="Cash On Delivery"){
       const paymentResult = {
@@ -123,6 +134,29 @@ const OrderScreen = ({ match }) => {
     dispatch(returnRequestOrder(order));
   };
   // const itemsPrice = order.totalPrice - (order.taxPrice + order.shippingPrice)
+
+
+  const calculateTotalPrice = (qty, amount, unit, price) => {
+    if (unit === "hours") {
+      return qty * amount * price;
+    } else if (unit === "weeks") {
+      return qty * amount * price * 60;
+    } else if (unit === "days") {
+      return qty * amount * price * 10;
+    } else {
+      return 0;
+    }
+  };
+
+  const calculateOrderTotalPrice = (orderItems) => {
+    return orderItems.reduce((total, item) => {
+      return total + calculateTotalPrice(item.qty, item.duration.amount, item.duration.unit, item.price);
+    }, 0);
+  };
+
+  const totalOrderPrice = calculateOrderTotalPrice(order.orderItems);
+
+  
   const getStatusClass = (status) => {
     return status ? 'active' : '';
   };
@@ -198,12 +232,13 @@ const OrderScreen = ({ match }) => {
                                           {item.duration.amount} {item.duration.unit}
                                         </div>                                 
                                         <div className="item-duration">
-                                        <strong>Item Price : </strong>
+                                        <strong>Item Price : RS. </strong>
                                         {item.price}
                                         </div>
                                         <div className="item-quantity-price">
                                         <strong>Total Price : </strong>
-                                          {`${item.qty} x RS. ${item.price} = RS. ${item.qty * item.price}`}
+                                          {/* {`${item.qty} x RS. ${item.price} = RS. ${item.qty * item.price}`} */}
+                                          {`RS. ${calculateTotalPrice(item.qty, item.duration.amount, item.duration.unit, item.price)}`}
                                         </div>
                                         {/* <h4>Slot Booked</h4> */}
                                         <div className="item-duration">
@@ -496,13 +531,26 @@ const OrderScreen = ({ match }) => {
                   <ListGroup.Item >
                     <h2>Order Summary</h2>
                   </ListGroup.Item>
-                  <ListGroup.Item >
+
+                  {/* <ListGroup.Item >
                     <Row>
                       <Col>Total Price</Col>
                       <Col>{`RS. ${
                         order.totalPrice -
                         (order.taxPrice + order.shippingPrice).toFixed(2)
                       }`}</Col>
+                    </Row>
+                  </ListGroup.Item> */}
+                   <ListGroup.Item >
+                    <Row>
+                      <Col>Items</Col>
+                      <Col>{order.orderItems.reduce((acc, item) => acc + item.qty, 0)}</Col>
+                    </Row>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Total Price</Col>
+                      <Col>{`RS. ${totalOrderPrice}`}</Col>
                     </Row>
                   </ListGroup.Item>
 
