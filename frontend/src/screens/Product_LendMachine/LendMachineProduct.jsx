@@ -175,8 +175,6 @@ import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
 import Meta from "../../components/Helmet/Meta";
 import Rating from "../../components/Rating/Rating";
-import Datetime from 'react-datetime';
-import 'react-datetime/css/react-datetime.css';
 
 // import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 // import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
@@ -377,7 +375,7 @@ const LendMachineProduct = ({ history, match }) => {
    // Find the seller's email, seller's mobile number
    const sellerEmail = users?.find(userInfo => userInfo.name === productLendMachines.seller)?.email;
    const sellerNumber= users?.find(userInfo => userInfo.name === productLendMachines.seller)?.cropSelection;
-   console.log("user is",userInfo.name);
+  //  console.log("user is",userInfo.name);
    console.log("user is",sellerNumber);
   const category_back = productLendMachines.category ? productLendMachines.category.toLowerCase() : '';
 
