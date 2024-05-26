@@ -39,7 +39,7 @@ const CardMenu = () => {
                         <Card.Text className='card-text'>
                             No need to buy heavy machines and equipments everytime!!! Just order here and and get all kinds of equipments for rent at cheaper rate. Why to wait? Go and order.
                         </Card.Text>
-                        <Link to='/consumer'>
+                        <Link to='/farmer'>
                             <Button variant="success" className="btn-explore btn-md m-2">EXPLORE MORE</Button>
                         </Link>
                     </Card.Body>
