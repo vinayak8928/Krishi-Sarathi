@@ -126,11 +126,28 @@ const createMachineProductReview = asyncHandler(async (req, res) => {
     }
 })
 
+
+const updateMachineQuantity = asyncHandler(async (req, res) => {
+    console.log('Received request to update quantity:', req.body)
+    const machine = await ProductLendMachines.findById(req.params.id)
+  
+    if (machine) {
+      machine.quantity -= req.body.qty
+      const updatedMachine = await machine.save()
+      console.log('Updated machine quantity:', updatedMachine)
+      res.json(updatedMachine)
+    } else {
+      res.status(404)
+      throw new Error('Machine not found')
+    }
+  })
+  
 export { 
     getLendMachnines, 
     getLendMachnineById, 
     deleteLendMachnine,
     createLendMachine,
     updateLendMachine,
-    createMachineProductReview
+    createMachineProductReview,
+    updateMachineQuantity
 }

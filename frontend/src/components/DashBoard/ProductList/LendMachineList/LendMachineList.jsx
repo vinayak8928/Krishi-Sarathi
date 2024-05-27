@@ -21,7 +21,7 @@ const SeedList = () => {
 
     const productLendMachinesList = useSelector(state => state.productLendMachinesList)
     const { loading: loadingMachine, error: errorMachine, productLendMachines } = productLendMachinesList
-
+    
     const productLendMachinesDelete = useSelector(state => state.productLendMachinesDelete)
     const { loading: loadingDelete, error: errorDelete, success: successDelete } = productLendMachinesDelete
 

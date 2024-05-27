@@ -18,7 +18,11 @@ import {
     MACHINE_UPDATE_RESET,
     PRODUCT_CREATE_REVIEW_REQUEST,
     PRODUCT_CREATE_REVIEW_SUCCESS,
-    PRODUCT_CREATE_REVIEW_FAIL
+    PRODUCT_CREATE_REVIEW_FAIL,
+
+    MACHINE_UPDATE_QUANTITY_REQUEST,
+    MACHINE_UPDATE_QUANTITY_SUCCESS,
+    MACHINE_UPDATE_QUANTITY_FAIL,
 } from './../constants/productConstants.js'
 import { logout } from './userActions'
 
@@ -193,3 +197,32 @@ export const createProductReview = (productId, review) => async (
       })
     }
   }
+
+
+
+  export const updateMachineQuantity = (id, qty) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: MACHINE_UPDATE_QUANTITY_REQUEST })
+      const { userLogin: { userInfo } } = getState()
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+      console.log('Sending request to update quantity:', { id, qty })
+      const { data } = await axios.put(`/api/lendMachines/${id}/quantity`, { qty }, config)
+      console.log('Received response from updating quantity:', data)
+      dispatch({
+        type: MACHINE_UPDATE_QUANTITY_SUCCESS,
+        payload: data,
+      })
+    } catch (error) {
+      console.error('Error updating quantity:', error.response && error.response.data.message ? error.response.data.message : error.message)
+      dispatch({
+        type: MACHINE_UPDATE_QUANTITY_FAIL,
+        payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+      })
+    }
+  }
+  

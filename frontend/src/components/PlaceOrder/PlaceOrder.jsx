@@ -735,6 +735,7 @@ import Message from "../../components/Message/Message";
 import { createOrder } from "./../../actions/orderAction";
 import Meta from "../Helmet/Meta";
 import { saveShippingAddress, setAmt } from "./../../actions/cartActions";
+import { updateMachineQuantity } from './../../actions/productLendMachinesActions'
 import { useLocation } from "react-router-dom";
 import { useHistory,Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
@@ -756,6 +757,9 @@ const PlaceOrder = () => {
 
   const cart = useSelector((state) => state.cartSeed);
   const { cartItems } = cart;
+
+  const productLendMachinesList = useSelector(state => state.productLendMachinesList)
+  const { productLendMachines } = productLendMachinesList
 
   cart.itemsPrice = cart.cartItems
     .reduce((acc, item) => acc + item.qty * item.price, 0)
@@ -891,7 +895,17 @@ const PlaceOrder = () => {
         totalPrice: cart.totalPrice,
       })
     );
+
+    cartItems.forEach(item => {
+      dispatch(updateMachineQuantity(item.seed, item.qty))
+    })
+
   };
+  
+  const findMachineQuantity = (seedId) => {
+    const machine = productLendMachines.find(machine => machine._id === seedId)
+    return machine ? machine.quantity : 0
+}
 
   return (
     <div style={{ marginTop: "100px"  }}>
@@ -1130,6 +1144,18 @@ const PlaceOrder = () => {
                     <Alert variant="danger">{customErrorMessage}</Alert>
                   )}
                 </ListGroup.Item>
+
+                {cartItems.map((item, index) => (
+                    <ListGroup.Item key={index}>
+                        <Row>
+                            <div>
+                                <strong>Remaining Quantity: </strong>
+                                {findMachineQuantity(item.seed) - item.qty}
+                            </div>
+                        </Row>
+                    </ListGroup.Item>
+                ))}
+
               </ListGroup>
             </Card>
           </Col>

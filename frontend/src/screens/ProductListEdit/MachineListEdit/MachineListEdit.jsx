@@ -116,7 +116,7 @@ const MachineListEdit = ({ match }) => {
       <Meta title="Krishi Sarathi | Machine Edit" />
       <FormContainer>
         <h2 style={{ marginTop: "120px", textAlign: "center" }}>
-          Lend Machines
+          Lend Machiness
         </h2>
         <Link to="#" className="btn btn-light my-3" onClick={goBackHandler}>
           GO BACK

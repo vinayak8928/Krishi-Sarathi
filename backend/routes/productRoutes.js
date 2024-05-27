@@ -15,7 +15,8 @@ import {
     deleteLendMachnine,
     updateLendMachine,
     createLendMachine,
-    createMachineProductReview
+    createMachineProductReview,
+    updateMachineQuantity
 } from './../controllers/productLendMachineController.js'
 import {
     getConsumerProducts,
@@ -25,6 +26,7 @@ import {
     updateConsumer
 } from './../controllers/consumerProductControlller.js'
 import { protect, admin } from './../middleware/authMiddleware.js'
+
 
 router
     .route('/seeds')
@@ -69,5 +71,12 @@ router
     .get(getConsumerProductById)
     .delete(protect, deleteConsumerProduct)
     .put(protect, updateConsumer)
+
+
+// Add a new route for updating machine quantity
+router
+    .route('/lendMachines/:id/quantity')
+    .put(protect, updateMachineQuantity)
+
 
 export default router

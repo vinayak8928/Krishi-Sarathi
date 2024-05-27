@@ -19,7 +19,11 @@ import {
     PRODUCT_CREATE_REVIEW_REQUEST,
     PRODUCT_CREATE_REVIEW_SUCCESS,
     PRODUCT_CREATE_REVIEW_FAIL,
-    PRODUCT_CREATE_REVIEW_RESET
+    PRODUCT_CREATE_REVIEW_RESET,
+
+    MACHINE_UPDATE_QUANTITY_REQUEST,
+  MACHINE_UPDATE_QUANTITY_SUCCESS,
+  MACHINE_UPDATE_QUANTITY_FAIL,
 } from './../constants/productConstants.js'
 
 export const productLendMachinesListReducer = (state = { productLendMachines: [] }, action) => {
@@ -106,3 +110,18 @@ export const productReviewCreateReducer = (state = {}, action) => {
             return state
     }
 }
+
+
+
+export const machineUpdateQuantityReducer = (state = {}, action) => {
+    switch (action.type) {
+      case MACHINE_UPDATE_QUANTITY_REQUEST:
+        return { loading: true };
+      case MACHINE_UPDATE_QUANTITY_SUCCESS:
+        return { loading: false, success: true, machine: action.payload };
+      case MACHINE_UPDATE_QUANTITY_FAIL:
+        return { loading: false, error: action.payload };
+      default:
+        return state;
+    }
+  };
