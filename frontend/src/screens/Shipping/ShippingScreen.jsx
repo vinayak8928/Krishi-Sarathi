@@ -267,7 +267,7 @@ const ShippingScreen = () => {
       <FormContainer>
         <Meta title="Krishi Sarathi | Shipping" />
         <CheckoutSteps step1 step2 />
-        <h1>Shipping</h1>
+        <h1>Delivery Address</h1>
 
         <Form onSubmit={submitHandler} style={{ marginBottom: "40px" }}>
           <Form.Group controlId="address">

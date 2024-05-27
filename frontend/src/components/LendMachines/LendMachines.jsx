@@ -28,7 +28,7 @@ const LendMachines = ({ _id, name, image,  price ,power, rating}) => {
           </Card.Text> */}
 
           <Card.Text>
-            <h4>RS.{price}</h4>
+            <h4>RS.{price}/hour</h4>
           </Card.Text>
           <Rating value={rating}  color="#f8e825" />
           {/* <Rating value={rating} /> */}
