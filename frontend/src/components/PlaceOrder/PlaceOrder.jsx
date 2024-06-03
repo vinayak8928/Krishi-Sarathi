@@ -1105,12 +1105,12 @@ const PlaceOrder = () => {
                     <Col>RS. {val}</Col>
                   </Row>
                 </ListGroup.Item>
-                <ListGroup.Item>
+                {/* <ListGroup.Item>
                   <Row>
                     <Col>Shipping</Col>
                     <Col>RS. {cart.shippingPrice}</Col>
                   </Row>
-                </ListGroup.Item>
+                </ListGroup.Item> */}
                 <ListGroup.Item>
                   <Row>
                     <Col>Tax</Col>
@@ -1145,7 +1145,7 @@ const PlaceOrder = () => {
                   )}
                 </ListGroup.Item>
 
-                {cartItems.map((item, index) => (
+                {/* {cartItems.map((item, index) => (
                     <ListGroup.Item key={index}>
                         <Row>
                             <div>
@@ -1154,7 +1154,7 @@ const PlaceOrder = () => {
                             </div>
                         </Row>
                     </ListGroup.Item>
-                ))}
+                ))} */}
 
               </ListGroup>
             </Card>

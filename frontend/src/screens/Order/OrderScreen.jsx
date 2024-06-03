@@ -554,12 +554,12 @@ const OrderScreen = ({ match }) => {
                     </Row>
                   </ListGroup.Item>
 
-                  <ListGroup.Item>
+                  {/* <ListGroup.Item>
                     <Row>
                       <Col>Shipping</Col>
                       <Col>{`RS. ${order.shippingPrice}`}</Col>
                     </Row>
-                  </ListGroup.Item>
+                  </ListGroup.Item> */}
 
                   <ListGroup.Item>
                     <Row>
