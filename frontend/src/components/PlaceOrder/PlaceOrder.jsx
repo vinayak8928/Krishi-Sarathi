@@ -735,7 +735,8 @@ import Message from "../../components/Message/Message";
 import { createOrder } from "./../../actions/orderAction";
 import Meta from "../Helmet/Meta";
 import { saveShippingAddress, setAmt } from "./../../actions/cartActions";
-import { updateMachineQuantity } from './../../actions/productLendMachinesActions'
+import { updateMachineQuantity } from './../../actions/productLendMachinesActions';
+import { removeFromCart } from "./../../actions/cartActions";
 import { useLocation } from "react-router-dom";
 import { useHistory,Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
@@ -899,6 +900,10 @@ const PlaceOrder = () => {
     cartItems.forEach(item => {
       dispatch(updateMachineQuantity(item.seed, item.qty))
     })
+
+    cartItems.forEach(item => {
+      dispatch(removeFromCart(item.seed)); // Assuming 'seed' is the unique identifier for each cart item
+    });
 
   };
   
@@ -1101,7 +1106,7 @@ const PlaceOrder = () => {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Items</Col>
+                    <Col>Amount</Col>
                     <Col>RS. {val}</Col>
                   </Row>
                 </ListGroup.Item>
