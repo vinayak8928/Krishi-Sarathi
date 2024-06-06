@@ -137,10 +137,10 @@ const Footer = () => {
                 style={{ width: "60px" }}
               />
               <p>
-                <i className="fa fa-home mr-3" /> Hubli, Karnataka, India
+                <i className="fa fa-home mr-3" /> Hubballi, Karnataka, India
               </p>
               <p>
-                <i className="fa fa-envelope mr-3" /> krishisarathi@gmail.com
+                <i className="fa fa-envelope mr-3" /> krishisarathi8@gmail.com
               </p>
               <p>
                 <i className="fa fa-phone mr-3" /> + 91 9876543213

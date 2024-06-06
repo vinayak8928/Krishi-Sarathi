@@ -35,9 +35,7 @@ import TrackingBar from "../TrackingBar/TrackingBar";
 import '../TrackingBar/TrackingBar.css'
 
 
-let val;
-let val_duration;
-let val_inp;
+
 const OrderScreen = ({ match }) => {
   const orderId = match.params.id;
 
@@ -63,6 +61,14 @@ const OrderScreen = ({ match }) => {
 
   // const orderReturnRequest = useSelector((state) => state.orderReturnRequest);
   // const { success: successReturnRequest, loading: loadingReturnRequest } = orderReturnRequest;
+  useEffect(() => {
+    if (successDeliver) {
+        dispatch({ type: ORDER_DELIVER_RESET })
+    } else {
+        dispatch(getOrderDetails(orderId))
+    }
+}, [dispatch, orderId, successDeliver])
+
 
   useEffect(() => {
     if (!userInfo) {
